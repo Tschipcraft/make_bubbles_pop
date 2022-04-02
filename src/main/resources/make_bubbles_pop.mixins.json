@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.tschipcraft.make_bubbles_pop.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+  ],
+  "client": [
+    "BubblePop",
+    "BubbleColumnPop",
+    "CurrentDownPop"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

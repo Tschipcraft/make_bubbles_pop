@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "make_bubbles_pop",
+  "version": "${version}",
+  "name": "Make Bubbles Pop Mod",
+  "description": "Title says it all. This clientside mod makes bubble particles pop.",
+  "authors": [
+    "Tschipcraft"
+  ],
+  "contact": {
+    "homepage": "https://tschipcraft.ddns.net/",
+    "sources": "https://github.com/Tschipcraft/make_bubbles_pop_mod"
+  },
+  "icon": "assets/make_bubbles_pop/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "net.tschipcraft.make_bubbles_pop.MakeBubblesPop"
+    ]
+  },
+  "mixins": [
+    "make_bubbles_pop.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.13.3",
+    "fabric": "*",
+    "minecraft": "1.18.x",
+    "java": ">=17"
+  }
+}
