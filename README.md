@@ -1,6 +1,6 @@
 # Make Bubbles Pop Mod
 
-<img src="src/main/resources/assets/make_bubbles_pop/icon.png" width="64" height="64">
+<img src="src/main/resources/assets/make_bubbles_pop/icon_scaled.png" width="64" height="64">
 
 > A fabric mod for Minecraft 1.18x
 
