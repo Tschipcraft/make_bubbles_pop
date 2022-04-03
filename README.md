@@ -8,9 +8,9 @@
 
 Title says it all. This client-side mod makes bubble particles pop.
 
-Should be compatible with every other mod
+Should be compatible with every other mod.
 
-Fixes [MC-132067](https://bugs.mojang.com/browse/MC-132067)
+Fixes [MC-132067](https://bugs.mojang.com/browse/MC-132067).
 
 ## Installation
 
