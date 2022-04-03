@@ -14,10 +14,8 @@ Fixes [MC-132067](https://bugs.mojang.com/browse/MC-132067)
 
 ## Demo
 
-Soul Sand:
 https://user-images.githubusercontent.com/78470530/161437539-a666994e-2a25-4b80-aecd-240b1a979cfd.mp4
 
-Fishing:
 https://user-images.githubusercontent.com/78470530/161437560-0935de11-5b12-41b2-abe8-cafc7bb86d1d.mp4
 
 ## Installation
