@@ -16,7 +16,7 @@ Fixes [MC-132067](https://bugs.mojang.com/browse/MC-132067).
 
 Download the latest release from [here](https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod/releases/latest) and put the .jar file into the `mods` folder in your Minecraft directory.
 
-## Demo
+## Demo Videos
 
 https://user-images.githubusercontent.com/78470530/161437539-a666994e-2a25-4b80-aecd-240b1a979cfd.mp4
 
