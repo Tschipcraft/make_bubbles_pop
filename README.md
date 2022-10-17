@@ -22,7 +22,7 @@ Fixes [MC-132067](https://bugs.mojang.com/browse/MC-132067).
 
 Download the latest release from [here](https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod/releases/latest) and put the .jar file into the `mods` folder in your Minecraft directory.
 
-You can also of course download it from Modrinth or CurseForge.
+You can also, of course, download it from Modrinth or CurseForge.
 
 <a href="https://modrinth.com/mod/make_bubbles_pop/versions"><img src="https://github.com/modrinth/art/blob/main/Branding/Badge/badge-dark.svg"></a>
 
