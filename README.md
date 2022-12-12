@@ -25,7 +25,13 @@ Download the latest release from [here](https://github.com/Tschipcraft/fabric_ma
 
 You can also, of course, download it from Modrinth or CurseForge.
 
-<a href="https://modrinth.com/mod/make_bubbles_pop/versions"><img src="https://github.com/modrinth/art/blob/main/Branding/Badge/badge-dark.svg"></a>
+<a href="https://modrinth.com/mod/make_bubbles_pop">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/modrinth/art/blob/main/Branding/Badge/badge-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://github.com/modrinth/art/blob/main/Branding/Badge/badge-light.svg">
+  <img alt="Download on Modrinth" src="https://github.com/modrinth/art/blob/main/Branding/Badge/badge-dark.svg">
+</picture>
+</a>
 
 ## Demo Videos
 
