@@ -32,6 +32,9 @@ You can also, of course, download it from Modrinth or CurseForge.
   <img alt="Download on Modrinth" src="https://github.com/modrinth/art/blob/main/Branding/Badge/badge-dark.svg">
 </picture>
 </a>
+<a href="https://www.curseforge.com/minecraft/mc-mods/make-bubbles-pop">
+<img alt="Download on CurseForge" src="https://i.imgur.com/zcIcoGb.png">
+</a>
 
 ## Demo Videos
 
