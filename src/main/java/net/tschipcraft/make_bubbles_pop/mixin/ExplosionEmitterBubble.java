@@ -20,6 +20,7 @@ public abstract class ExplosionEmitterBubble extends NoRenderParticle {
 
     @Inject(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/world/ClientWorld;addParticle(Lnet/minecraft/particle/ParticleEffect;DDDDDD)V", shift = At.Shift.BEFORE))
     protected void injectBubbleParticle(CallbackInfo info) {
+        // Add bubble particles to explosions
         if (this.world.getFluidState(new BlockPos(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
             for (int i = 0; i < 2; i++) {
                 double d = (this.random.nextDouble() - this.random.nextDouble());

@@ -3,14 +3,16 @@
   "id": "make_bubbles_pop",
   "version": "${version}",
   "name": "Make Bubbles Pop Mod",
-  "description": "Title says it all. This client-side mod makes bubble particles pop.",
+  "description": "This client-side mod makes bubble particles pop and lets them realistically rise to the water surface.",
   "authors": [
     "Tschipcraft"
   ],
   "contact": {
-    "homepage": "https://tschipcraft.ddns.net/",
-    "sources": "https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod"
+    "homepage": "https://linktr.ee/tschipcraft",
+    "sources": "https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod",
+    "issues": "https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod/issues"
   },
+  "license": "MIT",
   "icon": "assets/make_bubbles_pop/icon.png",
   "environment": "client",
   "entrypoints": {

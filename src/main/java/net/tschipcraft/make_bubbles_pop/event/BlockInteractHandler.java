@@ -23,7 +23,9 @@ public class BlockInteractHandler implements UseBlockCallback {
         if (hitResult.getType() == HitResult.Type.BLOCK && !player.isSpectator() && !player.isSneaking()) {
 
             if (world.getBlockState(blockPos).getBlock() instanceof ChestBlock) {
+                // A chest block was right-clicked
                 if (!ChestBlock.isChestBlocked(world, blockPos) && world.getFluidState(blockPos).isIn(FluidTags.WATER)) {
+                    // The chest block is waterlogged and not blocked -> show bubbles + play sound
                     for (int i = (int)(Math.random() * 5) + 5; i >= 0; i--) {
                         world.addParticle(ParticleTypes.BUBBLE, blockPos.getX() + 0.5 + ((0.5 - Math.random())/2.0), blockPos.getY() + 0.7 - (Math.random()/2.0), blockPos.getZ() + 0.5 + ((0.5 - Math.random())/2.0), 0f, 0.1f, 0f);
                         world.playSound(blockPos.getX(), blockPos.getY(), blockPos.getZ(), SoundEvents.BLOCK_BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundCategory.AMBIENT, 0.1f, 1.4f, false);
@@ -32,8 +34,9 @@ public class BlockInteractHandler implements UseBlockCallback {
                 }
             }
 
+            /*
             if (world.getBlockState(blockPos).getBlock() instanceof BarrelBlock) {
-                //TODO detect FACING (BarrelBlock.FACING)
+                //TODO figure out how to retrieve FACING value (BarrelBlock.FACING)
                 if (world.getFluidState(blockPos.up()).isIn(FluidTags.WATER)) {
                     for (int i = (int)(Math.random() * 5) + 5; i >= 0; i--) {
                         world.addParticle(ParticleTypes.BUBBLE, blockPos.getX() + 1.0 + ((0.5 - Math.random())/2.0), blockPos.getY() + 0.7 - (Math.random()/2.0), blockPos.getZ() + 0.5 + ((0.5 - Math.random())/2.0), 0f, 0.1f, 0f);
@@ -42,6 +45,7 @@ public class BlockInteractHandler implements UseBlockCallback {
 
                 }
             }
+             */
         }
 
         return ActionResult.PASS;
