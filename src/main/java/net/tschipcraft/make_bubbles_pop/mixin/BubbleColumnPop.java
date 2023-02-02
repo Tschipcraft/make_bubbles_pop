@@ -23,4 +23,13 @@ public abstract class BubbleColumnPop extends SpriteBillboardParticle {
         this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
         this.world.playSound(this.x, this.y, this.z, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.AMBIENT, 0.1f, 1f, true);
     }
+
+    /*
+    // Increase upward motion to compensate for the increased momentum of normal bubble particles - looks weird
+    @Inject(method = "tick()V", at = @At("TAIL"))
+    protected void injectUpwardsMotion(CallbackInfo info) {
+        // Upwards motion
+        this.velocityY += 0.01;
+    }
+     */
 }
