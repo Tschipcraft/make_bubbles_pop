@@ -9,11 +9,12 @@
   <a href="https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod/releases/latest"><img src="https://img.shields.io/github/downloads/Tschipcraft/fabric_make_bubbles_pop_mod/total?logo=github&colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
 </p>
 
-> A fabric/quilt mod for Minecraft 1.18x-1.19x
+> A fabric/quilt mod for Minecraft 1.17x-1.19x
 
 ## Features
 
 This client-side mod makes bubble particles pop and lets them rise realistically to the water surface.
+It also adds bubble particles to opening chests and explosions underwater.
 
 Should be compatible with every other mod.
 
@@ -41,3 +42,7 @@ This mod is also available on Modrinth and CurseForge!
 https://user-images.githubusercontent.com/78470530/161437539-a666994e-2a25-4b80-aecd-240b1a979cfd.mp4
 
 https://user-images.githubusercontent.com/78470530/161437560-0935de11-5b12-41b2-abe8-cafc7bb86d1d.mp4
+
+<br>
+
+[🔎 Check out even more demo videos over on Modrinth!](https://modrinth.com/mod/make_bubbles_pop)
