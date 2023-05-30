@@ -1,5 +1,7 @@
 package net.tschipcraft.make_bubbles_pop.mixin;
 
+import net.minecraft.block.ChestBlock;
+import net.minecraft.block.LightBlock;
 import net.minecraft.client.particle.SpriteBillboardParticle;
 import net.minecraft.client.particle.WaterBubbleParticle;
 import net.minecraft.client.world.ClientWorld;
@@ -71,15 +73,15 @@ public abstract class BubblePop extends SpriteBillboardParticle {
         this.accelerationTicker++;
 
 
-        if (this.maxAge-- <= 0 || !this.world.getFluidState(BlockPos.ofFloored(this.x, this.y + 0.1, this.z)).isIn(FluidTags.WATER)) {
-            // maxAge reached/Can't reach top -> pop
-            this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
-            this.markDead();
-        } else if (!this.world.getFluidState(BlockPos.ofFloored(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
+        if (!this.world.getFluidState(BlockPos.ofFloored(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
             // Outside water -> pop with sound
             this.markDead();
             this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
             this.world.playSound(this.x, this.y, this.z, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.AMBIENT, 0.1f, 1f, false);
+        } else if (this.maxAge-- <= 0 || !this.world.getFluidState(BlockPos.ofFloored(this.x, this.y + 0.1, this.z)).isIn(FluidTags.WATER) && this.world.getFluidState(BlockPos.ofFloored(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
+            // maxAge reached/Can't reach top -> pop
+            this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
+            this.markDead();
         } else {
 
             if (!this.world.getFluidState(BlockPos.ofFloored(this.x, this.y + 0.8, this.z)).isIn(FluidTags.WATER)) {
@@ -89,6 +91,17 @@ public abstract class BubblePop extends SpriteBillboardParticle {
                 boolean escapeNegX = this.world.getFluidState(BlockPos.ofFloored(this.x - 1, this.y + 0.8, this.z)).isIn(FluidTags.WATER) && this.world.getFluidState(BlockPos.ofFloored(this.x - 1, this.y, this.z)).isIn(FluidTags.WATER);
                 boolean escapePosZ = this.world.getFluidState(BlockPos.ofFloored(this.x, this.y + 0.8, this.z + 1)).isIn(FluidTags.WATER) && this.world.getFluidState(BlockPos.ofFloored(this.x, this.y, this.z + 1)).isIn(FluidTags.WATER);
                 boolean escapeNegZ = this.world.getFluidState(BlockPos.ofFloored(this.x, this.y + 0.8, this.z - 1)).isIn(FluidTags.WATER) && this.world.getFluidState(BlockPos.ofFloored(this.x, this.y, this.z - 1)).isIn(FluidTags.WATER);
+
+                /*
+                Ebic screenshots
+                 || world.getBlockState(BlockPos.ofFloored(this.x, this.y + 0.8, this.z)).getBlock() instanceof LightBlock
+
+                escapePosX = !(this.world.getBlockState(BlockPos.ofFloored(this.x + 1, this.y + 0.8, this.z)).getBlock() instanceof LightBlock);
+                escapeNegX = !(this.world.getBlockState(BlockPos.ofFloored(this.x - 1, this.y + 0.8, this.z)).getBlock() instanceof LightBlock);
+
+                escapePosZ = false;
+                escapeNegZ = false;
+                 */
 
                 if (!(!escapePosX && !escapeNegX && !escapePosZ && !escapeNegZ)) {
                     for (int i = 0; i <= 5; i++) {
