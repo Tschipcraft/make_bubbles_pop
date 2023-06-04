@@ -2,8 +2,8 @@ modLoader="javafml"
 # A version range to match for said mod loader - 45 is 1.19.4 or above
 loaderVersion="[45,)"
 license="MIT"
-issueTrackerURL="https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod/issues"
-showAsResourcePack = false
+issueTrackerURL="https://github.com/Tschipcraft/make_bubbles_pop/issues"
+showAsResourcePack=false
 
 [[mods]]
 modId="make_bubbles_pop"
@@ -11,7 +11,7 @@ version="${file.jarVersion}-forge"
 displayName="Make Bubbles Pop"
 # A URL to query for updates for this mod. See the JSON update specification https://docs.minecraftforge.net/en/latest/misc/updatechecker/
 updateJSONURL="https://api.modrinth.com/updates/gPCdW0Wr/forge_updates.json"
-displayURL="https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod"
+displayURL="https://github.com/Tschipcraft/make_bubbles_pop"
 logoFile="assets/make_bubbles_pop/icon.png"
 logoBlur=false
 #credits="Thanks for this example mod goes to Java" #optional

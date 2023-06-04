@@ -9,8 +9,8 @@
   ],
   "contact": {
     "homepage": "https://linktr.ee/tschipcraft",
-    "sources": "https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod",
-    "issues": "https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod/issues"
+    "sources": "https://github.com/Tschipcraft/make_bubbles_pop",
+    "issues": "https://github.com/Tschipcraft/make_bubbles_pop/issues"
   },
   "license": "MIT",
   "icon": "assets/make_bubbles_pop/icon.png",

@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="demo/icon_scaled.png" width="95" height="95"><br/>
+  <a><img src="demo/icon_scaled.png" width="95" height="95"></a><br/>
   Make Bubbles Pop Mod
 </h1>
 <p align="center">
