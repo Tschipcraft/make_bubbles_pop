@@ -4,7 +4,7 @@ import net.minecraft.client.particle.ExplosionEmitterParticle;
 import net.minecraft.client.particle.NoRenderParticle;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.tag.FluidTags;
+import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -21,7 +21,7 @@ public abstract class ExplosionEmitterBubble extends NoRenderParticle {
     @Inject(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/world/ClientWorld;addParticle(Lnet/minecraft/particle/ParticleEffect;DDDDDD)V", shift = At.Shift.BEFORE))
     protected void injectBubbleParticle(CallbackInfo info) {
         // Add bubble particles to explosions
-        if (this.world.getFluidState(BlockPos.ofFloored(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
+        if (this.world.getFluidState(new BlockPos(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
             for (int i = 0; i < 2; i++) {
                 double d = (this.random.nextDouble() - this.random.nextDouble());
                 double e = (this.random.nextDouble() - this.random.nextDouble());

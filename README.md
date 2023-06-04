@@ -9,6 +9,11 @@
   <a href="https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod/releases/latest"><img src="https://img.shields.io/github/downloads/Tschipcraft/fabric_make_bubbles_pop_mod/total?logo=github&colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
 </p>
 
+<img alt="Info" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/info.svg"><br>
+This branch hosts the old fabric and the backported forge version.
+- Fabric version works in Minecraft 1.17–1.19.3
+- Forge version works in Minecraft 1.19–1.19.3
+
 ## Features
 
 This client-side mod makes bubble particles pop

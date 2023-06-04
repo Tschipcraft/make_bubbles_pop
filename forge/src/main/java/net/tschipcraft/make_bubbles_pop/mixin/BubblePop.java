@@ -72,24 +72,24 @@ public class BubblePop extends TextureSheetParticle {
         this.accelerationTicker++;
 
 
-        if (!this.level.getFluidState(BlockPos.containing(this.x, this.y, this.z)).is(FluidTags.WATER)) {
+        if (!this.level.getFluidState(new BlockPos(this.x, this.y, this.z)).is(FluidTags.WATER)) {
             // Outside water -> pop with sound
             this.remove();
             this.level.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.xd, this.yd, this.zd);
             this.level.playLocalSound(this.x, this.y, this.z, SoundEvents.BUBBLE_COLUMN_BUBBLE_POP, SoundSource.AMBIENT, 0.1f, 1f, true);
-        } else if (this.lifetime-- <= 0 || !this.level.getFluidState(BlockPos.containing(this.x, this.y + 0.1, this.z)).is(FluidTags.WATER) && this.level.getFluidState(BlockPos.containing(this.x, this.y, this.z)).is(FluidTags.WATER)) {
+        } else if (this.lifetime-- <= 0 || !this.level.getFluidState(new BlockPos(this.x, this.y + 0.1, this.z)).is(FluidTags.WATER) && this.level.getFluidState(new BlockPos(this.x, this.y, this.z)).is(FluidTags.WATER)) {
             // lifetime reached/Can't reach top -> pop
             this.level.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.xd, this.yd, this.zd);
             this.remove();
         } else {
 
-            if (!this.level.getFluidState(BlockPos.containing(this.x, this.y + 0.8, this.z)).is(FluidTags.WATER)) {
+            if (!this.level.getFluidState(new BlockPos(this.x, this.y + 0.8, this.z)).is(FluidTags.WATER)) {
                 // Direct way upwards blocked -> search up different way to water surface
 
-                boolean escapePosX = this.level.getFluidState(BlockPos.containing(this.x + 1, this.y + 0.8, this.z)).is(FluidTags.WATER) && this.level.getFluidState(BlockPos.containing(this.x + 1, this.y, this.z)).is(FluidTags.WATER);
-                boolean escapeNegX = this.level.getFluidState(BlockPos.containing(this.x - 1, this.y + 0.8, this.z)).is(FluidTags.WATER) && this.level.getFluidState(BlockPos.containing(this.x - 1, this.y, this.z)).is(FluidTags.WATER);
-                boolean escapePosZ = this.level.getFluidState(BlockPos.containing(this.x, this.y + 0.8, this.z + 1)).is(FluidTags.WATER) && this.level.getFluidState(BlockPos.containing(this.x, this.y, this.z + 1)).is(FluidTags.WATER);
-                boolean escapeNegZ = this.level.getFluidState(BlockPos.containing(this.x, this.y + 0.8, this.z - 1)).is(FluidTags.WATER) && this.level.getFluidState(BlockPos.containing(this.x, this.y, this.z - 1)).is(FluidTags.WATER);
+                boolean escapePosX = this.level.getFluidState(new BlockPos(this.x + 1, this.y + 0.8, this.z)).is(FluidTags.WATER) && this.level.getFluidState(new BlockPos(this.x + 1, this.y, this.z)).is(FluidTags.WATER);
+                boolean escapeNegX = this.level.getFluidState(new BlockPos(this.x - 1, this.y + 0.8, this.z)).is(FluidTags.WATER) && this.level.getFluidState(new BlockPos(this.x - 1, this.y, this.z)).is(FluidTags.WATER);
+                boolean escapePosZ = this.level.getFluidState(new BlockPos(this.x, this.y + 0.8, this.z + 1)).is(FluidTags.WATER) && this.level.getFluidState(new BlockPos(this.x, this.y, this.z + 1)).is(FluidTags.WATER);
+                boolean escapeNegZ = this.level.getFluidState(new BlockPos(this.x, this.y + 0.8, this.z - 1)).is(FluidTags.WATER) && this.level.getFluidState(new BlockPos(this.x, this.y, this.z - 1)).is(FluidTags.WATER);
 
                 if (!(!escapePosX && !escapeNegX && !escapePosZ && !escapeNegZ)) {
                     for (int i = 0; i <= 5; i++) {

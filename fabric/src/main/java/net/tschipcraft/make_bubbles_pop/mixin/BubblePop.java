@@ -8,7 +8,7 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.registry.tag.FluidTags;
+import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Mixin;
@@ -73,31 +73,31 @@ public abstract class BubblePop extends SpriteBillboardParticle {
         this.accelerationTicker++;
 
 
-        if (!this.world.getFluidState(BlockPos.ofFloored(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
+        if (!this.world.getFluidState(new BlockPos(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
             // Outside water -> pop with sound
             this.markDead();
             this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
             this.world.playSound(this.x, this.y, this.z, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.AMBIENT, 0.1f, 1f, false);
-        } else if (this.maxAge-- <= 0 || !this.world.getFluidState(BlockPos.ofFloored(this.x, this.y + 0.1, this.z)).isIn(FluidTags.WATER) && this.world.getFluidState(BlockPos.ofFloored(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
+        } else if (this.maxAge-- <= 0 || !this.world.getFluidState(new BlockPos(this.x, this.y + 0.1, this.z)).isIn(FluidTags.WATER) && this.world.getFluidState(new BlockPos(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
             // maxAge reached/Can't reach top -> pop
             this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
             this.markDead();
         } else {
 
-            if (!this.world.getFluidState(BlockPos.ofFloored(this.x, this.y + 0.8, this.z)).isIn(FluidTags.WATER)) {
+            if (!this.world.getFluidState(new BlockPos(this.x, this.y + 0.8, this.z)).isIn(FluidTags.WATER)) {
                 // Direct way upwards blocked -> search up different way to water surface
 
-                boolean escapePosX = this.world.getFluidState(BlockPos.ofFloored(this.x + 1, this.y + 0.8, this.z)).isIn(FluidTags.WATER) && this.world.getFluidState(BlockPos.ofFloored(this.x + 1, this.y, this.z)).isIn(FluidTags.WATER);
-                boolean escapeNegX = this.world.getFluidState(BlockPos.ofFloored(this.x - 1, this.y + 0.8, this.z)).isIn(FluidTags.WATER) && this.world.getFluidState(BlockPos.ofFloored(this.x - 1, this.y, this.z)).isIn(FluidTags.WATER);
-                boolean escapePosZ = this.world.getFluidState(BlockPos.ofFloored(this.x, this.y + 0.8, this.z + 1)).isIn(FluidTags.WATER) && this.world.getFluidState(BlockPos.ofFloored(this.x, this.y, this.z + 1)).isIn(FluidTags.WATER);
-                boolean escapeNegZ = this.world.getFluidState(BlockPos.ofFloored(this.x, this.y + 0.8, this.z - 1)).isIn(FluidTags.WATER) && this.world.getFluidState(BlockPos.ofFloored(this.x, this.y, this.z - 1)).isIn(FluidTags.WATER);
+                boolean escapePosX = this.world.getFluidState(new BlockPos(this.x + 1, this.y + 0.8, this.z)).isIn(FluidTags.WATER) && this.world.getFluidState(new BlockPos(this.x + 1, this.y, this.z)).isIn(FluidTags.WATER);
+                boolean escapeNegX = this.world.getFluidState(new BlockPos(this.x - 1, this.y + 0.8, this.z)).isIn(FluidTags.WATER) && this.world.getFluidState(new BlockPos(this.x - 1, this.y, this.z)).isIn(FluidTags.WATER);
+                boolean escapePosZ = this.world.getFluidState(new BlockPos(this.x, this.y + 0.8, this.z + 1)).isIn(FluidTags.WATER) && this.world.getFluidState(new BlockPos(this.x, this.y, this.z + 1)).isIn(FluidTags.WATER);
+                boolean escapeNegZ = this.world.getFluidState(new BlockPos(this.x, this.y + 0.8, this.z - 1)).isIn(FluidTags.WATER) && this.world.getFluidState(new BlockPos(this.x, this.y, this.z - 1)).isIn(FluidTags.WATER);
 
                 /*
                 Ebic screenshots
-                 || world.getBlockState(BlockPos.ofFloored(this.x, this.y + 0.8, this.z)).getBlock() instanceof LightBlock
+                 || world.getBlockState(new BlockPos(this.x, this.y + 0.8, this.z)).getBlock() instanceof LightBlock
 
-                escapePosX = !(this.world.getBlockState(BlockPos.ofFloored(this.x + 1, this.y + 0.8, this.z)).getBlock() instanceof LightBlock);
-                escapeNegX = !(this.world.getBlockState(BlockPos.ofFloored(this.x - 1, this.y + 0.8, this.z)).getBlock() instanceof LightBlock);
+                escapePosX = !(this.world.getBlockState(new BlockPos(this.x + 1, this.y + 0.8, this.z)).getBlock() instanceof LightBlock);
+                escapeNegX = !(this.world.getBlockState(new BlockPos(this.x - 1, this.y + 0.8, this.z)).getBlock() instanceof LightBlock);
 
                 escapePosZ = false;
                 escapeNegZ = false;
