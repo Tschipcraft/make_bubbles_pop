@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="demo/icon_scaled.png" width="95" height="95"><br/>
+  <a><img src="demo/icon_scaled.png" width="95" height="95"></a><br/>
   Make Bubbles Pop Mod
 </h1>
 <p align="center">
@@ -9,10 +9,12 @@
   <a href="https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod/releases/latest"><img src="https://img.shields.io/github/downloads/Tschipcraft/fabric_make_bubbles_pop_mod/total?logo=github&colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
 </p>
 
-<img alt="Info" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/info.svg"><br>
+<picture><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/light-theme/info.svg"><img alt="Info" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/info.svg"></picture><br>
 This branch hosts the old fabric and the backported forge version.
-- Fabric version works in Minecraft 1.17–1.19.3
+- Fabric version works in Minecraft 1.18–1.19.3
 - Forge version works in Minecraft 1.19–1.19.3
+
+[Got to the master branch for the latest version](https://github.com/Tschipcraft/make_bubbles_pop/tree/master)
 
 ## Features
 
@@ -32,9 +34,9 @@ This mod is also available on Modrinth and CurseForge!
 
 <a href="https://modrinth.com/mod/make_bubbles_pop">
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/modrinth/art/blob/main/Branding/Badge/badge-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://github.com/modrinth/art/blob/main/Branding/Badge/badge-light.svg">
-  <img alt="Download on Modrinth" src="https://github.com/modrinth/art/blob/main/Branding/Badge/badge-dark.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/modrinth/art/main/Branding/Badge/badge-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/modrinth/art/main/Branding/Badge/badge-light.svg">
+  <img alt="Download on Modrinth" src="https://raw.githubusercontent.com/modrinth/art/main/Branding/Badge/badge-dark.svg">
 </picture>
 </a>
 <a href="https://www.curseforge.com/minecraft/mc-mods/make-bubbles-pop">

@@ -11,7 +11,7 @@ version="${file.jarVersion}-forge"
 displayName="Make Bubbles Pop"
 # A URL to query for updates for this mod. See the JSON update specification https://docs.minecraftforge.net/en/latest/misc/updatechecker/
 updateJSONURL="https://api.modrinth.com/updates/gPCdW0Wr/forge_updates.json"
-displayURL="https://github.com/Tschipcraft/make_bubbles_pop"
+displayURL="https://github.com/Tschipcraft/make_bubbles_pop/tree/pre-1.19.4"
 logoFile="icon.png"
 logoBlur=false
 #credits="Thanks for this example mod goes to Java" #optional
