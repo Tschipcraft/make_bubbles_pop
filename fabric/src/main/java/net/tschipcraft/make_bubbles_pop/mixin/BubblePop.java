@@ -79,9 +79,10 @@ public abstract class BubblePop extends SpriteBillboardParticle {
             this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
             this.world.playSound(this.x, this.y, this.z, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.AMBIENT, 0.1f, 1f, false);
         } else if (this.maxAge-- <= 0 || !this.world.getFluidState(BlockPos.ofFloored(this.x, this.y + 0.1, this.z)).isIn(FluidTags.WATER) && this.world.getFluidState(BlockPos.ofFloored(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
-            // maxAge reached/Can't reach top -> pop
-            this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
+            // maxAge reached/Can't reach top -> pop with low-pitch sound
             this.markDead();
+            this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
+            this.world.playSound(this.x, this.y, this.z, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.AMBIENT, 0.1f, 0f, false);
         } else {
 
             if (!this.world.getFluidState(BlockPos.ofFloored(this.x, this.y + 0.8, this.z)).isIn(FluidTags.WATER)) {
