@@ -28,5 +28,10 @@
     "fabric": "*",
     "minecraft": ">=1.18 <1.19.4",
     "java": ">=17"
+  },
+  "custom": {
+    "catalogue": {
+      "banner": "assets/make_bubbles_pop/icon.png"
+    }
   }
 }

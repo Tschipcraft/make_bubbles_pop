@@ -18,7 +18,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod(MakeBubblesPop.MODID)
 public class MakeBubblesPop
 {
@@ -44,7 +43,6 @@ public class MakeBubblesPop
         LOGGER.info("Make Bubbles Pop by Tschipcraft initialized!");
     }
 
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void RightClickBlock(PlayerInteractEvent.RightClickBlock event)
     {
@@ -60,7 +58,6 @@ public class MakeBubblesPop
                         level.addParticle(ParticleTypes.BUBBLE, block.getBlockPos().getX() + 0.5 + ((0.5 - Math.random())/2.0), block.getBlockPos().getY() + 0.7 - (Math.random()/2.0), block.getBlockPos().getZ() + 0.5 + ((0.5 - Math.random())/2.0), 0f, 0.1f, 0f);
                         level.playLocalSound(block.getBlockPos().getX(), block.getBlockPos().getY(), block.getBlockPos().getZ(), SoundEvents.BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundSource.AMBIENT, 0.1f, 1.4f, false);
                     }
-
                 }
             }
         }

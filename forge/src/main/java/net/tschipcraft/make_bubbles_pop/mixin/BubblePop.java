@@ -76,11 +76,12 @@ public class BubblePop extends TextureSheetParticle {
             // Outside water -> pop with sound
             this.remove();
             this.level.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.xd, this.yd, this.zd);
-            this.level.playLocalSound(this.x, this.y, this.z, SoundEvents.BUBBLE_COLUMN_BUBBLE_POP, SoundSource.AMBIENT, 0.1f, 1f, true);
+            this.level.playLocalSound(this.x, this.y, this.z, SoundEvents.BUBBLE_COLUMN_BUBBLE_POP, SoundSource.AMBIENT, 0.1f, 1f, false);
         } else if (this.lifetime-- <= 0 || !this.level.getFluidState(new BlockPos(this.x, this.y + 0.1, this.z)).is(FluidTags.WATER) && this.level.getFluidState(new BlockPos(this.x, this.y, this.z)).is(FluidTags.WATER)) {
-            // lifetime reached/Can't reach top -> pop
-            this.level.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.xd, this.yd, this.zd);
+            // lifetime reached/Can't reach top -> pop with low-pitch sound
             this.remove();
+            this.level.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.xd, this.yd, this.zd);
+            this.level.playLocalSound(this.x, this.y, this.z, SoundEvents.BUBBLE_COLUMN_BUBBLE_POP, SoundSource.AMBIENT, 0.1f, 0f, false);
         } else {
 
             if (!this.level.getFluidState(new BlockPos(this.x, this.y + 0.8, this.z)).is(FluidTags.WATER)) {

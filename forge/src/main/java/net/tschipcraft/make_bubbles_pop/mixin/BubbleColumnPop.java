@@ -21,7 +21,15 @@ public abstract class BubbleColumnPop extends TextureSheetParticle {
     @Inject(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/particle/BubbleColumnUpParticle;remove()V", shift = At.Shift.AFTER))
     protected void injectPopParticle(CallbackInfo info) {
         this.level.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.xd, this.yd, this.zd);
-        this.level.playLocalSound(this.x, this.y, this.z, SoundEvents.BUBBLE_COLUMN_BUBBLE_POP, SoundSource.AMBIENT, 0.1f, 1f, true);
+        this.level.playLocalSound(this.x, this.y, this.z, SoundEvents.BUBBLE_COLUMN_BUBBLE_POP, SoundSource.AMBIENT, 0.1f, 1f, false);
+    }
+
+    @Inject(method = "tick()V", at = @At(value = "HEAD"))
+    protected void injectPopParticleIntoSuper(CallbackInfo info) {
+        if ((this.age + 1) >= this.lifetime) {
+            this.remove();
+            this.level.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.xd, this.yd, this.zd);
+        }
     }
 
     /*
