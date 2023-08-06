@@ -1,14 +1,11 @@
 package net.tschipcraft.make_bubbles_pop.mixin;
 
-import net.minecraft.block.ChestBlock;
-import net.minecraft.block.LightBlock;
 import net.minecraft.client.particle.SpriteBillboardParticle;
 import net.minecraft.client.particle.WaterBubbleParticle;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Mixin;
@@ -48,8 +45,11 @@ public abstract class BubblePop extends SpriteBillboardParticle {
         this.prevPosY = this.y;
         this.prevPosZ = this.z;
 
-        // Upwards motion
-        this.velocityY += 0.01;
+        // Upward motion
+        // Scale dependant motion?
+        // => http://seas.ucla.edu/stenstro/Bubble.pdf
+        //this.velocityY += .02f - (this.scale / 10f);
+        this.velocityY += .01f;
         this.move(this.velocityX, this.velocityY, this.velocityZ);
 
         // Right and left motion
@@ -73,25 +73,25 @@ public abstract class BubblePop extends SpriteBillboardParticle {
         this.accelerationTicker++;
 
 
-        if (!this.world.getFluidState(BlockPos.ofFloored(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
+        if (!this.world.isWater(BlockPos.ofFloored(this.x, this.y, this.z))) {
             // Outside water -> pop with sound
             this.markDead();
             this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
             this.world.playSound(this.x, this.y, this.z, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.AMBIENT, 0.1f, 1f, false);
-        } else if (this.maxAge-- <= 0 || !this.world.getFluidState(BlockPos.ofFloored(this.x, this.y + 0.1, this.z)).isIn(FluidTags.WATER) && this.world.getFluidState(BlockPos.ofFloored(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
+        } else if (this.maxAge-- <= 0 || !this.world.isWater(BlockPos.ofFloored(this.x, this.y + 0.1, this.z)) && this.world.isWater(BlockPos.ofFloored(this.x, this.y, this.z))) {
             // maxAge reached/Can't reach top -> pop with low-pitch sound
             this.markDead();
             this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
             this.world.playSound(this.x, this.y, this.z, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.AMBIENT, 0.1f, 0f, false);
         } else {
 
-            if (!this.world.getFluidState(BlockPos.ofFloored(this.x, this.y + 0.8, this.z)).isIn(FluidTags.WATER)) {
+            if (!this.world.isWater(BlockPos.ofFloored(this.x, this.y + 0.8, this.z))) {
                 // Direct way upwards blocked -> search up different way to water surface
 
-                boolean escapePosX = this.world.getFluidState(BlockPos.ofFloored(this.x + 1, this.y + 0.8, this.z)).isIn(FluidTags.WATER) && this.world.getFluidState(BlockPos.ofFloored(this.x + 1, this.y, this.z)).isIn(FluidTags.WATER);
-                boolean escapeNegX = this.world.getFluidState(BlockPos.ofFloored(this.x - 1, this.y + 0.8, this.z)).isIn(FluidTags.WATER) && this.world.getFluidState(BlockPos.ofFloored(this.x - 1, this.y, this.z)).isIn(FluidTags.WATER);
-                boolean escapePosZ = this.world.getFluidState(BlockPos.ofFloored(this.x, this.y + 0.8, this.z + 1)).isIn(FluidTags.WATER) && this.world.getFluidState(BlockPos.ofFloored(this.x, this.y, this.z + 1)).isIn(FluidTags.WATER);
-                boolean escapeNegZ = this.world.getFluidState(BlockPos.ofFloored(this.x, this.y + 0.8, this.z - 1)).isIn(FluidTags.WATER) && this.world.getFluidState(BlockPos.ofFloored(this.x, this.y, this.z - 1)).isIn(FluidTags.WATER);
+                boolean escapePosX = this.world.isWater(BlockPos.ofFloored(this.x + 1, this.y + 0.8, this.z)) && this.world.isWater(BlockPos.ofFloored(this.x + 1, this.y, this.z));
+                boolean escapeNegX = this.world.isWater(BlockPos.ofFloored(this.x - 1, this.y + 0.8, this.z)) && this.world.isWater(BlockPos.ofFloored(this.x - 1, this.y, this.z));
+                boolean escapePosZ = this.world.isWater(BlockPos.ofFloored(this.x, this.y + 0.8, this.z + 1)) && this.world.isWater(BlockPos.ofFloored(this.x, this.y, this.z + 1));
+                boolean escapeNegZ = this.world.isWater(BlockPos.ofFloored(this.x, this.y + 0.8, this.z - 1)) && this.world.isWater(BlockPos.ofFloored(this.x, this.y, this.z - 1));
 
                 /*
                 Ebic screenshots

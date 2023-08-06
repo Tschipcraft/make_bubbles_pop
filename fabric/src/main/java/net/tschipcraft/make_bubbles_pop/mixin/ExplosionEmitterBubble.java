@@ -11,6 +11,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/**
+ * This mixin injects into the ExplosionEmitter particle class to add bubbles to explosions underwater.
+ */
 @Mixin(ExplosionEmitterParticle.class)
 public abstract class ExplosionEmitterBubble extends NoRenderParticle {
 
@@ -20,7 +23,7 @@ public abstract class ExplosionEmitterBubble extends NoRenderParticle {
 
     @Inject(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/world/ClientWorld;addParticle(Lnet/minecraft/particle/ParticleEffect;DDDDDD)V", shift = At.Shift.BEFORE))
     protected void injectBubbleParticle(CallbackInfo info) {
-        // Add bubble particles to explosions
+        // Add bubble particles to explosions underwater
         if (this.world.getFluidState(BlockPos.ofFloored(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
             for (int i = 0; i < 2; i++) {
                 double d = (this.random.nextDouble() - this.random.nextDouble());

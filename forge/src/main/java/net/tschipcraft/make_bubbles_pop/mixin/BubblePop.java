@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = BubbleParticle.class)
-public class BubblePop extends TextureSheetParticle {
+public abstract class BubblePop extends TextureSheetParticle {
     
     protected BubblePop(ClientLevel clientLevel, double d, double e, double f) {
         super(clientLevel, d, e, f);

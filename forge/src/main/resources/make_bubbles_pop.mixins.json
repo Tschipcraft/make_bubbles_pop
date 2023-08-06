@@ -10,7 +10,9 @@
     "BubblePop",
     "BubbleColumnPop",
     "CurrentDownPop",
-    "ExplosionEmitterBubble"
+    "ExplosionEmitterBubble",
+    "ChestBubble",
+    "BarrelOnUse"
   ],
   "injectors": {
     "defaultRequire": 1

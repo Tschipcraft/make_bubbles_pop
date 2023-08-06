@@ -11,6 +11,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+/**
+ * This mixin injects into the ExplosionEmitter particle class to add bubbles to explosions underwater.
+ */
 @Mixin(value = HugeExplosionSeedParticle.class)
 public abstract class ExplosionEmitterBubble extends NoRenderParticle {
 

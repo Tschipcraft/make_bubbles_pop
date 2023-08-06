@@ -13,7 +13,7 @@
     "issues": "https://github.com/Tschipcraft/make_bubbles_pop/issues"
   },
   "license": "MIT",
-  "icon": "assets/make_bubbles_pop/icon.png",
+  "icon": "icon.png",
   "environment": "client",
   "entrypoints": {
     "main": [
@@ -28,5 +28,10 @@
     "fabric": "*",
     "minecraft": ">=1.19.4",
     "java": ">=17"
+  },
+  "custom": {
+    "catalogue": {
+      "banner": "icon.png"
+    }
   }
 }

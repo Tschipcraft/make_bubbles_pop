@@ -25,7 +25,7 @@ public abstract class BubbleColumnPop extends SpriteBillboardParticle {
     }
 
     @Inject(method = "tick()V", at = @At(value = "HEAD"))
-    protected void injectPopParticletoSuper(CallbackInfo info) {
+    protected void injectPopParticleToSuper(CallbackInfo info) {
         if ((this.age + 1) >= this.maxAge) {
             this.markDead();
             this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
