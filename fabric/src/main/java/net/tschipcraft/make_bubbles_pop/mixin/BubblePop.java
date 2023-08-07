@@ -72,26 +72,25 @@ public abstract class BubblePop extends SpriteBillboardParticle {
 
         this.accelerationTicker++;
 
-
-        if (!this.world.getFluidState(new BlockPos(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
+        if (!this.world.isWater(new BlockPos(this.x, this.y, this.z))) {
             // Outside water -> pop with sound
             this.markDead();
             this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
             this.world.playSound(this.x, this.y, this.z, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.AMBIENT, 0.1f, 1f, false);
-        } else if (this.maxAge-- <= 0 || !this.world.getFluidState(new BlockPos(this.x, this.y + 0.1, this.z)).isIn(FluidTags.WATER) && this.world.getFluidState(new BlockPos(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
+        } else if (this.maxAge-- <= 0 || !this.world.isWater(new BlockPos(this.x, this.y + 0.1, this.z)) && this.world.isWater(new BlockPos(this.x, this.y, this.z))) {
             // maxAge reached/Can't reach top -> pop with low-pitch sound
             this.markDead();
             this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
             this.world.playSound(this.x, this.y, this.z, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.AMBIENT, 0.1f, 0f, false);
         } else {
 
-            if (!this.world.getFluidState(new BlockPos(this.x, this.y + 0.8, this.z)).isIn(FluidTags.WATER)) {
+            if (!this.world.isWater(new BlockPos(this.x, this.y + 0.8, this.z))) {
                 // Direct way upwards blocked -> search up different way to water surface
 
-                boolean escapePosX = this.world.getFluidState(new BlockPos(this.x + 1, this.y + 0.8, this.z)).isIn(FluidTags.WATER) && this.world.getFluidState(new BlockPos(this.x + 1, this.y, this.z)).isIn(FluidTags.WATER);
-                boolean escapeNegX = this.world.getFluidState(new BlockPos(this.x - 1, this.y + 0.8, this.z)).isIn(FluidTags.WATER) && this.world.getFluidState(new BlockPos(this.x - 1, this.y, this.z)).isIn(FluidTags.WATER);
-                boolean escapePosZ = this.world.getFluidState(new BlockPos(this.x, this.y + 0.8, this.z + 1)).isIn(FluidTags.WATER) && this.world.getFluidState(new BlockPos(this.x, this.y, this.z + 1)).isIn(FluidTags.WATER);
-                boolean escapeNegZ = this.world.getFluidState(new BlockPos(this.x, this.y + 0.8, this.z - 1)).isIn(FluidTags.WATER) && this.world.getFluidState(new BlockPos(this.x, this.y, this.z - 1)).isIn(FluidTags.WATER);
+                boolean escapePosX = this.world.isWater(new BlockPos(this.x + 1, this.y + 0.8, this.z)) && this.world.isWater(new BlockPos(this.x + 1, this.y, this.z));
+                boolean escapeNegX = this.world.isWater(new BlockPos(this.x - 1, this.y + 0.8, this.z)) && this.world.isWater(new BlockPos(this.x - 1, this.y, this.z));
+                boolean escapePosZ = this.world.isWater(new BlockPos(this.x, this.y + 0.8, this.z + 1)) && this.world.isWater(new BlockPos(this.x, this.y, this.z + 1));
+                boolean escapeNegZ = this.world.isWater(new BlockPos(this.x, this.y + 0.8, this.z - 1)) && this.world.isWater(new BlockPos(this.x, this.y, this.z - 1));
 
                 /*
                 Ebic screenshots

@@ -13,7 +13,7 @@
     "issues": "https://github.com/Tschipcraft/make_bubbles_pop/issues"
   },
   "license": "MIT",
-  "icon": "assets/make_bubbles_pop/icon.png",
+  "icon": "icon.png",
   "environment": "client",
   "entrypoints": {
     "main": [
@@ -31,7 +31,7 @@
   },
   "custom": {
     "catalogue": {
-      "banner": "assets/make_bubbles_pop/icon.png"
+      "banner": "icon.png"
     }
   }
 }
