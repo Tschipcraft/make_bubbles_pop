@@ -1,6 +1,6 @@
 modLoader="javafml"
-# A version range to match for said mod loader - 41..43 is 1.19..1.19.3
-loaderVersion="[41,45)"
+# A version range to match for said mod loader - 40 is 1.18.2
+loaderVersion="[40,41)"
 license="MIT"
 logoFile= "icon.png"
 logoBlur=false
@@ -25,13 +25,13 @@ updateJSONURL="https://api.modrinth.com/updates/gPCdW0Wr/forge_updates.json"
 # IGNORE_ALL_VERSION means that your mod will not cause a red X if it's present on the client or the server. This is a special case and should only be used if your mod has no server component.
 # NONE means that no display test is set on your mod. You need to do this yourself, see IExtensionPoint.DisplayTest for more information. You can define any scheme you wish with this value.
 # IMPORTANT NOTE: this is NOT an instruction as to which environments (CLIENT or DEDICATED SERVER) your mod loads on. Your mod should load (and maybe do nothing!) whereever it finds itself.
-displayTest="IGNORE_ALL_VERSION"
+#displayTest="IGNORE_ALL_VERSION"
 
 [[dependencies.make_bubbles_pop]]
     modId="minecraft"
     mandatory=true
     # This version range declares a minimum of the current minecraft version up to but not including the next major version
-    versionRange="[1.19,1.19.4)"
+    versionRange="[1.18.2,1.19)"
     ordering="NONE"
     side="CLIENT"
 
