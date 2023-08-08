@@ -3,7 +3,7 @@
   "id": "make_bubbles_pop",
   "version": "${version}-fabric",
   "name": "Make Bubbles Pop Mod",
-  "description": "This client-side mod makes bubble particles pop and lets them realistically rise to the water surface.\nIt also adds bubble particles to opening chests and explosions underwater.",
+  "description": "This client-side mod makes bubble particles pop and lets them realistically rise to the water surface.\nIt also adds bubble particles to opening chests, opening barrels and explosions underwater.",
   "authors": [
     "Tschipcraft"
   ],
