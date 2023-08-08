@@ -1,7 +1,7 @@
 modLoader="javafml"
 # A version range to match for said mod loader - 40 is 1.18.2
 loaderVersion="[40,41)"
-license="MIT"
+license="Custom"
 logoFile= "icon.png"
 logoBlur=false
 showAsResourcePack=false

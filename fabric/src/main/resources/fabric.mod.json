@@ -12,7 +12,7 @@
     "sources": "https://github.com/Tschipcraft/make_bubbles_pop/tree/pre-1.19.4",
     "issues": "https://github.com/Tschipcraft/make_bubbles_pop/issues"
   },
-  "license": "MIT",
+  "license": "Custom",
   "icon": "icon.png",
   "environment": "client",
   "entrypoints": {
@@ -30,6 +30,14 @@
     "java": ">=17"
   },
   "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.donate": "https://ko-fi.com/tschipcraft",
+        "modmenu.modrinth": "https://modrinth.com/mod/make_bubbles_pop",
+        "modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/make-bubbles-pop",
+        "modmenu.youtube": "https://www.youtube.com/@tschipcraft"
+      }
+    },
     "catalogue": {
       "banner": "icon.png"
     }
