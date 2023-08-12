@@ -13,7 +13,7 @@
 
 This client-side mod makes bubble particles pop
 and completely overhauls their behavior to make them rise realistically to the water surface.
-It also adds bubble particles to opening chests and explosions underwater.
+It also adds bubble particles to opening chests, opening barrels and explosions underwater.
 
 Should be compatible with every other mod.
 

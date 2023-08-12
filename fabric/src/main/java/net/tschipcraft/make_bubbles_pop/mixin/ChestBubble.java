@@ -66,7 +66,7 @@ public abstract class ChestBubble {
                                         xOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .8f;
                                         zOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
                                     } else if (facing == Direction.SOUTH) {
-                                        xOffset = 1f;
+                                        xOffset = 0f;
                                         zOffset = .5f;
                                         xOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .8f;
                                         zOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
@@ -77,7 +77,7 @@ public abstract class ChestBubble {
                                         zOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .8f;
                                     } else if (facing == Direction.WEST) {
                                         xOffset = .5f;
-                                        zOffset = 1f;
+                                        zOffset = 0f;
                                         xOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
                                         zOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .8f;
                                     }
