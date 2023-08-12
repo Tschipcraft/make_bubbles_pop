@@ -17,6 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * This mixin injects into the ChestBlockEntity class to add bubbles to opening chests underwater.
@@ -29,6 +30,7 @@ public abstract class ChestBubble {
 
     @Inject(method = "clientTick", at = @At("TAIL"))
     private static void clientTick(World world, BlockPos pos, BlockState state, ChestBlockEntity blockEntity, CallbackInfo ci) {
+        Random random = new Random();
         boolean bl = world != null;
         if (bl && world.isClient && world.isWater(pos)) {
             BlockState blockState = blockEntity.getCachedState();
@@ -54,7 +56,7 @@ public abstract class ChestBubble {
                         if (doubleChest) {
                             if (chestType == ChestType.LEFT) {
                                 // If the block is a double chest, only the left side plays particles and sound
-                                for (int i = 0; i < 15 + world.random.nextInt(20); i++) {
+                                for (int i = 0; i < 15 + random.nextInt(20); i++) {
                                     float xOffset = 0f;
                                     float zOffset = 0f;
                                     float xOffsetRand = 0f;
@@ -63,33 +65,33 @@ public abstract class ChestBubble {
                                     if (facing == Direction.NORTH) {
                                         xOffset = 1f;
                                         zOffset = .5f;
-                                        xOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .8f;
-                                        zOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
+                                        xOffsetRand = (random.nextFloat() - random.nextFloat()) * .8f;
+                                        zOffsetRand = (random.nextFloat() - random.nextFloat()) * .3f;
                                     } else if (facing == Direction.SOUTH) {
                                         xOffset = 1f;
                                         zOffset = .5f;
-                                        xOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .8f;
-                                        zOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
+                                        xOffsetRand = (random.nextFloat() - random.nextFloat()) * .8f;
+                                        zOffsetRand = (random.nextFloat() - random.nextFloat()) * .3f;
                                     } else if (facing == Direction.EAST) {
                                         xOffset = .5f;
                                         zOffset = 1f;
-                                        xOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
-                                        zOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .8f;
+                                        xOffsetRand = (random.nextFloat() - random.nextFloat()) * .3f;
+                                        zOffsetRand = (random.nextFloat() - random.nextFloat()) * .8f;
                                     } else if (facing == Direction.WEST) {
                                         xOffset = .5f;
                                         zOffset = 1f;
-                                        xOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
-                                        zOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .8f;
+                                        xOffsetRand = (random.nextFloat() - random.nextFloat()) * .3f;
+                                        zOffsetRand = (random.nextFloat() - random.nextFloat()) * .8f;
                                     }
 
-                                    world.addParticle(ParticleTypes.BUBBLE, pos.getX() + xOffset + xOffsetRand, pos.getY() + .7F - (world.random.nextFloat() / 2.0), pos.getZ() + zOffset + zOffsetRand, 0F, .05f + world.random.nextFloat() * .05f, 0F);
+                                    world.addParticle(ParticleTypes.BUBBLE, pos.getX() + xOffset + xOffsetRand, pos.getY() + .7F - (random.nextFloat() / 2.0), pos.getZ() + zOffset + zOffsetRand, 0F, .05f + random.nextFloat() * .05f, 0F);
                                 }
                                 world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundCategory.AMBIENT, 0.5f, 1.4f, false);
                             }
                         } else {
                             // Single chest
-                            for (int i = 0; i < 7 + world.random.nextInt(10); i++) {
-                                world.addParticle(ParticleTypes.BUBBLE, pos.getX() + .5f + (world.random.nextFloat() - world.random.nextFloat()) * .3f, pos.getY() + .7F - (world.random.nextFloat() / 2.0), pos.getZ() + .5f + (world.random.nextFloat() - world.random.nextFloat()) * .3f, 0F, .05f + world.random.nextFloat() * .05f, 0F);
+                            for (int i = 0; i < 7 + random.nextInt(10); i++) {
+                                world.addParticle(ParticleTypes.BUBBLE, pos.getX() + .5f + (random.nextFloat() - random.nextFloat()) * .3f, pos.getY() + .7F - (random.nextFloat() / 2.0), pos.getZ() + .5f + (random.nextFloat() - random.nextFloat()) * .3f, 0F, .05f + random.nextFloat() * .05f, 0F);
                             }
                             world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundCategory.AMBIENT, 0.3f, 1.4f, false);
                         }

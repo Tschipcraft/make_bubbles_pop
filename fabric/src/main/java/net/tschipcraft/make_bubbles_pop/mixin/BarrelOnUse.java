@@ -17,6 +17,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.Random;
+
 /**
  * This mixin injects into the BarrelBlock class to add bubbles to opening barrels underwater.
  */
@@ -25,6 +27,7 @@ public abstract class BarrelOnUse {
 
     @Inject(method = "onUse", at = @At("HEAD"))
     public void injectBubbles(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
+        Random random = new Random();
         boolean bl = world != null;
         if (bl && world.isClient) {
             if (world.isWater(pos.up()) && !state.get(BarrelBlock.OPEN)) {
@@ -33,7 +36,7 @@ public abstract class BarrelOnUse {
                 Direction facing = state.contains(BarrelBlock.FACING) ? state.get(BarrelBlock.FACING) : Direction.NORTH;
 
                 if (facing != Direction.DOWN) {
-                    for (int i = 0; i < 6 + world.random.nextInt(12); i++) {
+                    for (int i = 0; i < 6 + random.nextInt(12); i++) {
                         float xOffset = 0f;
                         float yOffset = 0f;
                         float zOffset = 0f;
@@ -48,40 +51,40 @@ public abstract class BarrelOnUse {
                             xOffset = .5f;
                             yOffset = .5f;
                             zOffset = 0f;
-                            xOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
-                            yOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
-                            zVelocityRand = -world.random.nextFloat();
+                            xOffsetRand = (random.nextFloat() - random.nextFloat()) * .3f;
+                            yOffsetRand = (random.nextFloat() - random.nextFloat()) * .3f;
+                            zVelocityRand = -random.nextFloat();
                         } else if (facing == Direction.SOUTH) {
                             xOffset = .5f;
                             yOffset = .5f;
                             zOffset = 1f;
-                            xOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
-                            yOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
-                            zVelocityRand = world.random.nextFloat();
+                            xOffsetRand = (random.nextFloat() - random.nextFloat()) * .3f;
+                            yOffsetRand = (random.nextFloat() - random.nextFloat()) * .3f;
+                            zVelocityRand = random.nextFloat();
                         } else if (facing == Direction.EAST) {
                             xOffset = 1f;
                             yOffset = .5f;
                             zOffset = .5f;
-                            yOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
-                            zOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
-                            xVelocityRand = world.random.nextFloat();
+                            yOffsetRand = (random.nextFloat() - random.nextFloat()) * .3f;
+                            zOffsetRand = (random.nextFloat() - random.nextFloat()) * .3f;
+                            xVelocityRand = random.nextFloat();
                         } else if (facing == Direction.WEST) {
                             xOffset = 0f;
                             yOffset = .5f;
                             zOffset = .5f;
-                            yOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
-                            zOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
-                            xVelocityRand = -world.random.nextFloat();
+                            yOffsetRand = (random.nextFloat() - random.nextFloat()) * .3f;
+                            zOffsetRand = (random.nextFloat() - random.nextFloat()) * .3f;
+                            xVelocityRand = -random.nextFloat();
                         } else if (facing == Direction.UP) {
                             xOffset = .5f;
                             yOffset = 1.5f;
                             zOffset = .5f;
-                            xOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
-                            yOffsetRand = -(world.random.nextFloat() / 2f);
-                            zOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
+                            xOffsetRand = (random.nextFloat() - random.nextFloat()) * .3f;
+                            yOffsetRand = -(random.nextFloat() / 2f);
+                            zOffsetRand = (random.nextFloat() - random.nextFloat()) * .3f;
                         }
 
-                        world.addParticle(ParticleTypes.BUBBLE, pos.getX() + xOffset + xOffsetRand, pos.getY() + yOffset + yOffsetRand, pos.getZ() + zOffset + zOffsetRand, xVelocityRand, .05f + world.random.nextFloat() * .05f, zVelocityRand);
+                        world.addParticle(ParticleTypes.BUBBLE, pos.getX() + xOffset + xOffsetRand, pos.getY() + yOffset + yOffsetRand, pos.getZ() + zOffset + zOffsetRand, xVelocityRand, .05f + random.nextFloat() * .05f, zVelocityRand);
                     }
                     world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundCategory.AMBIENT, 0.3f, 1.4f, false);
                 }
