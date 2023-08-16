@@ -30,10 +30,11 @@ public abstract class BarrelOnUse {
         Random random = new Random();
         boolean bl = world != null;
         if (bl && world.isClient) {
-            if (world.isWater(pos.up()) && !state.get(BarrelBlock.OPEN)) {
+            // Get direction of barrel block and test if its underwater
+            Direction facing = state.contains(BarrelBlock.FACING) ? state.get(BarrelBlock.FACING) : Direction.NORTH;
+            if (world.isWater(pos.offset(facing)) && !state.get(BarrelBlock.OPEN)) {
                 // A barrel block has been opened underwater by the current player
                 // Sadly I haven't found a way to play particles and sound when other players open the barrel
-                Direction facing = state.contains(BarrelBlock.FACING) ? state.get(BarrelBlock.FACING) : Direction.NORTH;
 
                 if (facing != Direction.DOWN) {
                     for (int i = 0; i < 6 + random.nextInt(12); i++) {
