@@ -28,10 +28,11 @@ public abstract class BarrelOnUse {
     public void injectBubbles(BlockState state, Level world, BlockPos pos, Player player, InteractionHand pHand, BlockHitResult pHit, CallbackInfoReturnable<InteractionResult> cir) {
         boolean bl = world != null;
         if (bl && world.isClientSide) {
-            if (world.getFluidState(pos.above()).is(FluidTags.WATER) && !state.getValue(BarrelBlock.OPEN)) {
+            // Get direction of barrel block and test if its underwater
+            Direction facing = state.getValues().containsKey(BarrelBlock.FACING) ? state.getValue(BarrelBlock.FACING) : Direction.NORTH;
+            if (world.getFluidState(pos.relative(facing)).is(FluidTags.WATER) && !state.getValue(BarrelBlock.OPEN)) {
                 // A barrel block has been opened underwater by the current player
                 // Sadly I haven't found a way to play particles and sound when other players open the barrel
-                Direction facing = state.getValues().containsKey(BarrelBlock.FACING) ? state.getValue(BarrelBlock.FACING) : Direction.NORTH;
 
                 if (facing != Direction.DOWN) {
                     for (int i = 0; i < 6 + world.random.nextInt(12); i++) {
