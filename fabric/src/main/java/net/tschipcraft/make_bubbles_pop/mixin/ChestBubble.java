@@ -9,6 +9,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,7 +31,7 @@ public abstract class ChestBubble {
     @Inject(method = "clientTick", at = @At("TAIL"))
     private static void clientTick(World world, BlockPos pos, BlockState state, ChestBlockEntity blockEntity, CallbackInfo ci) {
         boolean bl = world != null;
-        if (bl && world.isClient && world.isWater(pos)) {
+        if (bl && world.isClient && MakeBubblesPop.CHEST_BUBBLES_ENABLED && world.isWater(pos)) {
             BlockState blockState = blockEntity.getCachedState();
             ChestType chestType = blockState.contains(ChestBlock.CHEST_TYPE) ? blockState.get(ChestBlock.CHEST_TYPE) : ChestType.SINGLE;
             Direction facing = blockState.contains(ChestBlock.FACING) ? blockState.get(ChestBlock.FACING) : Direction.NORTH;

@@ -7,8 +7,9 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
+import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -20,8 +21,11 @@ public abstract class BubblePop extends SpriteBillboardParticle {
         super(clientWorld, d, e, f);
     }
 
-    private float accelerationAngle = (float)(Math.random() * 360);
-    private float accelerationTicker = 0;
+    @Unique
+    private float accelerationAngle = (float)(Math.random() * 360F);
+    @Unique
+    private float accelerationTicker = 0F;
+    @Unique
     private int routeDir = 0;
 
     /*
@@ -53,8 +57,8 @@ public abstract class BubblePop extends SpriteBillboardParticle {
         this.move(this.velocityX, this.velocityY, this.velocityZ);
 
         // Right and left motion
-        this.velocityX += ((double)((this.accelerationTicker/10) * MathHelper.cos(this.accelerationAngle))*0.04);
-        this.velocityZ += ((double)((this.accelerationTicker/10) * MathHelper.sin(this.accelerationAngle))*0.04);
+        this.velocityX += ((this.accelerationTicker / 10) * Math.cos(this.accelerationAngle) * 0.04);
+        this.velocityZ += ((this.accelerationTicker / 10) * Math.sin(this.accelerationAngle) * 0.04);
 
         this.velocityX *= 0.7500000238418579;
         this.velocityY *= 0.8500000238418579;
@@ -76,12 +80,16 @@ public abstract class BubblePop extends SpriteBillboardParticle {
         if (!this.world.isWater(BlockPos.ofFloored(this.x, this.y, this.z))) {
             // Outside water -> pop with sound
             this.markDead();
-            this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
+            if (MakeBubblesPop.POP_PARTICLE_ENABLED) {
+                this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
+            }
             this.world.playSound(this.x, this.y, this.z, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.AMBIENT, 0.1f, 1f, false);
         } else if (this.maxAge-- <= 0 || !this.world.isWater(BlockPos.ofFloored(this.x, this.y + 0.1, this.z)) && this.world.isWater(BlockPos.ofFloored(this.x, this.y, this.z))) {
             // maxAge reached/Can't reach top -> pop with low-pitch sound
             this.markDead();
-            this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
+            if (MakeBubblesPop.POP_PARTICLE_ENABLED) {
+                this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
+            }
             this.world.playSound(this.x, this.y, this.z, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.AMBIENT, 0.1f, 0f, false);
         } else {
 

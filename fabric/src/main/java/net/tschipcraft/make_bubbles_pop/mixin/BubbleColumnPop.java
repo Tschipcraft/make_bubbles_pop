@@ -6,6 +6,7 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,7 +21,9 @@ public abstract class BubbleColumnPop extends SpriteBillboardParticle {
 
     @Inject(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/particle/BubbleColumnUpParticle;markDead()V", shift = At.Shift.AFTER))
     protected void injectPopParticle(CallbackInfo info) {
-        this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
+        if (MakeBubblesPop.POP_PARTICLE_ENABLED) {
+            this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
+        }
         this.world.playSound(this.x, this.y, this.z, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.AMBIENT, 0.1f, 1f, true);
     }
 
@@ -28,7 +31,9 @@ public abstract class BubbleColumnPop extends SpriteBillboardParticle {
     protected void injectPopParticleToSuper(CallbackInfo info) {
         if ((this.age + 1) >= this.maxAge) {
             this.markDead();
-            this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
+            if (MakeBubblesPop.POP_PARTICLE_ENABLED) {
+                this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
+            }
         }
     }
 

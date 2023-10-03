@@ -12,6 +12,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -26,7 +27,7 @@ public abstract class BarrelOnUse {
     @Inject(method = "onUse", at = @At("HEAD"))
     public void injectBubbles(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
         boolean bl = world != null;
-        if (bl && world.isClient) {
+        if (bl && world.isClient && MakeBubblesPop.BARREL_BUBBLES_ENABLED) {
             // Get direction of barrel block and test if its underwater
             Direction facing = state.contains(BarrelBlock.FACING) ? state.get(BarrelBlock.FACING) : Direction.NORTH;
             if (world.isWater(pos.offset(facing)) && !state.get(BarrelBlock.OPEN)) {
