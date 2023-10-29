@@ -18,6 +18,9 @@
   "entrypoints": {
     "main": [
       "net.tschipcraft.make_bubbles_pop.MakeBubblesPop"
+    ],
+    "client": [
+      "net.tschipcraft.make_bubbles_pop.MakeBubblesPopClient"
     ]
   },
   "mixins": [
