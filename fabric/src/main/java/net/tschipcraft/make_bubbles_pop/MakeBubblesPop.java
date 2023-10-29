@@ -11,6 +11,9 @@ public class MakeBubblesPop implements ModInitializer {
 	public static boolean CHEST_BUBBLES_ENABLED = true;
 	public static boolean BARREL_BUBBLES_ENABLED = true;
 
+	//TODO: Make a config for these
+	public static boolean POPPED_BUBBLES_MAINTAIN_VELOCITY = true;
+
 	@Override
 	public void onInitialize() {
 		LOGGER.info("Make Bubbles Pop by Tschipcraft initialized!");

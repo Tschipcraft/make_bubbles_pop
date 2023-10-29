@@ -22,7 +22,11 @@ public abstract class BubbleColumnPop extends SpriteBillboardParticle {
     @Inject(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/particle/BubbleColumnUpParticle;markDead()V", shift = At.Shift.AFTER))
     protected void injectPopParticle(CallbackInfo info) {
         if (MakeBubblesPop.POP_PARTICLE_ENABLED) {
-            this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
+            this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z,
+                    MakeBubblesPop.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.velocityX : 0,
+                    MakeBubblesPop.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.velocityY : 0,
+                    MakeBubblesPop.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.velocityZ : 0
+            );
         }
         this.world.playSound(this.x, this.y, this.z, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.AMBIENT, 0.1f, 1f, true);
     }
@@ -32,7 +36,11 @@ public abstract class BubbleColumnPop extends SpriteBillboardParticle {
         if ((this.age + 1) >= this.maxAge) {
             this.markDead();
             if (MakeBubblesPop.POP_PARTICLE_ENABLED) {
-                this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
+                this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z,
+                        MakeBubblesPop.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.velocityX : 0,
+                        MakeBubblesPop.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.velocityY : 0,
+                        MakeBubblesPop.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.velocityZ : 0
+                );
             }
         }
     }

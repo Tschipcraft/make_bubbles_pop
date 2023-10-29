@@ -4,6 +4,7 @@ import net.minecraft.client.particle.CurrentDownParticle;
 import net.minecraft.client.particle.SpriteBillboardParticle;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.ParticleTypes;
+import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -18,7 +19,11 @@ public abstract class CurrentDownPop extends SpriteBillboardParticle {
 
     @Inject(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/particle/CurrentDownParticle;markDead()V", shift = At.Shift.AFTER))
     protected void injectPopParticle(CallbackInfo info) {
-        this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
+        this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z,
+                MakeBubblesPop.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.velocityX : 0,
+                MakeBubblesPop.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.velocityY : 0,
+                MakeBubblesPop.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.velocityZ : 0
+        );
     }
 
 }

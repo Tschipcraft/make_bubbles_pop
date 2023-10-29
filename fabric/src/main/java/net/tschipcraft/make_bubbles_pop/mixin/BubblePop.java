@@ -81,16 +81,20 @@ public abstract class BubblePop extends SpriteBillboardParticle {
             // Outside water -> pop with sound
             this.markDead();
             if (MakeBubblesPop.POP_PARTICLE_ENABLED) {
-                this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
+                this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z,
+                        MakeBubblesPop.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.velocityX : 0,
+                        MakeBubblesPop.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.velocityY : 0,
+                        MakeBubblesPop.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.velocityZ : 0
+                );
             }
-            this.world.playSound(this.x, this.y, this.z, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.AMBIENT, 0.1f, 1f, false);
+            this.world.playSound(this.x, this.y, this.z, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.AMBIENT, 0.1f, 0.9f + (this.world.random.nextFloat() * 0.2f), false);
         } else if (this.maxAge-- <= 0 || !this.world.isWater(BlockPos.ofFloored(this.x, this.y + 0.1, this.z)) && this.world.isWater(BlockPos.ofFloored(this.x, this.y, this.z))) {
             // maxAge reached/Can't reach top -> pop with low-pitch sound
             this.markDead();
             if (MakeBubblesPop.POP_PARTICLE_ENABLED) {
                 this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
             }
-            this.world.playSound(this.x, this.y, this.z, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.AMBIENT, 0.1f, 0f, false);
+            this.world.playSound(this.x, this.y, this.z, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.AMBIENT, 0.1f, 0.05f + (this.world.random.nextFloat() * 0.2f), false);
         } else {
 
             if (!this.world.isWater(BlockPos.ofFloored(this.x, this.y + 0.8, this.z))) {
