@@ -9,21 +9,25 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.Mth;
+import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = BubbleParticle.class)
+@Mixin(BubbleParticle.class)
 public abstract class BubblePop extends TextureSheetParticle {
     
     protected BubblePop(ClientLevel clientLevel, double d, double e, double f) {
         super(clientLevel, d, e, f);
     }
 
-    private float accelerationAngle = (float)(Math.random() * 360);
+    @Unique
+    private float accelerationAngle = (float)(Math.random() * 360F);
+    @Unique
     private float accelerationTicker = 0;
+    @Unique
     private int routeDir = 0;
 
     /*
@@ -47,13 +51,13 @@ public abstract class BubblePop extends TextureSheetParticle {
         this.yo = this.y;
         this.zo = this.z;
 
-        // Upwards motion
-        this.yd += 0.01;
+        // Upward motion
+        this.yd += .01f;
         this.move(this.xd, this.yd, this.zd);
 
         // Right and left motion
-        this.xd += ((double)((this.accelerationTicker/10) * Mth.cos(this.accelerationAngle))*0.04);
-        this.zd += ((double)((this.accelerationTicker/10) * Mth.sin(this.accelerationAngle))*0.04);
+        this.xd += ((this.accelerationTicker / 10) * Math.cos(this.accelerationAngle) * 0.04);
+        this.zd += ((this.accelerationTicker / 10) * Math.sin(this.accelerationAngle) * 0.04);
 
         this.xd *= 0.7500000238418579;
         this.yd *= 0.8500000238418579;
@@ -72,16 +76,24 @@ public abstract class BubblePop extends TextureSheetParticle {
         this.accelerationTicker++;
 
 
-        if (!this.level.getFluidState(BlockPos.containing(this.x, this.y, this.z)).is(FluidTags.WATER)) {
+        if (this.level.isEmptyBlock(BlockPos.containing(this.x, this.y + 0.1, this.z)) || !this.level.getFluidState(BlockPos.containing(this.x, this.y, this.z)).is(FluidTags.WATER)) {
             // Outside water -> pop with sound
             this.remove();
-            this.level.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.xd, this.yd, this.zd);
-            this.level.playLocalSound(this.x, this.y, this.z, SoundEvents.BUBBLE_COLUMN_BUBBLE_POP, SoundSource.AMBIENT, 0.1f, 1f, false);
+            if (MakeBubblesPop.POP_PARTICLE_ENABLED) {
+                this.level.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z,
+                        MakeBubblesPop.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.xd : 0,
+                        MakeBubblesPop.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.yd : 0,
+                        MakeBubblesPop.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.zd : 0
+                );
+            }
+            this.level.playLocalSound(this.x, this.y, this.z, SoundEvents.BUBBLE_COLUMN_BUBBLE_POP, SoundSource.AMBIENT, 0.1f, 0.85f + (this.level.random.nextFloat() * 0.3f), false);
         } else if (this.lifetime-- <= 0 || !this.level.getFluidState(BlockPos.containing(this.x, this.y + 0.1, this.z)).is(FluidTags.WATER) && this.level.getFluidState(BlockPos.containing(this.x, this.y, this.z)).is(FluidTags.WATER)) {
             // lifetime reached/Can't reach top -> pop with low-pitch sound
             this.remove();
-            this.level.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.xd, this.yd, this.zd);
-            this.level.playLocalSound(this.x, this.y, this.z, SoundEvents.BUBBLE_COLUMN_BUBBLE_POP, SoundSource.AMBIENT, 0.1f, 0f, false);
+            if (MakeBubblesPop.POP_PARTICLE_ENABLED) {
+                this.level.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.xd, this.yd, this.zd);
+            }
+            this.level.playLocalSound(this.x, this.y, this.z, SoundEvents.BUBBLE_COLUMN_BUBBLE_POP, SoundSource.AMBIENT, 0.1f, 0.01f + (this.level.random.nextFloat() * 0.3f), false);
         } else {
 
             if (!this.level.getFluidState(BlockPos.containing(this.x, this.y + 0.8, this.z)).is(FluidTags.WATER)) {

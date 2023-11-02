@@ -19,9 +19,18 @@ public class MakeBubblesPop
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
+    //TODO: Find equivalent in Forge
+    //public static final Identifier BARREL_BUBBLE_PACKET = new Identifier("make_bubbles_pop", "barrel_bubble_packet");
+    public static boolean POP_PARTICLE_ENABLED = true;
+    public static boolean CHEST_BUBBLES_ENABLED = true;
+    public static boolean BARREL_BUBBLES_ENABLED = true;
 
-    public MakeBubblesPop()
-    {
+    //TODO: Make a config for these
+    public static boolean POPPED_BUBBLES_MAINTAIN_VELOCITY = true;
+    public static boolean BARREL_BUBBLES_CREATED_FROM_SERVER = true; // To be disabled when on a server without Make Bubbles Pop
+
+
+    public MakeBubblesPop() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         // Register the setup method for modloading

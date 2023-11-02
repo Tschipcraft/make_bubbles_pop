@@ -15,7 +15,7 @@ public class MakeBubblesPop implements ModInitializer {
 
 	//TODO: Make a config for these
 	public static boolean POPPED_BUBBLES_MAINTAIN_VELOCITY = true;
-	public static boolean BARREL_BUBBLES_CREATED_FROM_SERVER = true; //To be disabled when on a server without Make Bubbles Pop
+	public static boolean BARREL_BUBBLES_CREATED_FROM_SERVER = true; // To be disabled when on a server without Make Bubbles Pop
 
 	@Override
 	public void onInitialize() {

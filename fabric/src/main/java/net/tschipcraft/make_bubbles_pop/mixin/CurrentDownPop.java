@@ -19,6 +19,7 @@ public abstract class CurrentDownPop extends SpriteBillboardParticle {
 
     @Inject(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/particle/CurrentDownParticle;markDead()V", shift = At.Shift.AFTER))
     protected void injectPopParticle(CallbackInfo info) {
+        //TODO: Add check for pop particles?
         this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z,
                 MakeBubblesPop.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.velocityX : 0,
                 MakeBubblesPop.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.velocityY : 0,
