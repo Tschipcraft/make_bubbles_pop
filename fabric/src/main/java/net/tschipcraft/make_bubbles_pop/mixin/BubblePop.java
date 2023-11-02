@@ -77,7 +77,7 @@ public abstract class BubblePop extends SpriteBillboardParticle {
         this.accelerationTicker++;
 
 
-        if (!this.world.isWater(BlockPos.ofFloored(this.x, this.y, this.z))) {
+        if (this.world.isAir(BlockPos.ofFloored(this.x, this.y + 0.1, this.z)) || !this.world.isWater(BlockPos.ofFloored(this.x, this.y, this.z))) {
             // Outside water -> pop with sound
             this.markDead();
             if (MakeBubblesPop.POP_PARTICLE_ENABLED) {

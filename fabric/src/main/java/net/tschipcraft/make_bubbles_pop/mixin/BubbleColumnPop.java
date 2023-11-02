@@ -28,7 +28,7 @@ public abstract class BubbleColumnPop extends SpriteBillboardParticle {
                     MakeBubblesPop.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.velocityZ : 0
             );
         }
-        this.world.playSound(this.x, this.y, this.z, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.AMBIENT, 0.1f, 0.85f + (world.random.nextFloat() * 0.3f), true);
+        this.world.playSound(this.x, this.y, this.z, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.AMBIENT, 0.1f, 0.85f + (world.random.nextFloat() * 0.3f), false);
     }
 
     @Inject(method = "tick()V", at = @At(value = "HEAD"))

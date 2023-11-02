@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * This mixin injects into the BarrelBlockEntity class to add bubbles to Barrels opening underwater.
  */
 @Mixin(BarrelBlockEntity.class)
-public class BarrelEntityOnUse {
+public abstract class BarrelEntityOnUse {
 
     @Inject(method = "setOpen", at = @At("HEAD"))
     public void injectBubbles(BlockState state, boolean open, CallbackInfo info) {
@@ -29,8 +29,10 @@ public class BarrelEntityOnUse {
         World world = barrelBlockEntity.getWorld();
         if (world != null && !world.isClient) {
             BlockPos pos = barrelBlockEntity.getPos();
+            // Get direction of barrel block and test if its underwater
             Direction facing = state.contains(BarrelBlock.FACING) ? state.get(BarrelBlock.FACING) : Direction.NORTH;
             if (world.isWater(pos.offset(facing)) && !state.get(BarrelBlock.OPEN)) {
+                // A barrel block has been opened underwater. Send a packet to all players tracking the barrel block
                 PacketByteBuf byteBuf = new PacketByteBuf(Unpooled.buffer());
                 byteBuf.writeInt(pos.getX());
                 byteBuf.writeInt(pos.getY());

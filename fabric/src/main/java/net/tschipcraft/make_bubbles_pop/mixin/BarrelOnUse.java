@@ -29,6 +29,7 @@ public abstract class BarrelOnUse {
             // Get direction of barrel block and test if its underwater
             Direction facing = state.contains(BarrelBlock.FACING) ? state.get(BarrelBlock.FACING) : Direction.NORTH;
             if (world.isWater(pos.offset(facing)) && !state.get(BarrelBlock.OPEN)) {
+                // A barrel block has been opened underwater by the current player
                 BarrelBubbler.spawnBubbles(world, pos, facing);
             }
         }
