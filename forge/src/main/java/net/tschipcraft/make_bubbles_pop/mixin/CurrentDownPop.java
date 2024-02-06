@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = WaterCurrentDownParticle.class)
+@Mixin(WaterCurrentDownParticle.class)
 public abstract class CurrentDownPop extends TextureSheetParticle {
 
     protected CurrentDownPop(ClientLevel clientWorld, double d, double e, double f) {
