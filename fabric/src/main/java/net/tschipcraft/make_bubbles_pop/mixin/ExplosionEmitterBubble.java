@@ -26,13 +26,13 @@ public abstract class ExplosionEmitterBubble extends NoRenderParticle {
         // Add bubble particles to explosions underwater
         if (this.world.getFluidState(BlockPos.ofFloored(this.x, this.y, this.z)).isIn(FluidTags.WATER)) {
             for (int i = 0; i < 2; i++) {
-                double d = (this.random.nextDouble() - this.random.nextDouble());
-                double e = (this.random.nextDouble() - this.random.nextDouble());
-                double f = (this.random.nextDouble() - this.random.nextDouble());
-                double d2 = this.x + d * 4.0;
-                double e2 = this.y + e * 4.0;
-                double f2 = this.z + f * 4.0;
-                this.world.addParticle(ParticleTypes.BUBBLE, d2, e2, f2, d * 2, e * 2, f * 2);
+                double dx = (this.random.nextDouble() - this.random.nextDouble());
+                double dy = (this.random.nextDouble() - this.random.nextDouble());
+                double dz = (this.random.nextDouble() - this.random.nextDouble());
+                double x = this.x + dx * 3.5;
+                double y = this.y + dy * 3.5;
+                double z = this.z + dz * 3.5;
+                this.world.addParticle(ParticleTypes.BUBBLE, x, y, z, dx * 3, dy * 3, dz * 3);
             }
         }
     }

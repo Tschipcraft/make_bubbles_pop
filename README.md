@@ -4,8 +4,8 @@
 </h1>
 <p align="center">
   <a href="https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod/stargazers"><img src="https://img.shields.io/github/stars/Tschipcraft/fabric_make_bubbles_pop_mod?colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
-  <a href="https://www.curseforge.com/minecraft/mc-mods/make-bubbles-pop"><img src="https://cf.way2muchnoise.eu/full_605235_downloads.svg?badge_style=for_the_badge"></a>
-  <a href="https://modrinth.com/mod/make_bubbles_pop"><img src="https://img.shields.io/modrinth/dt/make_bubbles_pop?label=Modrinth&colorA=2d2d2d&style=for-the-badge&logo=modrinth"></a>
+  <a href="https://www.curseforge.com/minecraft/mc-mods/make-bubbles-pop"><img src="https://img.shields.io/curseforge/dt/605235?logo=curseforge&label=CurseForge&colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
+  <a href="https://modrinth.com/mod/make_bubbles_pop"><img src="https://img.shields.io/modrinth/dt/make_bubbles_pop?label=Modrinth&colorA=363a4f&colorB=b7bdf8&style=for-the-badge&logo=modrinth"></a>
   <a href="https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod/releases/latest"><img src="https://img.shields.io/github/downloads/Tschipcraft/fabric_make_bubbles_pop_mod/total?logo=github&colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
 </p>
 
