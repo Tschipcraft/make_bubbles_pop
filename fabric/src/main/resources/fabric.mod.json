@@ -43,6 +43,9 @@
     },
     "catalogue": {
       "banner": "icon.png"
+    },
+    "ducky_updater": {
+      "modrinthId": "gPCdW0Wr"
     }
   }
 }

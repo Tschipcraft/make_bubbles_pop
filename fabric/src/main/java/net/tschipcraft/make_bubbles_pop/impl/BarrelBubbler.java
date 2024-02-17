@@ -9,13 +9,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
+import net.tschipcraft.make_bubbles_pop.MakeBubblesPopConfig;
 
 @Environment(EnvType.CLIENT)
 public class BarrelBubbler {
 
     public static void spawnBubbles(World world, BlockPos pos, Direction facing) {
-        boolean bl = world != null;
-        if (bl && world.isClient && MakeBubblesPop.BARREL_BUBBLES_ENABLED) {
+        if (world != null && world.isClient && (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.BARREL_BUBBLES_ENABLED)) {
             if (facing != Direction.DOWN) {
                 for (int i = 0; i < 6 + world.random.nextInt(12); i++) {
                     float xOffset = 0f;
@@ -31,26 +31,26 @@ public class BarrelBubbler {
                     if (facing == Direction.NORTH) {
                         xOffset = .5f;
                         yOffset = .5f;
-                        zOffset = 0f;
+                        zOffset = -.01f;
                         xOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
                         yOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
                         zVelocityRand = -world.random.nextFloat();
                     } else if (facing == Direction.SOUTH) {
                         xOffset = .5f;
                         yOffset = .5f;
-                        zOffset = 1f;
+                        zOffset = 1.01f;
                         xOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
                         yOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
                         zVelocityRand = world.random.nextFloat();
                     } else if (facing == Direction.EAST) {
-                        xOffset = 1f;
+                        xOffset = 1.01f;
                         yOffset = .5f;
                         zOffset = .5f;
                         yOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
                         zOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
                         xVelocityRand = world.random.nextFloat();
                     } else if (facing == Direction.WEST) {
-                        xOffset = 0f;
+                        xOffset = -.01f;
                         yOffset = .5f;
                         zOffset = .5f;
                         yOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
@@ -58,10 +58,10 @@ public class BarrelBubbler {
                         xVelocityRand = -world.random.nextFloat();
                     } else if (facing == Direction.UP) {
                         xOffset = .5f;
-                        yOffset = 1.5f;
+                        yOffset = 1.01f;
                         zOffset = .5f;
                         xOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
-                        yOffsetRand = -(world.random.nextFloat() / 2f);
+                        yOffsetRand = (world.random.nextFloat() * .25f);
                         zOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
                     }
 

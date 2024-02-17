@@ -10,6 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
+import net.tschipcraft.make_bubbles_pop.MakeBubblesPopConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This mixin injects into the ChestBlockEntity class to add bubbles to opening chests underwater.
+ * This mixin injects into the ChestBlockEntity class into the clientTick method to add bubbles to opening chests underwater.
  */
 @Mixin(ChestBlockEntity.class)
 public abstract class ChestBubble {
@@ -30,12 +31,11 @@ public abstract class ChestBubble {
 
     @Inject(method = "clientTick", at = @At("TAIL"))
     private static void clientTick(World world, BlockPos pos, BlockState state, ChestBlockEntity blockEntity, CallbackInfo ci) {
-        boolean bl = world != null;
-        if (bl && world.isClient && MakeBubblesPop.CHEST_BUBBLES_ENABLED && world.isWater(pos)) {
-            BlockState blockState = blockEntity.getCachedState();
-            ChestType chestType = blockState.contains(ChestBlock.CHEST_TYPE) ? blockState.get(ChestBlock.CHEST_TYPE) : ChestType.SINGLE;
-            Direction facing = blockState.contains(ChestBlock.FACING) ? blockState.get(ChestBlock.FACING) : Direction.NORTH;
-            Block block = blockState.getBlock();
+        if (world != null && world.isClient && (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.CHEST_BUBBLES_ENABLED) && world.isWater(pos)) {
+            //BlockState blockState = blockEntity.getCachedState();
+            ChestType chestType = state.contains(ChestBlock.CHEST_TYPE) ? state.get(ChestBlock.CHEST_TYPE) : ChestType.SINGLE;
+            Direction facing = state.contains(ChestBlock.FACING) ? state.get(ChestBlock.FACING) : Direction.NORTH;
+            Block block = state.getBlock();
 
             boolean doubleChest = chestType != ChestType.SINGLE;
 
@@ -44,7 +44,7 @@ public abstract class ChestBubble {
                 AbstractChestBlock<?> abstractChestBlock = (AbstractChestBlock) block;
 
                 DoubleBlockProperties.PropertySource<? extends ChestBlockEntity> propertySource;
-                propertySource = abstractChestBlock.getBlockEntitySource(blockState, world, pos, true);
+                propertySource = abstractChestBlock.getBlockEntitySource(state, world, pos, true);
 
                 float openFactor = propertySource.apply(ChestBlock.getAnimationProgressRetriever(blockEntity)).get(1.0f);
 

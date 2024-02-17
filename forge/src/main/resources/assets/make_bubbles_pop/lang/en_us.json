@@ -1,5 +1,4 @@
 {
-  "modmenu.summaryTranslation.make_bubbles_pop": "Makes bubble particles pop and lets them rise to the water surface.",
   "make_bubbles_pop.midnightconfig.title":"Make Bubbles Pop Configuration",
   "make_bubbles_pop.midnightconfig.BUBBLE_PHYSICS_ENABLED":"Enable Bubble Physics",
   "make_bubbles_pop.midnightconfig.CHEST_BUBBLES_ENABLED":"Enable Chest Bubbles",

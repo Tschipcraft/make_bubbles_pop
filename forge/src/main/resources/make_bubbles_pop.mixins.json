@@ -4,9 +4,6 @@
   "package": "net.tschipcraft.make_bubbles_pop.mixin",
   "compatibilityLevel": "JAVA_17",
   "refmap": "make_bubbles_pop.refmap.json",
-  "mixins": [
-    "BarrelEntityOnUse"
-  ],
   "client": [
     "BubblePop",
     "BubbleColumnPop",

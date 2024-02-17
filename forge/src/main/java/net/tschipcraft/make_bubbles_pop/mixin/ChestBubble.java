@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.ChestType;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
+import net.tschipcraft.make_bubbles_pop.MakeBubblesPopConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This mixin injects into the ChestBlockEntity class to add bubbles to opening chests underwater.
+ * This mixin injects into the ChestBlockEntity class into the clientTick method to add bubbles to opening chests underwater.
  */
 @Mixin(ChestBlockEntity.class)
 public abstract class ChestBubble {
@@ -35,12 +36,11 @@ public abstract class ChestBubble {
 
     @Inject(method = "lidAnimateTick", at = @At("TAIL"))
     private static void clientTick(Level world, BlockPos pos, BlockState state, ChestBlockEntity blockEntity, CallbackInfo ci) {
-        boolean bl = world != null;
-        if (bl && world.isClientSide && MakeBubblesPop.CHEST_BUBBLES_ENABLED && world.getFluidState(pos).is(FluidTags.WATER)) {
-            BlockState blockState = blockEntity.getBlockState();
-            ChestType chestType = blockState.getValues().containsKey(BlockStateProperties.CHEST_TYPE) ? blockState.getValue(BlockStateProperties.CHEST_TYPE) : ChestType.SINGLE;
-            Direction facing = blockState.getValues().containsKey(ChestBlock.FACING) ? blockState.getValue(ChestBlock.FACING) : Direction.NORTH;
-            Block block = blockState.getBlock();
+        if (world != null && world.isClientSide && (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.CHEST_BUBBLES_ENABLED) && world.getFluidState(pos).is(FluidTags.WATER)) {
+            //BlockState blockState = blockEntity.getBlockState();
+            ChestType chestType = state.getValues().containsKey(BlockStateProperties.CHEST_TYPE) ? state.getValue(BlockStateProperties.CHEST_TYPE) : ChestType.SINGLE;
+            Direction facing = state.getValues().containsKey(ChestBlock.FACING) ? state.getValue(ChestBlock.FACING) : Direction.NORTH;
+            Block block = state.getBlock();
 
             boolean doubleChest = chestType != ChestType.SINGLE;
 

@@ -6,6 +6,8 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.BarrelBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BarrelBlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
@@ -13,6 +15,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -21,7 +24,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * This mixin injects into the BarrelBlockEntity class to add bubbles to Barrels opening underwater.
  */
 @Mixin(BarrelBlockEntity.class)
-public abstract class BarrelEntityOnUse {
+public abstract class BarrelEntityOnUse extends LootableContainerBlockEntity {
+
+    protected BarrelEntityOnUse(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
+        super(blockEntityType, blockPos, blockState);
+    }
 
     @Inject(method = "setOpen", at = @At("HEAD"))
     public void injectBubbles(BlockState state, boolean open, CallbackInfo info) {
@@ -43,6 +50,11 @@ public abstract class BarrelEntityOnUse {
                 }
             }
         }
+    }
+
+    @Unique
+    public void clientTick(World world, BlockPos pos, BlockState state, BarrelBlockEntity blockEntity) {
+        // Can't call clientTick here since I can't reference it in the BarrelBlock mixin.
     }
 
 }

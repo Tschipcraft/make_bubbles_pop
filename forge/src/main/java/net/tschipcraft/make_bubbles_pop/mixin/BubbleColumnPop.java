@@ -21,14 +21,15 @@ public abstract class BubbleColumnPop extends TextureSheetParticle {
 
     @Inject(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/particle/BubbleColumnUpParticle;remove()V", shift = At.Shift.AFTER))
     protected void injectPopParticle(CallbackInfo info) {
+        // TODO: Global bubble pop
         if (MakeBubblesPop.POP_PARTICLE_ENABLED) {
             this.level.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z,
                     MakeBubblesPop.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.xd : 0,
                     MakeBubblesPop.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.yd : 0,
                     MakeBubblesPop.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.zd : 0
             );
+            this.level.playLocalSound(this.x, this.y, this.z, SoundEvents.BUBBLE_COLUMN_BUBBLE_POP, SoundSource.AMBIENT, 0.1f, 0.85f + (level.random.nextFloat() * 0.3f), false);
         }
-        this.level.playLocalSound(this.x, this.y, this.z, SoundEvents.BUBBLE_COLUMN_BUBBLE_POP, SoundSource.AMBIENT, 0.1f, 0.85f + (level.random.nextFloat() * 0.3f), false);
     }
 
     @Inject(method = "tick()V", at = @At(value = "HEAD"))

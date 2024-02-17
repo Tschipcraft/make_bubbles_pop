@@ -3,9 +3,6 @@
   "minVersion": "0.8",
   "package": "net.tschipcraft.make_bubbles_pop.mixin",
   "compatibilityLevel": "JAVA_17",
-  "mixins": [
-    "BarrelEntityOnUse"
-  ],
   "client": [
     "BarrelOnUse",
     "BubbleColumnPop",

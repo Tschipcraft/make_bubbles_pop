@@ -29,7 +29,7 @@ public abstract class BarrelEntityOnUse {
             Direction facing = state.getValues().containsKey(BarrelBlock.FACING) ? state.getValue(BarrelBlock.FACING) : Direction.NORTH;
             if (world.getFluidState(pos.relative(facing)).is(FluidTags.WATER) && !state.getValue(BarrelBlock.OPEN)) {
                 // A barrel block has been opened underwater. Send a packet to all players tracking the barrel block
-                //TODO: Figure this out for Forge
+                //TODO: Figure this out for Forge -> handled in BarrelOnUse now
                 /*
                 PacketByteBuf byteBuf = new PacketByteBuf(Unpooled.buffer());
                 byteBuf.writeInt(pos.getX());
