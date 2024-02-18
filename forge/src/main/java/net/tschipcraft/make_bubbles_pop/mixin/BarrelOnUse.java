@@ -8,6 +8,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BarrelBlock;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -30,10 +31,14 @@ import java.util.List;
  * This mixin injects into the BarrelBlock class to add bubbles to opening barrels underwater.
  */
 @Mixin(BarrelBlock.class)
-public abstract class BarrelOnUse {
+public abstract class BarrelOnUse extends BaseEntityBlock {
 
     @Unique
     private static final List<BlockPos> openedBarrels = new ArrayList<>();
+
+    protected BarrelOnUse(Properties pProperties) {
+        super(pProperties);
+    }
 
     @Inject(method = "use", at = @At("HEAD"))
     public void injectBubbles(BlockState state, Level world, BlockPos pos, Player player, InteractionHand pHand, BlockHitResult pHit, CallbackInfoReturnable<InteractionResult> cir) {
@@ -52,6 +57,7 @@ public abstract class BarrelOnUse {
 
     // Experimental - register BarrelBlock to tick on the client
     @Nullable
+    @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return type == BlockEntityType.BARREL ? this::clientTick : null;
     }

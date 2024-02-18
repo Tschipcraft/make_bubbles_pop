@@ -1,12 +1,12 @@
 <h1 align="center">
-  <a><img src="demo/icon_scaled.png" width="95" height="95" style="image-rendering: pixelated"></a><br/>
+  <a><img alt="Icon" src="demo/icon_scaled.png" width="95" height="95" style="image-rendering: pixelated"></a><br/>
   Make Bubbles Pop Mod
 </h1>
 <p align="center">
-  <a href="https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod/stargazers"><img src="https://img.shields.io/github/stars/Tschipcraft/fabric_make_bubbles_pop_mod?colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
-  <a href="https://www.curseforge.com/minecraft/mc-mods/make-bubbles-pop"><img src="https://img.shields.io/curseforge/dt/605235?logo=curseforge&label=CurseForge&colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
-  <a href="https://modrinth.com/mod/make_bubbles_pop"><img src="https://img.shields.io/modrinth/dt/make_bubbles_pop?label=Modrinth&colorA=363a4f&colorB=b7bdf8&style=for-the-badge&logo=modrinth"></a>
-  <a href="https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod/releases/latest"><img src="https://img.shields.io/github/downloads/Tschipcraft/fabric_make_bubbles_pop_mod/total?logo=github&colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
+  <a href="https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod/stargazers"><img alt="GitHub Stars" src="https://img.shields.io/github/stars/Tschipcraft/fabric_make_bubbles_pop_mod?colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
+  <a href="https://www.curseforge.com/minecraft/mc-mods/make-bubbles-pop"><img alt="CurseForge Downloads" src="https://img.shields.io/curseforge/dt/605235?logo=curseforge&label=CurseForge&colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
+  <a href="https://modrinth.com/mod/make_bubbles_pop"><img alt="Modrinth Downloads" src="https://img.shields.io/modrinth/dt/make_bubbles_pop?label=Modrinth&colorA=363a4f&colorB=b7bdf8&style=for-the-badge&logo=modrinth"></a>
+  <a href="https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod/releases/latest"><img alt="GitHub Downloads" src="https://img.shields.io/github/downloads/Tschipcraft/fabric_make_bubbles_pop_mod/total?logo=github&colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
 </p>
 
 ## Features
