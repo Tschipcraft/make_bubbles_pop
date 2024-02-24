@@ -1,8 +1,8 @@
 package net.tschipcraft.make_bubbles_pop;
 
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.util.Identifier;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,21 +12,18 @@ public class MakeBubblesPop implements ModInitializer {
 
 	public static final Identifier BARREL_BUBBLE_PACKET = new Identifier("make_bubbles_pop", "barrel_bubble_packet");
 
-	public static boolean POP_PARTICLE_ENABLED = true;
-	public static boolean CHEST_BUBBLES_ENABLED = true;
-	public static boolean BARREL_BUBBLES_ENABLED = true;
-	public static boolean POPPED_BUBBLES_MAINTAIN_VELOCITY = true;
-	public static boolean BARREL_BUBBLES_CREATED_FROM_SERVER = false; // To be disabled when on a server without Make Bubbles Pop
-
-	public static boolean MIDNIGHTLIB_INSTALLED = false;
+	public static final boolean MIDNIGHTLIB_INSTALLED = FabricLoader.getInstance().isModLoaded("midnightlib");
 
 	@Override
 	public void onInitialize() {
-		if (FabricLoader.getInstance().isModLoaded("midnightlib")) {
+		if (MIDNIGHTLIB_INSTALLED) {
 			// Use MidnightLib features
 			MakeBubblesPopConfig.init(LOGGER.getName(), MakeBubblesPopConfig.class);
-			MIDNIGHTLIB_INSTALLED = true;
 		}
 		LOGGER.info("Make Bubbles Pop by Tschipcraft initialized!");
+	}
+
+	public static double getConfigInitialVelocity(double original) {
+		return (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.POPPED_BUBBLES_MAINTAIN_VELOCITY) ? original : 0D;
 	}
 }

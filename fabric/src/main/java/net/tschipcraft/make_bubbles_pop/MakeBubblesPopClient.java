@@ -21,7 +21,7 @@ public class MakeBubblesPopClient implements ClientModInitializer {
 			ctx.execute(() -> {
 				if (ctx.world == null)
 					throw new IllegalStateException("Your world is null? How?");
-				BarrelBubbler.spawnBubbles(ctx.world, pos, facing);
+				BarrelBubbler.spawnBubbles(ctx.world, pos, facing, ctx.world.random);
 			});
 		});
 	}

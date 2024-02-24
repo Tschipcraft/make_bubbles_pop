@@ -4,12 +4,13 @@
   "package": "net.tschipcraft.make_bubbles_pop.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
-    "BarrelOnUse",
-    "BubbleColumnPop",
-    "BubblePop",
-    "ChestBubble",
-    "CurrentDownPop",
-    "ExplosionEmitterBubble"
+    "client.BarrelBlockEntityMixin",
+    "client.BarrelOnUse",
+    "client.BubbleColumnPop",
+    "client.BubblePop",
+    "client.ChestBubble",
+    "client.CurrentDownPop",
+    "client.ExplosionEmitterBubble"
   ],
   "injectors": {
     "defaultRequire": 1

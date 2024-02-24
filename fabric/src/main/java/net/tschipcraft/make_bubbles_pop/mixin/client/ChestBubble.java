@@ -1,4 +1,4 @@
-package net.tschipcraft.make_bubbles_pop.mixin;
+package net.tschipcraft.make_bubbles_pop.mixin.client;
 
 import net.minecraft.block.*;
 import net.minecraft.block.entity.ChestBlockEntity;
@@ -30,7 +30,7 @@ public abstract class ChestBubble {
     private static final List<BlockPos> openedChests = new ArrayList<>();
 
     @Inject(method = "clientTick", at = @At("TAIL"))
-    private static void clientTick(World world, BlockPos pos, BlockState state, ChestBlockEntity blockEntity, CallbackInfo ci) {
+    private static void makeBubblesPop$clientTick(World world, BlockPos pos, BlockState state, ChestBlockEntity blockEntity, CallbackInfo ci) {
         if (world != null && world.isClient && (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.CHEST_BUBBLES_ENABLED) && world.isWater(pos)) {
             //BlockState blockState = blockEntity.getCachedState();
             ChestType chestType = state.contains(ChestBlock.CHEST_TYPE) ? state.get(ChestBlock.CHEST_TYPE) : ChestType.SINGLE;
@@ -39,14 +39,12 @@ public abstract class ChestBubble {
 
             boolean doubleChest = chestType != ChestType.SINGLE;
 
-            if (block instanceof AbstractChestBlock) {
+            if (block instanceof AbstractChestBlock<?> abstractChestBlock) {
                 // Get open factor
-                AbstractChestBlock<?> abstractChestBlock = (AbstractChestBlock) block;
-
                 DoubleBlockProperties.PropertySource<? extends ChestBlockEntity> propertySource;
                 propertySource = abstractChestBlock.getBlockEntitySource(state, world, pos, true);
 
-                float openFactor = propertySource.apply(ChestBlock.getAnimationProgressRetriever(blockEntity)).get(1.0f);
+                float openFactor = propertySource.apply(ChestBlock.getAnimationProgressRetriever(blockEntity)).get(1F);
 
                 if (openFactor > 0) {
                     if(!openedChests.contains(pos)) {
@@ -56,43 +54,43 @@ public abstract class ChestBubble {
                             if (chestType == ChestType.LEFT) {
                                 // If the block is a double chest, only the left side plays particles and sound
                                 for (int i = 0; i < 15 + world.random.nextInt(20); i++) {
-                                    float xOffset = 0f;
-                                    float zOffset = 0f;
-                                    float xOffsetRand = 0f;
-                                    float zOffsetRand = 0f;
+                                    float xOffset = 0F;
+                                    float zOffset = 0F;
+                                    float xOffsetRand = 0F;
+                                    float zOffsetRand = 0F;
 
                                     if (facing == Direction.NORTH) {
-                                        xOffset = 1f;
-                                        zOffset = .5f;
-                                        xOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .8f;
-                                        zOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
+                                        xOffset = 1F;
+                                        zOffset = 0.5F;
+                                        xOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * 0.8F;
+                                        zOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * 0.3F;
                                     } else if (facing == Direction.SOUTH) {
-                                        xOffset = 0f;
-                                        zOffset = .5f;
-                                        xOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .8f;
-                                        zOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
+                                        xOffset = 0F;
+                                        zOffset = 0.5F;
+                                        xOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * 0.8F;
+                                        zOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * 0.3F;
                                     } else if (facing == Direction.EAST) {
-                                        xOffset = .5f;
-                                        zOffset = 1f;
-                                        xOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
-                                        zOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .8f;
+                                        xOffset = 0.5F;
+                                        zOffset = 1F;
+                                        xOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * 0.3F;
+                                        zOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * 0.8F;
                                     } else if (facing == Direction.WEST) {
-                                        xOffset = .5f;
-                                        zOffset = 0f;
-                                        xOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
-                                        zOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .8f;
+                                        xOffset = 0.5F;
+                                        zOffset = 0F;
+                                        xOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * 0.3F;
+                                        zOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * 0.8F;
                                     }
 
-                                    world.addParticle(ParticleTypes.BUBBLE, pos.getX() + xOffset + xOffsetRand, pos.getY() + .7F - (world.random.nextFloat() / 2.0), pos.getZ() + zOffset + zOffsetRand, 0F, .05f + world.random.nextFloat() * .05f, 0F);
+                                    world.addParticle(ParticleTypes.BUBBLE, pos.getX() + xOffset + xOffsetRand, pos.getY() + 0.7F - (world.random.nextFloat() / 2F), pos.getZ() + zOffset + zOffsetRand, 0F, 0.05F + world.random.nextFloat() * 0.05F, 0F);
                                 }
-                                world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundCategory.AMBIENT, 0.5f, 1.4f, false);
+                                world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundCategory.AMBIENT, 0.5F, 1.4F, false);
                             }
                         } else {
                             // Single chest
                             for (int i = 0; i < 7 + world.random.nextInt(10); i++) {
-                                world.addParticle(ParticleTypes.BUBBLE, pos.getX() + .5f + (world.random.nextFloat() - world.random.nextFloat()) * .3f, pos.getY() + .7F - (world.random.nextFloat() / 2.0), pos.getZ() + .5f + (world.random.nextFloat() - world.random.nextFloat()) * .3f, 0F, .05f + world.random.nextFloat() * .05f, 0F);
+                                world.addParticle(ParticleTypes.BUBBLE, pos.getX() + 0.5F + (world.random.nextFloat() - world.random.nextFloat()) * 0.3F, pos.getY() + 0.7F - (world.random.nextFloat() / 2F), pos.getZ() + 0.5F + (world.random.nextFloat() - world.random.nextFloat()) * 0.3F, 0F, 0.05F + world.random.nextFloat() * 0.05F, 0F);
                             }
-                            world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundCategory.AMBIENT, 0.3f, 1.4f, false);
+                            world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundCategory.AMBIENT, 0.3F, 1.4F, false);
                         }
                     }
                 } else {
