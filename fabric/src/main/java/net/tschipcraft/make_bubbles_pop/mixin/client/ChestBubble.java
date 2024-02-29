@@ -32,9 +32,8 @@ public abstract class ChestBubble {
     @Inject(method = "clientTick", at = @At("TAIL"))
     private static void makeBubblesPop$clientTick(World world, BlockPos pos, BlockState state, ChestBlockEntity blockEntity, CallbackInfo ci) {
         if (world != null && world.isClient && (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.CHEST_BUBBLES_ENABLED) && world.isWater(pos)) {
-            //BlockState blockState = blockEntity.getCachedState();
-            ChestType chestType = state.contains(ChestBlock.CHEST_TYPE) ? state.get(ChestBlock.CHEST_TYPE) : ChestType.SINGLE;
-            Direction facing = state.contains(ChestBlock.FACING) ? state.get(ChestBlock.FACING) : Direction.NORTH;
+            ChestType chestType = state.getOrEmpty(ChestBlock.CHEST_TYPE).orElse(ChestType.SINGLE);
+            Direction facing = state.getOrEmpty(ChestBlock.FACING).orElse(Direction.NORTH);
             Block block = state.getBlock();
 
             boolean doubleChest = chestType != ChestType.SINGLE;
@@ -100,4 +99,5 @@ public abstract class ChestBubble {
             }
         }
     }
+
 }

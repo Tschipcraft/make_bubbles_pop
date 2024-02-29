@@ -1,6 +1,6 @@
 package net.tschipcraft.make_bubbles_pop.mixin.client;
 
-import net.minecraft.block.entity.BarrelBlockEntity;
+import net.minecraft.world.level.block.entity.BarrelBlockEntity;
 import net.tschipcraft.make_bubbles_pop.impl.BarrelBlockEntityInterface;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;

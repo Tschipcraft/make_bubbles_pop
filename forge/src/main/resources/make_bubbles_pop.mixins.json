@@ -5,12 +5,13 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "make_bubbles_pop.refmap.json",
   "client": [
-    "BubblePop",
-    "BubbleColumnPop",
-    "CurrentDownPop",
-    "ExplosionEmitterBubble",
-    "ChestBubble",
-    "BarrelOnUse"
+    "client.BubblePop",
+    "client.BubbleColumnPop",
+    "client.CurrentDownPop",
+    "client.ChestBubble",
+    "client.BarrelBlockEntityMixin",
+    "client.BarrelBubble",
+    "client.ExplosionEmitterBubble"
   ],
   "injectors": {
     "defaultRequire": 1

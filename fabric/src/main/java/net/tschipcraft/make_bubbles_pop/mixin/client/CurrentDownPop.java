@@ -50,7 +50,6 @@ public abstract class CurrentDownPop extends SpriteBillboardParticle {
     @Inject(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/particle/CurrentDownParticle;move(DDD)V"))
     private void makeBubblesPop$injectFloorCollision(CallbackInfo ci) {
         if (!this.world.isWater(BlockPos.ofFloored(this.x, this.y - this.scale * 1.5D, this.z))) {
-            //this.velocityY = 0;
             this.velocityY = 0.01D;
             this.age = this.maxAge;
         }

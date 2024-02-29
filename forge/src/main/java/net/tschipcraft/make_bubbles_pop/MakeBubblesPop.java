@@ -20,18 +20,13 @@ public class MakeBubblesPop {
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    //TODO: Find equivalent in Forge -> client ticking for barrel block
-    //public static final Identifier BARREL_BUBBLE_PACKET = new Identifier("make_bubbles_pop", "barrel_bubble_packet");
     public static boolean POP_PARTICLE_ENABLED = true;
     public static boolean CHEST_BUBBLES_ENABLED = true;
     public static boolean BARREL_BUBBLES_ENABLED = true;
 
-    //TODO: Make a config for these
     public static boolean POPPED_BUBBLES_MAINTAIN_VELOCITY = true;
-    public static boolean BARREL_BUBBLES_CREATED_FROM_SERVER = false; // To be disabled when on a server without Make Bubbles Pop
 
-
-    public static boolean MIDNIGHTLIB_INSTALLED = false;
+    public static final boolean MIDNIGHTLIB_INSTALLED = ModList.get().isLoaded("midnightlib");
 
 
     public MakeBubblesPop() {
@@ -45,7 +40,7 @@ public class MakeBubblesPop {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        if (ModList.get().isLoaded("midnightlib")) {
+        if (MIDNIGHTLIB_INSTALLED) {
             // Use MidnightLib features
             LOGGER.info("Detected midnightlib!");
             MakeBubblesPopConfig.init(MODID, MakeBubblesPopConfig.class);
@@ -54,7 +49,6 @@ public class MakeBubblesPop {
                     return MidnightConfig.getScreen(parent, MODID);
                 });
             });
-            MIDNIGHTLIB_INSTALLED = true;
         }
         LOGGER.info("Make Bubbles Pop by Tschipcraft initialized!");
     }

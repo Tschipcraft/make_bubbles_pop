@@ -25,28 +25,30 @@ import java.util.List;
  * This mixin injects into the BarrelBlock class to add bubbles to opening barrels underwater.
  */
 @Mixin(BarrelBlock.class)
-public abstract class BarrelOnUse extends BlockWithEntity {
+public abstract class BarrelBubble extends BlockWithEntity {
 
     @Unique
     private static final List<BarrelBlockEntity> OPENED_BARRELS = new ArrayList<>();
 
-    protected BarrelOnUse(Settings settings) {
+    protected BarrelBubble(Settings settings) {
         super(settings);
     }
 
     // Experimental - register BarrelBlock to tick on the client instead of using packets
     @Nullable
+    @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return world.isClient ? checkType(type, BlockEntityType.BARREL, this::clientTick) : null;
+        return world.isClient ? checkType(type, BlockEntityType.BARREL, this::makeBubblesPop$clientTick) : null;
     }
 
     @Unique
-    public void clientTick(World world, BlockPos pos, BlockState state, BarrelBlockEntity blockEntity) {
+    public void makeBubblesPop$clientTick(World world, BlockPos pos, BlockState state, BarrelBlockEntity blockEntity) {
         if (world != null && world.isClient && (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.BARREL_BUBBLES_ENABLED)) {
-            if (((BarrelBlockEntityInterface)blockEntity).makeBubblesPop$wasLoaded()) {
-                // Get direction of barrel block and test if its underwater
-                Direction facing = state.getOrEmpty(BarrelBlock.FACING).orElse(Direction.NORTH);
-                boolean open = state.getOrEmpty(BarrelBlock.OPEN).orElse(false);
+            // Get direction and openness of barrel block
+            Direction facing = state.getOrEmpty(BarrelBlock.FACING).orElse(Direction.NORTH);
+            boolean open = state.getOrEmpty(BarrelBlock.OPEN).orElse(false);
+
+            if (((BarrelBlockEntityInterface) blockEntity).makeBubblesPop$wasLoaded()) {
                 if (world.isWater(pos.offset(facing)) && open) {
                     if (!OPENED_BARRELS.contains(blockEntity)) {
                         // A barrel block has been opened underwater
@@ -58,15 +60,13 @@ public abstract class BarrelOnUse extends BlockWithEntity {
                     OPENED_BARRELS.remove(blockEntity);
                 }
             } else {
-                Direction facing = state.getOrEmpty(BarrelBlock.FACING).orElse(Direction.NORTH);
-                boolean open = state.getOrEmpty(BarrelBlock.OPEN).orElse(false);
                 if (world.isWater(pos.offset(facing)) && open) {
                     if (!OPENED_BARRELS.contains(blockEntity)) {
                         // Mark barrel as open to prevent it from creating bubbles upon loading if already open
                         OPENED_BARRELS.add(blockEntity);
                     }
                 }
-                ((BarrelBlockEntityInterface)blockEntity).makeBubblesPop$setLoaded(true);
+                ((BarrelBlockEntityInterface) blockEntity).makeBubblesPop$setLoaded(true);
             }
         }
     }
@@ -77,4 +77,5 @@ public abstract class BarrelOnUse extends BlockWithEntity {
         super.finalize();
         OPENED_BARRELS.clear();
     }
+
 }

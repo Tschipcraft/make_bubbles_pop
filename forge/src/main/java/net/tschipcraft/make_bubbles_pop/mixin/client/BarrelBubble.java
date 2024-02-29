@@ -1,4 +1,4 @@
-package net.tschipcraft.make_bubbles_pop.mixin;
+package net.tschipcraft.make_bubbles_pop.mixin.client;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPopConfig;
+import net.tschipcraft.make_bubbles_pop.impl.BarrelBlockEntityInterface;
 import net.tschipcraft.make_bubbles_pop.impl.BarrelBubbler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -31,52 +32,57 @@ import java.util.List;
  * This mixin injects into the BarrelBlock class to add bubbles to opening barrels underwater.
  */
 @Mixin(BarrelBlock.class)
-public abstract class BarrelOnUse extends BaseEntityBlock {
+public abstract class BarrelBubble extends BaseEntityBlock {
 
     @Unique
     private static final List<BlockPos> openedBarrels = new ArrayList<>();
 
-    protected BarrelOnUse(Properties pProperties) {
+    protected BarrelBubble(Properties pProperties) {
         super(pProperties);
-    }
-
-    @Inject(method = "use", at = @At("HEAD"))
-    public void injectBubbles(BlockState state, Level world, BlockPos pos, Player player, InteractionHand pHand, BlockHitResult pHit, CallbackInfoReturnable<InteractionResult> cir) {
-        /*
-        boolean bl = world != null;
-        if (bl && world.isClientSide && MakeBubblesPop.BARREL_BUBBLES_ENABLED && !MakeBubblesPop.BARREL_BUBBLES_CREATED_FROM_SERVER) {
-            // Get direction of barrel block and test if its underwater
-            Direction facing = state.getValues().containsKey(BarrelBlock.FACING) ? state.getValue(BarrelBlock.FACING) : Direction.NORTH;
-            if (world.getFluidState(pos.relative(facing)).is(FluidTags.WATER) && !state.getValue(BarrelBlock.OPEN)) {
-                // A barrel block has been opened underwater by the current player
-                BarrelBubbler.spawnBubbles(world, pos, facing);
-            }
-        }
-         */
     }
 
     // Experimental - register BarrelBlock to tick on the client
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return type == BlockEntityType.BARREL ? this::clientTick : null;
+        return type == BlockEntityType.BARREL ? this::makeBubblesPop$clientTick : null;
     }
 
     @Unique
-    public <T extends BlockEntity> void clientTick(Level world, BlockPos pos, BlockState state, T blockEntity) {
+    public <T extends BlockEntity> void makeBubblesPop$clientTick(Level world, BlockPos pos, BlockState state, T blockEntity) {
         if (world != null && world.isClientSide && (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.BARREL_BUBBLES_ENABLED)) {
-            // Get direction of barrel block and test if its underwater
-            Direction facing = state.getValues().containsKey(BarrelBlock.FACING) ? state.getValue(BarrelBlock.FACING) : Direction.NORTH;
-            if (world.getFluidState(pos.relative(facing)).is(FluidTags.WATER) && state.getValue(BarrelBlock.OPEN)) {
-                if(!openedBarrels.contains(pos)) {
-                    // A barrel block has been opened underwater
-                    openedBarrels.add(pos);
-                    BarrelBubbler.spawnBubbles(world, pos, facing);
+            // Get direction and openness of barrel block
+            Direction facing = state.getOptionalValue(BarrelBlock.FACING).orElse(Direction.NORTH);
+            boolean open = state.getOptionalValue(BarrelBlock.OPEN).orElse(false);
+
+            if (((BarrelBlockEntityInterface) blockEntity).makeBubblesPop$wasLoaded()) {
+                if (world.getFluidState(pos.relative(facing)).is(FluidTags.WATER) && open) {
+                    if (!openedBarrels.contains(pos)) {
+                        // A barrel block has been opened underwater
+                        openedBarrels.add(pos);
+                        BarrelBubbler.spawnBubbles(world, pos, facing, world.random);
+                    }
+                } else {
+                    // Barrel block closed
+                    openedBarrels.remove(pos);
                 }
             } else {
-                // Barrel block closed
-                openedBarrels.remove(pos);
+                if (world.getFluidState(pos.relative(facing)).is(FluidTags.WATER) && open) {
+                    if (!openedBarrels.contains(pos)) {
+                        // Mark barrel as open to prevent it from creating bubbles upon loading if already open
+                        openedBarrels.add(pos);
+                    }
+                }
+                ((BarrelBlockEntityInterface) blockEntity).makeBubblesPop$setLoaded(true);
             }
         }
     }
+
+    // Prevent memory leaks
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+        openedBarrels.clear();
+    }
+
 }

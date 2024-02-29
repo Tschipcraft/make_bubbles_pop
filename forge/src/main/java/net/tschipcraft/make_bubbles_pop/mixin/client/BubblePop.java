@@ -1,4 +1,4 @@
-package net.tschipcraft.make_bubbles_pop.mixin;
+package net.tschipcraft.make_bubbles_pop.mixin.client;
 
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.BubbleParticle;
@@ -39,7 +39,7 @@ public abstract class BubblePop extends TextureSheetParticle {
     }
 
     @Unique
-    private float accelerationAngle = (float)(Math.random() * 360F);
+    private float accelerationAngle;
     @Unique
     private byte accelerationTicker = 0;
     @Unique
@@ -55,9 +55,10 @@ public abstract class BubblePop extends TextureSheetParticle {
      */
 
     @Inject(method = "<init>", at = @At(value = "TAIL"))
-    void init(ClientLevel clientlevel, double d, double e, double f, double g, double h, double i, CallbackInfo ci) {
+    void makeBubblesPop$init(ClientLevel clientlevel, double d, double e, double f, double g, double h, double i, CallbackInfo ci) {
         // Longer lifetime to enable bubbles to rise to the top (Could cause performance issues - you called it previous me)
-        this.lifetime = (int) ((MakeBubblesPop.MIDNIGHTLIB_INSTALLED ? MakeBubblesPopConfig.BUBBLE_LIFETIME_MULTIPLIER : 32.0) / (Math.random() * 0.7 + 0.1));
+        this.lifetime = (int) ((MakeBubblesPop.MIDNIGHTLIB_INSTALLED ? MakeBubblesPopConfig.BUBBLE_LIFETIME_MULTIPLIER : 32.0D) / (this.random.nextDouble() * 0.7D + 0.1D));
+        this.accelerationAngle = this.random.nextFloat() * 360F;
     }
 
     @Override
@@ -81,7 +82,7 @@ public abstract class BubblePop extends TextureSheetParticle {
         } else {
 
             // Upward motion
-            this.yd += .01f;
+            this.yd += 0.01F;
             this.move(this.xd, this.yd, this.zd);
 
             // Detect stuck bubbles
@@ -93,21 +94,21 @@ public abstract class BubblePop extends TextureSheetParticle {
 
             // New direction
             if (this.accelerationTicker == 0) {
-                this.accelerationAngle = (float)(Math.random() * 360);
+                this.accelerationAngle = this.random.nextFloat() * 360F;
             }
 
             this.accelerationTicker++;
-            if (this.accelerationTicker >= 5) {
+            if (this.accelerationTicker % 5 == 0) {
                 this.accelerationTicker = 0;
             }
 
             // Apply
-            this.xd += (((double) this.accelerationTicker / 10) * Math.cos(this.accelerationAngle) * 0.04);
-            this.zd += (((double) this.accelerationTicker / 10) * Math.sin(this.accelerationAngle) * 0.04);
+            this.xd += (((double) this.accelerationTicker / 10D) * Math.cos(this.accelerationAngle) * 0.04D);
+            this.zd += (((double) this.accelerationTicker / 10D) * Math.sin(this.accelerationAngle) * 0.04D);
 
-            this.xd *= 0.7500000238418579;
-            this.yd *= 0.8500000238418579;
-            this.zd *= 0.7500000238418579;
+            this.xd *= 0.7500000238418579D;
+            this.yd *= 0.8500000238418579D;
+            this.zd *= 0.7500000238418579D;
 
 
             // PHYSICS
@@ -115,31 +116,31 @@ public abstract class BubblePop extends TextureSheetParticle {
             if (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.BUBBLE_PHYSICS_ENABLED) {
 
                 // Search way around blocks
-                if (!this.level.getFluidState(BlockPos.containing(this.x, this.y + 0.8, this.z)).is(FluidTags.WATER)) {
+                if (!this.level.getFluidState(BlockPos.containing(this.x, this.y + 0.8D, this.z)).is(FluidTags.WATER)) {
                     // Direct way upwards blocked -> search up different way to water surface
 
-                    boolean escapePosX = this.level.getFluidState(BlockPos.containing(this.x + 1, this.y + 0.8, this.z)).is(FluidTags.WATER) && this.level.getFluidState(BlockPos.containing(this.x + 1, this.y, this.z)).is(FluidTags.WATER);
-                    boolean escapeNegX = this.level.getFluidState(BlockPos.containing(this.x - 1, this.y + 0.8, this.z)).is(FluidTags.WATER) && this.level.getFluidState(BlockPos.containing(this.x - 1, this.y, this.z)).is(FluidTags.WATER);
-                    boolean escapePosZ = this.level.getFluidState(BlockPos.containing(this.x, this.y + 0.8, this.z + 1)).is(FluidTags.WATER) && this.level.getFluidState(BlockPos.containing(this.x, this.y, this.z + 1)).is(FluidTags.WATER);
-                    boolean escapeNegZ = this.level.getFluidState(BlockPos.containing(this.x, this.y + 0.8, this.z - 1)).is(FluidTags.WATER) && this.level.getFluidState(BlockPos.containing(this.x, this.y, this.z - 1)).is(FluidTags.WATER);
+                    boolean escapePosX = this.level.getFluidState(BlockPos.containing(this.x + 1D, this.y + 0.8D, this.z)).is(FluidTags.WATER) && this.level.getFluidState(BlockPos.containing(this.x + 1D, this.y, this.z)).is(FluidTags.WATER);
+                    boolean escapeNegX = this.level.getFluidState(BlockPos.containing(this.x - 1D, this.y + 0.8D, this.z)).is(FluidTags.WATER) && this.level.getFluidState(BlockPos.containing(this.x - 1D, this.y, this.z)).is(FluidTags.WATER);
+                    boolean escapePosZ = this.level.getFluidState(BlockPos.containing(this.x, this.y + 0.8D, this.z + 1)).is(FluidTags.WATER) && this.level.getFluidState(BlockPos.containing(this.x, this.y, this.z + 1D)).is(FluidTags.WATER);
+                    boolean escapeNegZ = this.level.getFluidState(BlockPos.containing(this.x, this.y + 0.8D, this.z - 1)).is(FluidTags.WATER) && this.level.getFluidState(BlockPos.containing(this.x, this.y, this.z - 1D)).is(FluidTags.WATER);
 
                     if (!(!escapePosX && !escapeNegX && !escapePosZ && !escapeNegZ)) {
                         for (int i = 0; i <= 5; i++) {
                             if (escapePosX && this.routeDir == 1) {
-                                this.xd += 0.03;
+                                this.xd += 0.03D;
                                 break;
                             } else if (escapeNegX && this.routeDir == 2) {
-                                this.xd -= 0.03;
+                                this.xd -= 0.03D;
                                 break;
                             } else if (escapePosZ && this.routeDir == 3) {
-                                this.zd += 0.03;
+                                this.zd += 0.03D;
                                 break;
                             } else if (escapeNegZ && this.routeDir == 4) {
-                                this.zd -= 0.03;
+                                this.zd -= 0.03D;
                                 break;
                             } else {
                                 // Choose escape route direction
-                                this.routeDir = (byte) ((Math.random() * 4) + 1);
+                                this.routeDir = (byte) (this.random.nextDouble() * 4D + 1D);
                             }
                         }
                     } else {
@@ -153,9 +154,4 @@ public abstract class BubblePop extends TextureSheetParticle {
         }
     }
 
-    // Why did I add this?
-    @Override
-    public ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
-    }
 }

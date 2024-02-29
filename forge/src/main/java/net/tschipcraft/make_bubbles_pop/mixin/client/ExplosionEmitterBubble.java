@@ -1,4 +1,4 @@
-package net.tschipcraft.make_bubbles_pop.mixin;
+package net.tschipcraft.make_bubbles_pop.mixin.client;
 
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.HugeExplosionSeedParticle;
@@ -24,7 +24,7 @@ public abstract class ExplosionEmitterBubble extends NoRenderParticle {
     }
 
     @Inject(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/ClientLevel;addParticle(Lnet/minecraft/core/particles/ParticleOptions;DDDDDD)V", shift = At.Shift.BEFORE))
-    protected void injectBubbleParticle(CallbackInfo info) {
+    protected void makeBubblesPop$injectBubbleParticle(CallbackInfo info) {
         if (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.EXPLOSION_BUBBLES_ENABLED) {
             // Add bubble particles to explosions
             if (this.level.getFluidState(BlockPos.containing(this.x, this.y, this.z)).is(FluidTags.WATER)) {
@@ -32,12 +32,13 @@ public abstract class ExplosionEmitterBubble extends NoRenderParticle {
                     double dx = (this.random.nextDouble() - this.random.nextDouble());
                     double dy = (this.random.nextDouble() - this.random.nextDouble());
                     double dz = (this.random.nextDouble() - this.random.nextDouble());
-                    double x = this.x + dx * 3.5;
-                    double y = this.y + dy * 3.5;
-                    double z = this.z + dz * 3.5;
-                    this.level.addParticle(ParticleTypes.BUBBLE, x, y, z, dx * 3, dy * 3, dz * 3);
+                    double x = this.x + dx * 3.5D;
+                    double y = this.y + dy * 3.5D;
+                    double z = this.z + dz * 3.5D;
+                    this.level.addParticle(ParticleTypes.BUBBLE, x, y, z, dx * 3D, dy * 3D, dz * 3D);
                 }
             }
         }
     }
+
 }

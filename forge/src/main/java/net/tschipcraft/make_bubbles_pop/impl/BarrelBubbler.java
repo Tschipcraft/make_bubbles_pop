@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -14,60 +15,60 @@ import net.tschipcraft.make_bubbles_pop.MakeBubblesPopConfig;
 @OnlyIn(Dist.CLIENT)
 public class BarrelBubbler {
 
-    public static void spawnBubbles(Level world, BlockPos pos, Direction facing) {
+    public static void spawnBubbles(Level world, BlockPos pos, Direction facing, RandomSource random) {
         if (world != null && world.isClientSide && (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.BARREL_BUBBLES_ENABLED)) {
             if (facing != Direction.DOWN) {
-                for (int i = 0; i < 6 + world.random.nextInt(12); i++) {
-                    float xOffset = 0f;
-                    float yOffset = 0f;
-                    float zOffset = 0f;
-                    float xOffsetRand = 0f;
-                    float yOffsetRand = 0f;
-                    float zOffsetRand = 0f;
+                for (int i = 0; i < 6 + random.nextInt(12); i++) {
+                    float xOffset = 0F;
+                    float yOffset = 0F;
+                    float zOffset = 0F;
+                    float xOffsetRand = 0F;
+                    float yOffsetRand = 0F;
+                    float zOffsetRand = 0F;
 
-                    float xVelocityRand = 0f;
-                    float zVelocityRand = 0f;
+                    float xVelocityRand = 0F;
+                    float zVelocityRand = 0F;
 
                     if (facing == Direction.NORTH) {
-                        xOffset = .5f;
-                        yOffset = .5f;
-                        zOffset = -.01f;
-                        xOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
-                        yOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
-                        zVelocityRand = -world.random.nextFloat();
+                        xOffset = 0.5F;
+                        yOffset = 0.5F;
+                        zOffset = -.01F;
+                        xOffsetRand = (random.nextFloat() - random.nextFloat()) * 0.3F;
+                        yOffsetRand = (random.nextFloat() - random.nextFloat()) * 0.3F;
+                        zVelocityRand = -random.nextFloat();
                     } else if (facing == Direction.SOUTH) {
-                        xOffset = .5f;
-                        yOffset = .5f;
-                        zOffset = 1.01f;
-                        xOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
-                        yOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
-                        zVelocityRand = world.random.nextFloat();
+                        xOffset = 0.5F;
+                        yOffset = 0.5F;
+                        zOffset = 1.01F;
+                        xOffsetRand = (random.nextFloat() - random.nextFloat()) * 0.3F;
+                        yOffsetRand = (random.nextFloat() - random.nextFloat()) * 0.3F;
+                        zVelocityRand = random.nextFloat();
                     } else if (facing == Direction.EAST) {
-                        xOffset = 1.01f;
-                        yOffset = .5f;
-                        zOffset = .5f;
-                        yOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
-                        zOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
-                        xVelocityRand = world.random.nextFloat();
+                        xOffset = 1.01F;
+                        yOffset = 0.5F;
+                        zOffset = 0.5F;
+                        yOffsetRand = (random.nextFloat() - random.nextFloat()) * 0.3F;
+                        zOffsetRand = (random.nextFloat() - random.nextFloat()) * 0.3F;
+                        xVelocityRand = random.nextFloat();
                     } else if (facing == Direction.WEST) {
-                        xOffset = -.01f;
-                        yOffset = .5f;
-                        zOffset = .5f;
-                        yOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
-                        zOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
-                        xVelocityRand = -world.random.nextFloat();
+                        xOffset = -.01F;
+                        yOffset = 0.5F;
+                        zOffset = 0.5F;
+                        yOffsetRand = (random.nextFloat() - random.nextFloat()) * 0.3F;
+                        zOffsetRand = (random.nextFloat() - random.nextFloat()) * 0.3F;
+                        xVelocityRand = -random.nextFloat();
                     } else if (facing == Direction.UP) {
-                        xOffset = .5f;
-                        yOffset = 1.01f;
-                        zOffset = .5f;
-                        xOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
-                        yOffsetRand = (world.random.nextFloat() * .25f);
-                        zOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * .3f;
+                        xOffset = 0.5F;
+                        yOffset = 1.01F;
+                        zOffset = 0.5F;
+                        xOffsetRand = (random.nextFloat() - random.nextFloat()) * 0.3F;
+                        yOffsetRand = (random.nextFloat() * 0.25f);
+                        zOffsetRand = (random.nextFloat() - random.nextFloat()) * 0.3F;
                     }
 
-                    world.addParticle(ParticleTypes.BUBBLE, pos.getX() + xOffset + xOffsetRand, pos.getY() + yOffset + yOffsetRand, pos.getZ() + zOffset + zOffsetRand, xVelocityRand, .05f + world.random.nextFloat() * .05f, zVelocityRand);
+                    world.addParticle(ParticleTypes.BUBBLE, pos.getX() + xOffset + xOffsetRand, pos.getY() + yOffset + yOffsetRand, pos.getZ() + zOffset + zOffsetRand, xVelocityRand, 0.05f + random.nextFloat() * 0.05F, zVelocityRand);
                 }
-                world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundSource.AMBIENT, 0.3f, 1.4f, false);
+                world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundSource.AMBIENT, 0.3F, 1.4F, false);
             }
         }
     }

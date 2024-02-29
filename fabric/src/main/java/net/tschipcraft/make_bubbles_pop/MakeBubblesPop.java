@@ -15,6 +15,7 @@ public class MakeBubblesPop implements ModInitializer {
 	public void onInitialize() {
 		if (MIDNIGHTLIB_INSTALLED) {
 			// Use MidnightLib features
+			LOGGER.info("Detected midnightlib!");
 			MakeBubblesPopConfig.init(LOGGER.getName(), MakeBubblesPopConfig.class);
 		}
 		LOGGER.info("Make Bubbles Pop by Tschipcraft initialized!");

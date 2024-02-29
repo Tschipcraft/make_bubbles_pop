@@ -1,4 +1,4 @@
-package net.tschipcraft.make_bubbles_pop.mixin;
+package net.tschipcraft.make_bubbles_pop.mixin.client;
 
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.TextureSheetParticle;
@@ -20,7 +20,7 @@ public abstract class BubbleColumnPop extends TextureSheetParticle {
     }
 
     @Inject(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/particle/BubbleColumnUpParticle;remove()V", shift = At.Shift.AFTER))
-    protected void injectPopParticle(CallbackInfo info) {
+    protected void makeBubblesPop$injectPopParticle(CallbackInfo info) {
         // TODO: Global bubble pop
         if (MakeBubblesPop.POP_PARTICLE_ENABLED) {
             this.level.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z,
@@ -33,7 +33,7 @@ public abstract class BubbleColumnPop extends TextureSheetParticle {
     }
 
     @Inject(method = "tick()V", at = @At(value = "HEAD"))
-    protected void injectPopParticleToSuper(CallbackInfo info) {
+    protected void makeBubblesPop$injectPopParticleToSuper(CallbackInfo info) {
         if ((this.age + 1) >= this.lifetime) {
             this.remove();
             if (MakeBubblesPop.POP_PARTICLE_ENABLED) {

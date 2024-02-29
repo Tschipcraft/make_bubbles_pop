@@ -47,4 +47,5 @@ public abstract class ExplosionEmitterBubble extends NoRenderParticle {
             }
         }
     }
+
 }
