@@ -115,6 +115,39 @@ public abstract class BubblePop extends TextureSheetParticle {
 
             if (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.BUBBLE_PHYSICS_ENABLED) {
 
+                // Entity interaction
+                List<Entity> list = level.getEntities((Entity) null, this.getBoundingBox().inflate(0.5), new Predicate<>() {
+                    @Override
+                    public boolean test(Entity entity) {
+                        return entity.isAlive() && entity instanceof LivingEntity && !entity.noPhysics;
+                    }
+                });
+
+                for (Entity entityIn : list) {
+
+                    float xDiff = (float) (this.x - entityIn.getX());
+                    float zDiff = (float) (this.z - entityIn.getZ());
+                    float absDiff = (float) Mth.absMax(xDiff, zDiff);
+
+                    if (absDiff >= 0.0099F) {
+                        absDiff = (float) Math.sqrt(absDiff);
+                        xDiff /= absDiff;
+                        zDiff /= absDiff;
+
+                        float invertedDir = 1.0f / absDiff;
+
+                        if (invertedDir > 1.0F)
+                            invertedDir = 1.0F;
+
+                        this.xd += xDiff * invertedDir / 20D;
+                        this.zd += zDiff * invertedDir / 20D;
+
+                        this.xd += (entityIn.getDeltaMovement().x - this.xd) * 0.2D;
+                        this.yd += (entityIn.getDeltaMovement().y - this.yd) * 0.2D;
+                        this.zd += (entityIn.getDeltaMovement().z - this.zd) * 0.2D;
+                    }
+                }
+
                 // Search way around blocks
                 if (!this.level.getFluidState(BlockPos.containing(this.x, this.y + 0.8D, this.z)).is(FluidTags.WATER)) {
                     // Direct way upwards blocked -> search up different way to water surface

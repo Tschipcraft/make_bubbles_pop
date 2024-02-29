@@ -3,10 +3,13 @@ package net.tschipcraft.make_bubbles_pop.mixin.client;
 import net.minecraft.client.particle.SpriteBillboardParticle;
 import net.minecraft.client.particle.WaterBubbleParticle;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.entity.Entity;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPopConfig;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,6 +17,8 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.List;
 
 /**
  * <pre>
@@ -110,15 +115,35 @@ public abstract class BubblePop extends SpriteBillboardParticle {
 
             if (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.BUBBLE_PHYSICS_ENABLED) {
 
-                /*
-            PlayerEntity playerEntity = this.world.getClosestPlayer(this.x, this.y, this.z, 2.0, false);
-            if (playerEntity != null) {
-                // Bounce off player
-                this.velocityX += (playerEntity.getVelocity().x - this.velocityX) * 0.2;
-                this.velocityY += (playerEntity.getVelocity().y - this.velocityY) * 0.2;
-                this.velocityZ += (playerEntity.getVelocity().z - this.velocityZ) * 0.2;
-            }
-            */
+                // Entity interaction
+                List<Entity> list = world.getOtherEntities(null, this.getBoundingBox().expand(0.5), EntityPredicates.VALID_LIVING_ENTITY);
+
+                for (Entity entityIn : list) {
+                    if (!entityIn.noClip) {
+
+                        float xDiff = (float) (this.x - entityIn.getX());
+                        float zDiff = (float) (this.z - entityIn.getZ());
+                        float absDiff = (float) MathHelper.absMax(xDiff, zDiff);
+
+                        if (absDiff >= 0.0099F) {
+                            absDiff = (float) Math.sqrt(absDiff);
+                            xDiff /= absDiff;
+                            zDiff /= absDiff;
+
+                            float invertedDir = 1.0F / absDiff;
+
+                            if (invertedDir > 1.0F)
+                                invertedDir = 1.0F;
+
+                            this.velocityX += xDiff * invertedDir / 20D;
+                            this.velocityZ += zDiff * invertedDir / 20D;
+
+                            this.velocityX += (entityIn.getVelocity().x - this.velocityX) * 0.2D;
+                            this.velocityY += (entityIn.getVelocity().y - this.velocityY) * 0.2D;
+                            this.velocityZ += (entityIn.getVelocity().z - this.velocityZ) * 0.2D;
+                        }
+                    }
+                }
 
                 // Search way around blocks
                 if (!this.world.isWater(BlockPos.ofFloored(this.x, this.y + 0.8D, this.z)) && !this.world.isAir(BlockPos.ofFloored(this.x, this.y + 0.8D, this.z))) {
