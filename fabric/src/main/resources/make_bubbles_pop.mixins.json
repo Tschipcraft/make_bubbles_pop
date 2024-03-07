@@ -7,6 +7,7 @@
     "client.BubblePop",
     "client.BubbleColumnPop",
     "client.CurrentDownPop",
+    "client.PopBubblePop",
     "client.ChestBubble",
     "client.BarrelBlockEntityMixin",
     "client.BarrelBubble",

@@ -7,5 +7,7 @@
   "make_bubbles_pop.midnightconfig.BUBBLE_LIFETIME_MULTIPLIER":"Average Bubble Particle Lifetime",
   "make_bubbles_pop.midnightconfig.POP_PARTICLE_ENABLED":"Enable Bubble Pop Particles",
   "make_bubbles_pop.midnightconfig.BUBBLE_POP_VOLUME":"Bubble Pop Sound Volume",
-  "make_bubbles_pop.midnightconfig.POPPED_BUBBLES_MAINTAIN_VELOCITY":"Maintain Bubble Velocity for Bubble Pop Particles"
+  "make_bubbles_pop.midnightconfig.POPPED_BUBBLES_MAINTAIN_VELOCITY":"Maintain Bubble Velocity for Bubble Pop Particles",
+  "make_bubbles_pop.midnightconfig.BIOME_COLORS_ENABLED":"Enable Biome Dependent Bubble Colors",
+  "make_bubbles_pop.midnightconfig.BIOME_COLOR_INTENSITY":"Bubble Biome Color Intensity"
 }

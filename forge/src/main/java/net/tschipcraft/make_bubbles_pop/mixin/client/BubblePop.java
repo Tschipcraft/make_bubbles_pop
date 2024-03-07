@@ -2,18 +2,15 @@ package net.tschipcraft.make_bubbles_pop.mixin.client;
 
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.BubbleParticle;
-import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPopConfig;
+import net.tschipcraft.make_bubbles_pop.impl.BubbleUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -56,13 +53,17 @@ public abstract class BubblePop extends TextureSheetParticle {
 
     @Inject(method = "<init>", at = @At(value = "TAIL"))
     void makeBubblesPop$init(ClientLevel clientlevel, double d, double e, double f, double g, double h, double i, CallbackInfo ci) {
-        // Longer lifetime to enable bubbles to rise to the top (Could cause performance issues - you called it previous me)
+        // Longer lifetime to enable bubbles to fully rise to the top (Could cause performance issues - you called it previous me)
         this.lifetime = (int) ((MakeBubblesPop.MIDNIGHTLIB_INSTALLED ? MakeBubblesPopConfig.BUBBLE_LIFETIME_MULTIPLIER : 32.0D) / (this.random.nextDouble() * 0.7D + 0.1D));
         this.accelerationAngle = this.random.nextFloat() * 360F;
+
+        // Tint bubble based on water color
+        BubbleUtil.tintBubble(this.level, this.x, this.y, this.z, this);
     }
 
-    @Override
-    public void tick() {
+    @Inject(method = "tick", at = @At(value = "HEAD"), cancellable = true)
+    public void makeBubblesPop$tick(CallbackInfo ci) {
+        ci.cancel();
         this.xo = this.x;
         this.yo = this.y;
         this.zo = this.z;
@@ -70,18 +71,12 @@ public abstract class BubblePop extends TextureSheetParticle {
         if (this.age++ >= this.lifetime || !this.level.getFluidState(BlockPos.containing(this.x, this.y + 0.1, this.z)).is(FluidTags.WATER) || !this.level.getFluidState(BlockPos.containing(this.x, this.y, this.z)).is(FluidTags.WATER)) {
             // Outside water/lifetime reached -> pop with sound
             this.remove();
-            // TODO: Global bubble pop
-            if (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.POP_PARTICLE_ENABLED) {
-                this.level.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z,
-                        !MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.xd : 0,
-                        !MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.yd : 0,
-                        !MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.zd : 0
-                );
-                this.level.playLocalSound(this.x, this.y, this.z, SoundEvents.BUBBLE_COLUMN_BUBBLE_POP, SoundSource.AMBIENT, (MakeBubblesPop.MIDNIGHTLIB_INSTALLED ? MakeBubblesPopConfig.BUBBLE_POP_VOLUME : .1f), .85f + (this.level.random.nextFloat() * .3f), false);
-            }
+            BubbleUtil.popBubble(level, this.x, this.y, this.z, this.xd, this.yd, this.zd);
         } else {
 
             // Upward motion
+            // Scale dependant motion?
+            // => http://seas.ucla.edu/stenstro/Bubble.pdf - see you in v1.0.0
             this.yd += 0.01F;
             this.move(this.xd, this.yd, this.zd);
 
@@ -103,8 +98,8 @@ public abstract class BubblePop extends TextureSheetParticle {
             }
 
             // Apply
-            this.xd += (((double) this.accelerationTicker / 10D) * Math.cos(this.accelerationAngle) * 0.04D);
-            this.zd += (((double) this.accelerationTicker / 10D) * Math.sin(this.accelerationAngle) * 0.04D);
+            this.xd += ((this.accelerationTicker / 10D) * Math.cos(this.accelerationAngle) * 0.04D);
+            this.zd += ((this.accelerationTicker / 10D) * Math.sin(this.accelerationAngle) * 0.04D);
 
             this.xd *= 0.7500000238418579D;
             this.yd *= 0.8500000238418579D;

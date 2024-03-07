@@ -22,13 +22,19 @@ public class MakeBubblesPopConfig extends MidnightConfig {
     @Entry
     public static boolean POP_PARTICLE_ENABLED = true;
 
+    // Show this entry with percentage if possible
     @Entry(isSlider = true, min = 0F, max = 1F, precision = 100)
     public static float BUBBLE_POP_VOLUME = 0.1F;
 
     @Entry
     public static boolean POPPED_BUBBLES_MAINTAIN_VELOCITY = true;
 
+    @Entry
     public static boolean BIOME_COLORS_ENABLED = true;
+
+    // Show this entry with percentage if possible
+    @Entry(isSlider = true, min = 0F, max = 1F, precision = 100)
+    public static float BIOME_COLOR_INTENSITY = 0.65F;
 
     public static boolean BUBBLE_BEHAVIOR_FOR_SOUL_SAND_BUBBLES = true;
 

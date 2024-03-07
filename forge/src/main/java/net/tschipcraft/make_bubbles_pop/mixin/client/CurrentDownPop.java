@@ -4,10 +4,8 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.client.particle.WaterCurrentDownParticle;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.tags.FluidTags;
-import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
-import net.tschipcraft.make_bubbles_pop.MakeBubblesPopConfig;
+import net.tschipcraft.make_bubbles_pop.impl.BubbleUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -19,15 +17,16 @@ public abstract class CurrentDownPop extends TextureSheetParticle {
         super(clientWorld, d, e, f);
     }
 
+    // Tint bubble based on water color
+    @Inject(method = "<init>", at = @At(value = "TAIL"))
+    void makeBubblesPop$init(ClientLevel pLevel, double pX, double pY, double pZ, CallbackInfo ci) {
+        BubbleUtil.tintBubble(this.level, this.x, this.y, this.z, this);
+    }
+
     // Inject pop particle
     @Inject(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/particle/WaterCurrentDownParticle;remove()V", shift = At.Shift.AFTER))
     protected void makeBubblesPop$injectPopParticle(CallbackInfo info) {
-        //TODO: Global bubble pop
-        this.level.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z,
-                MakeBubblesPopConfig.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.xd : 0,
-                MakeBubblesPopConfig.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.yd : 0,
-                MakeBubblesPopConfig.POPPED_BUBBLES_MAINTAIN_VELOCITY ? this.zd : 0
-        );
+        BubbleUtil.popBubble(level, this.x, this.y, this.z, this.xd, this.yd, this.zd);
     }
 
 

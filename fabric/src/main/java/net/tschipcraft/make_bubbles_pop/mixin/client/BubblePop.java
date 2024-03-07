@@ -4,14 +4,12 @@ import net.minecraft.client.particle.SpriteBillboardParticle;
 import net.minecraft.client.particle.WaterBubbleParticle;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.predicate.entity.EntityPredicates;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPopConfig;
+import net.tschipcraft.make_bubbles_pop.impl.BubbleUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -53,9 +51,12 @@ public abstract class BubblePop extends SpriteBillboardParticle {
 
     @Inject(method = "<init>", at = @At(value = "TAIL"))
     void makeBubblesPop$init(ClientWorld clientWorld, double d, double e, double f, double g, double h, double i, CallbackInfo ci) {
-        // Longer maxAge to enable bubbles to rise to the top (Could cause performance issues - you called it previous me)
+        // Longer maxAge to enable bubbles to fully rise to the top (Could cause performance issues - you called it previous me)
         this.maxAge = (int) ((MakeBubblesPop.MIDNIGHTLIB_INSTALLED ? MakeBubblesPopConfig.BUBBLE_LIFETIME_MULTIPLIER : 32D) / (this.random.nextDouble() * 0.7D + 0.1D));
         this.accelerationAngle = this.random.nextFloat() * 360F;
+
+        // Tint bubble based on water color
+        BubbleUtil.tintBubble(world, this.x, this.y, this.z, this);
     }
 
     @Inject(method = "tick", at = @At(value = "HEAD"), cancellable = true)
@@ -68,15 +69,7 @@ public abstract class BubblePop extends SpriteBillboardParticle {
         if (this.age++ >= this.maxAge || !this.world.isWater(BlockPos.ofFloored(this.x, this.y + 0.1, this.z)) || !this.world.isWater(BlockPos.ofFloored(this.x, this.y, this.z))) {
             // Outside water/maxAge reached -> pop with sound
             this.markDead();
-            // TODO: Global bubble pop
-            if (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.POP_PARTICLE_ENABLED) {
-                this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z,
-                        MakeBubblesPop.getConfigInitialVelocity(this.velocityX),
-                        MakeBubblesPop.getConfigInitialVelocity(this.velocityY),
-                        MakeBubblesPop.getConfigInitialVelocity(this.velocityZ)
-                );
-                this.world.playSound(this.x, this.y, this.z, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.AMBIENT, (MakeBubblesPop.MIDNIGHTLIB_INSTALLED ? MakeBubblesPopConfig.BUBBLE_POP_VOLUME : .1f), .85f + (this.world.random.nextFloat() * .3f), false);
-            }
+            BubbleUtil.popBubble(world, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
         } else {
 
             // Upward motion
@@ -103,8 +96,8 @@ public abstract class BubblePop extends SpriteBillboardParticle {
             }
 
             // Apply
-            this.velocityX += (((double) this.accelerationTicker / 10D) * Math.cos(this.accelerationAngle) * 0.04D);
-            this.velocityZ += (((double) this.accelerationTicker / 10D) * Math.sin(this.accelerationAngle) * 0.04D);
+            this.velocityX += ((this.accelerationTicker / 10D) * Math.cos(this.accelerationAngle) * 0.04D);
+            this.velocityZ += ((this.accelerationTicker / 10D) * Math.sin(this.accelerationAngle) * 0.04D);
 
             this.velocityX *= 0.7500000238418579D;
             this.velocityY *= 0.8500000238418579D;

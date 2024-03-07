@@ -15,6 +15,10 @@ import net.tschipcraft.make_bubbles_pop.MakeBubblesPopConfig;
 @OnlyIn(Dist.CLIENT)
 public class BarrelBubbler {
 
+    private BarrelBubbler() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static void spawnBubbles(Level world, BlockPos pos, Direction facing, RandomSource random) {
         if (world != null && world.isClientSide && (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.BARREL_BUBBLES_ENABLED)) {
             if (facing != Direction.DOWN) {

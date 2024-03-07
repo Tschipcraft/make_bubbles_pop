@@ -3,9 +3,8 @@ package net.tschipcraft.make_bubbles_pop.mixin.client;
 import net.minecraft.client.particle.CurrentDownParticle;
 import net.minecraft.client.particle.SpriteBillboardParticle;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
-import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
+import net.tschipcraft.make_bubbles_pop.impl.BubbleUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -17,15 +16,16 @@ public abstract class CurrentDownPop extends SpriteBillboardParticle {
         super(clientWorld, d, e, f);
     }
 
+    // Tint bubble based on water color
+    @Inject(method = "<init>", at = @At(value = "TAIL"))
+    void makeBubblesPop$init(ClientWorld clientWorld, double d, double e, double f, CallbackInfo ci) {
+        BubbleUtil.tintBubble(world, this.x, this.y, this.z, this);
+    }
+
     // Inject pop particle
     @Inject(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/particle/CurrentDownParticle;markDead()V", shift = At.Shift.AFTER))
     protected void makeBubblesPop$injectPopParticle(CallbackInfo info) {
-        //TODO: Global bubble pop
-        this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z,
-                MakeBubblesPop.getConfigInitialVelocity(this.velocityX),
-                MakeBubblesPop.getConfigInitialVelocity(this.velocityY),
-                MakeBubblesPop.getConfigInitialVelocity(this.velocityZ)
-        );
+        BubbleUtil.popBubble(world, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
     }
 
 
