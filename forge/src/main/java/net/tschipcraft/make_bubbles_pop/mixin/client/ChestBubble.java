@@ -91,7 +91,10 @@ public abstract class ChestBubble {
                             for (int i = 0; i < 7 + world.random.nextInt(10); i++) {
                                 world.addParticle(ParticleTypes.BUBBLE, pos.getX() + 0.5f + (world.random.nextFloat() - world.random.nextFloat()) * 0.3F, pos.getY() + 0.7F - (world.random.nextFloat() / 2.0D), pos.getZ() + 0.5f + (world.random.nextFloat() - world.random.nextFloat()) * 0.3F, 0F, 0.05f + world.random.nextFloat() * 0.05F, 0F);
                             }
-                            world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundSource.AMBIENT, 0.3F, 1.4F, false);
+                            // Play sound
+                            if (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.CONTAINER_SOUND_ENABLED) {
+                                world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundSource.AMBIENT, 0.3F, 1.4F, false);
+                            }
                         }
                     }
                 } else {

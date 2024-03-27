@@ -34,7 +34,7 @@ public abstract class BarrelBubble extends BlockWithEntity {
         super(settings);
     }
 
-    // Experimental - register BarrelBlock to tick on the client instead of using packets
+    // Register BarrelBlock to tick on the client instead of using packets
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {

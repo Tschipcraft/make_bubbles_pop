@@ -44,11 +44,11 @@ jobs:
         if: ${{ runner.os == 'Linux' && matrix.java == '17' }} # Only upload artifacts built from latest java on one OS
         uses: actions/upload-artifact@v4
         with:
-          name: "Make Bubbles Pop Fabric"
+          name: "Make Bubbles Pop Fabric (Unzip Me)"
           path: fabric/build/libs/make_bubbles_pop-*.jar
       - name: Capture forge build artifact
         if: ${{ runner.os == 'Linux' && matrix.java == '17' }} # Only upload artifacts built from latest java on one OS
         uses: actions/upload-artifact@v4
         with:
-          name: "Make Bubbles Pop Forge"
+          name: "Make Bubbles Pop Forge (Unzip Me)"
           path: forge/build/libs/make_bubbles_pop-*.jar
