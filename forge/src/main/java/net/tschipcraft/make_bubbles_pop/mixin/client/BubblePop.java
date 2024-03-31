@@ -137,8 +137,10 @@ public abstract class BubblePop extends TextureSheetParticle {
                         this.xd += xDiff * invertedDir / 20D;
                         this.zd += zDiff * invertedDir / 20D;
 
+                        // Add entity velocity
+                        // The y velocity 0.419875 is excluded, since some players falsely return this value if they have been flying in creative mode whilst loaded
                         this.xd += (entityIn.getDeltaMovement().x - this.xd) * 0.2D;
-                        this.yd += (entityIn.getDeltaMovement().y - this.yd) * 0.2D;
+                        if (entityIn.getDeltaMovement().y != 0.419875D) this.yd += (entityIn.getDeltaMovement().y - this.yd) * 0.2D;
                         this.zd += (entityIn.getDeltaMovement().z - this.zd) * 0.2D;
                     }
                 }

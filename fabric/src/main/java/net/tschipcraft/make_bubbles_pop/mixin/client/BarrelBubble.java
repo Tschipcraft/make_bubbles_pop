@@ -28,7 +28,7 @@ import java.util.List;
 public abstract class BarrelBubble extends BlockWithEntity {
 
     @Unique
-    private static final List<BarrelBlockEntity> OPENED_BARRELS = new ArrayList<>();
+    private static final List<BlockPos> OPENED_BARRELS = new ArrayList<>();
 
     protected BarrelBubble(Settings settings) {
         super(settings);
@@ -50,20 +50,20 @@ public abstract class BarrelBubble extends BlockWithEntity {
 
             if (((BarrelBlockEntityInterface) blockEntity).makeBubblesPop$wasLoaded()) {
                 if (world.isWater(pos.offset(facing)) && open) {
-                    if (!OPENED_BARRELS.contains(blockEntity)) {
+                    if (!OPENED_BARRELS.contains(pos)) {
                         // A barrel block has been opened underwater
-                        OPENED_BARRELS.add(blockEntity);
+                        OPENED_BARRELS.add(pos);
                         BarrelBubbler.spawnBubbles(world, pos, facing, world.random);
                     }
                 } else {
                     // Barrel block closed
-                    OPENED_BARRELS.remove(blockEntity);
+                    OPENED_BARRELS.remove(pos);
                 }
             } else {
                 if (world.isWater(pos.offset(facing)) && open) {
-                    if (!OPENED_BARRELS.contains(blockEntity)) {
+                    if (!OPENED_BARRELS.contains(pos)) {
                         // Mark barrel as open to prevent it from creating bubbles upon loading if already open
-                        OPENED_BARRELS.add(blockEntity);
+                        OPENED_BARRELS.add(pos);
                     }
                 }
                 ((BarrelBlockEntityInterface) blockEntity).makeBubblesPop$setLoaded(true);

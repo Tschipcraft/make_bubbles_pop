@@ -131,8 +131,10 @@ public abstract class BubblePop extends SpriteBillboardParticle {
                             this.velocityX += xDiff * invertedDir / 20D;
                             this.velocityZ += zDiff * invertedDir / 20D;
 
+                            // Add entity velocity
+                            // The y velocity 0.419875 is excluded, since some players falsely return this value if they have been flying in creative mode whilst loaded
                             this.velocityX += (entityIn.getVelocity().x - this.velocityX) * 0.2D;
-                            this.velocityY += (entityIn.getVelocity().y - this.velocityY) * 0.2D;
+                            if (entityIn.getVelocity().y != 0.419875D) this.velocityY += (entityIn.getVelocity().y - this.velocityY) * 0.2D;
                             this.velocityZ += (entityIn.getVelocity().z - this.velocityZ) * 0.2D;
                         }
                     }
