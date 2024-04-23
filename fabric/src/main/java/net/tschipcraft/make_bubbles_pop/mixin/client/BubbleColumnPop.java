@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(BubbleColumnUpParticle.class)
 public abstract class BubbleColumnPop extends SpriteBillboardParticle {
-    // TODO: Add support for overhauled bubble behavior (#3)
+    // TODO: Add support for overhauled bubble behavior (#3) - next version
 
     protected BubbleColumnPop(ClientWorld clientWorld, double d, double e, double f) {
         super(clientWorld, d, e, f);

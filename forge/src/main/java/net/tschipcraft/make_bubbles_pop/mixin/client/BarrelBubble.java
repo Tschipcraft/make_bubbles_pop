@@ -2,7 +2,6 @@ package net.tschipcraft.make_bubbles_pop.mixin.client;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BarrelBlock;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -49,7 +48,7 @@ public abstract class BarrelBubble extends BaseEntityBlock {
             boolean open = state.getOptionalValue(BarrelBlock.OPEN).orElse(false);
 
             if (((BarrelBlockEntityInterface) blockEntity).makeBubblesPop$wasLoaded()) {
-                if (world.getFluidState(pos.relative(facing)).is(FluidTags.WATER) && open) {
+                if (world.isWaterAt(pos.relative(facing)) && open) {
                     if (!OPENED_BARRELS.contains(pos)) {
                         // A barrel block has been opened underwater
                         OPENED_BARRELS.add(pos);
@@ -60,7 +59,7 @@ public abstract class BarrelBubble extends BaseEntityBlock {
                     OPENED_BARRELS.remove(pos);
                 }
             } else {
-                if (world.getFluidState(pos.relative(facing)).is(FluidTags.WATER) && open) {
+                if (world.isWaterAt(pos.relative(facing)) && open) {
                     if (!OPENED_BARRELS.contains(pos)) {
                         // Mark barrel as open to prevent it from creating bubbles upon loading if already open
                         OPENED_BARRELS.add(pos);

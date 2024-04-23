@@ -4,7 +4,6 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.client.particle.WaterCurrentDownParticle;
 import net.minecraft.core.BlockPos;
-import net.minecraft.tags.FluidTags;
 import net.tschipcraft.make_bubbles_pop.impl.BubbleUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.*;
@@ -50,7 +49,7 @@ public abstract class CurrentDownPop extends TextureSheetParticle {
     // Make hitting the magma block/floor look nicer
     @Inject(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/particle/WaterCurrentDownParticle;move(DDD)V"))
     private void makeBubblesPop$injectFloorCollision(CallbackInfo ci) {
-        if (!this.level.getFluidState(BlockPos.containing(this.x, this.y - this.quadSize * 1.5D, this.z)).is(FluidTags.WATER)) {
+        if (!this.level.isWaterAt(BlockPos.containing(this.x, this.y - this.quadSize * 1.5D, this.z))) {
             this.yd = 0.01D;
             this.age = this.lifetime;
         }

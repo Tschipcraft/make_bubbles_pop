@@ -55,7 +55,7 @@ public class BarrelBubbler {
                         zOffsetRand = (random.nextFloat() - random.nextFloat()) * 0.3F;
                         xVelocityRand = random.nextFloat();
                     } else if (facing == Direction.WEST) {
-                        xOffset = -.01F;
+                        xOffset = -0.01F;
                         yOffset = 0.5F;
                         zOffset = 0.5F;
                         yOffsetRand = (random.nextFloat() - random.nextFloat()) * 0.3F;
@@ -74,7 +74,7 @@ public class BarrelBubbler {
                 }
                 // Play sound
                 if (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.CONTAINER_SOUND_ENABLED) {
-                    world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundCategory.AMBIENT, 0.3F, 1.4F, false);
+                    world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundCategory.AMBIENT, 0.3F + (random.nextFloat() * 0.1F), 1.3F + (random.nextFloat() * 0.3F), false);
                 }
             }
         }

@@ -22,7 +22,6 @@ import java.util.List;
  * <pre>
  * This mixin injects into the WaterBubbleParticle class to completely overhaul bubble behavior.
  * Notable changes for devs:
- *  - The tick() method is completely overwritten (no super calls)
  *  - Age now counts upwards like any other particle instead of maxAge downwards (wtf mojang)
  * </pre>
  */
@@ -43,7 +42,7 @@ public abstract class BubblePop extends SpriteBillboardParticle {
     /*
     // Original @Inject method to the tick function
     @Inject(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/particle/WaterBubbleParticle;markDead()V", shift = At.Shift.AFTER))
-    protected void injectPopParticle(CallbackInfo info) {
+    protected void makeBubblesPop$injectPopParticle(CallbackInfo info) {
         this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
         this.world.playSound(this.x, this.y, this.z, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.AMBIENT, 0.1f, 1f, false);
     }
@@ -75,7 +74,7 @@ public abstract class BubblePop extends SpriteBillboardParticle {
             // Upward motion
             // Scale dependant motion?
             // => http://seas.ucla.edu/stenstro/Bubble.pdf - see you in v1.0.0
-            this.velocityY += 0.01F;
+            this.velocityY += 0.01D;
             this.move(this.velocityX, this.velocityY, this.velocityZ);
 
             // Detect stuck bubbles

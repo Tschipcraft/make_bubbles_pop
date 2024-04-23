@@ -20,12 +20,6 @@ public class MakeBubblesPop {
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public static boolean POP_PARTICLE_ENABLED = true;
-    public static boolean CHEST_BUBBLES_ENABLED = true;
-    public static boolean BARREL_BUBBLES_ENABLED = true;
-
-    public static boolean POPPED_BUBBLES_MAINTAIN_VELOCITY = true;
-
     public static final boolean MIDNIGHTLIB_INSTALLED = ModList.get().isLoaded("midnightlib");
 
 
@@ -42,7 +36,7 @@ public class MakeBubblesPop {
     private void setup(final FMLCommonSetupEvent event) {
         if (MIDNIGHTLIB_INSTALLED) {
             // Use MidnightLib features
-            LOGGER.info("Detected midnightlib!");
+            LOGGER.info("MidnightLib detected!");
             MakeBubblesPopConfig.init(MODID, MakeBubblesPopConfig.class);
             ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, () -> {
                 return new ConfigScreenHandler.ConfigScreenFactory((client, parent) -> {

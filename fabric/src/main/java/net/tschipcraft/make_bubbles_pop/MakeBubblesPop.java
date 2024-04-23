@@ -15,7 +15,7 @@ public class MakeBubblesPop implements ModInitializer {
 	public void onInitialize() {
 		if (MIDNIGHTLIB_INSTALLED) {
 			// Use MidnightLib features
-			LOGGER.info("Detected midnightlib!");
+			LOGGER.info("MidnightLib detected!");
 			MakeBubblesPopConfig.init(LOGGER.getName(), MakeBubblesPopConfig.class);
 		}
 		LOGGER.info("Make Bubbles Pop by Tschipcraft initialized!");
@@ -24,4 +24,5 @@ public class MakeBubblesPop implements ModInitializer {
 	public static double getConfigInitialVelocity(double original) {
 		return (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.POPPED_BUBBLES_MAINTAIN_VELOCITY) ? original : 0D;
 	}
+
 }

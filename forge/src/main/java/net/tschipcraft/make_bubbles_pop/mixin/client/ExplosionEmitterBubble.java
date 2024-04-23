@@ -5,7 +5,6 @@ import net.minecraft.client.particle.HugeExplosionSeedParticle;
 import net.minecraft.client.particle.NoRenderParticle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.tags.FluidTags;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPopConfig;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,7 +26,7 @@ public abstract class ExplosionEmitterBubble extends NoRenderParticle {
     protected void makeBubblesPop$injectBubbleParticle(CallbackInfo info) {
         if (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.EXPLOSION_BUBBLES_ENABLED) {
             // Add bubble particles to explosions
-            if (this.level.getFluidState(BlockPos.containing(this.x, this.y, this.z)).is(FluidTags.WATER)) {
+            if (this.level.isWaterAt(BlockPos.containing(this.x, this.y, this.z))) {
                 for (int i = 0; i < 2; i++) {
                     double dx = (this.random.nextDouble() - this.random.nextDouble());
                     double dy = (this.random.nextDouble() - this.random.nextDouble());

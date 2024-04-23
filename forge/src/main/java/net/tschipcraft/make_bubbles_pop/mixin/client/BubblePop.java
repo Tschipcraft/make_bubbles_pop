@@ -4,7 +4,6 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.BubbleParticle;
 import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.core.BlockPos;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,7 +23,6 @@ import java.util.function.Predicate;
  * <pre>
  * This mixin injects into the WaterBubbleParticle class to completely overhaul bubble behavior.
  * Notable changes for devs:
- *  - The tick() method is completely overwritten (no super calls)
  *  - Age now counts upwards like any other particle instead of maxAge downwards (wtf mojang)
  * </pre>
  */
@@ -45,7 +43,7 @@ public abstract class BubblePop extends TextureSheetParticle {
     /*
     // Original @Inject method to the tick function
     @Inject(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/particle/WaterBubbleParticle;remove()V", shift = At.Shift.AFTER))
-    protected void injectPopParticle(CallbackInfo info) {
+    protected void makeBubblesPop$injectPopParticle(CallbackInfo info) {
         this.level.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.xd, this.yd, this.zd);
         this.level.playLocalSound(this.x, this.y, this.z, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundSource.AMBIENT, 0.1f, 1f, false);
     }
@@ -68,7 +66,7 @@ public abstract class BubblePop extends TextureSheetParticle {
         this.yo = this.y;
         this.zo = this.z;
 
-        if (this.age++ >= this.lifetime || !this.level.getFluidState(BlockPos.containing(this.x, this.y + 0.1, this.z)).is(FluidTags.WATER) || !this.level.getFluidState(BlockPos.containing(this.x, this.y, this.z)).is(FluidTags.WATER)) {
+        if (this.age++ >= this.lifetime || !this.level.isWaterAt(BlockPos.containing(this.x, this.y + 0.1, this.z)) || !this.level.isWaterAt(BlockPos.containing(this.x, this.y, this.z))) {
             // Outside water/lifetime reached -> pop with sound
             this.remove();
             BubbleUtil.popBubble(level, this.x, this.y, this.z, this.xd, this.yd, this.zd);
@@ -77,7 +75,7 @@ public abstract class BubblePop extends TextureSheetParticle {
             // Upward motion
             // Scale dependant motion?
             // => http://seas.ucla.edu/stenstro/Bubble.pdf - see you in v1.0.0
-            this.yd += 0.01F;
+            this.yd += 0.01D;
             this.move(this.xd, this.yd, this.zd);
 
             // Detect stuck bubbles
@@ -146,13 +144,13 @@ public abstract class BubblePop extends TextureSheetParticle {
                 }
 
                 // Search way around blocks
-                if (!this.level.getFluidState(BlockPos.containing(this.x, this.y + 0.8D, this.z)).is(FluidTags.WATER)) {
+                if (!this.level.isWaterAt(BlockPos.containing(this.x, this.y + 0.8D, this.z)) && !this.level.isEmptyBlock(BlockPos.containing(this.x, this.y + 0.8D, this.z))) {
                     // Direct way upwards blocked -> search up different way to water surface
 
-                    boolean escapePosX = this.level.getFluidState(BlockPos.containing(this.x + 1D, this.y + 0.8D, this.z)).is(FluidTags.WATER) && this.level.getFluidState(BlockPos.containing(this.x + 1D, this.y, this.z)).is(FluidTags.WATER);
-                    boolean escapeNegX = this.level.getFluidState(BlockPos.containing(this.x - 1D, this.y + 0.8D, this.z)).is(FluidTags.WATER) && this.level.getFluidState(BlockPos.containing(this.x - 1D, this.y, this.z)).is(FluidTags.WATER);
-                    boolean escapePosZ = this.level.getFluidState(BlockPos.containing(this.x, this.y + 0.8D, this.z + 1)).is(FluidTags.WATER) && this.level.getFluidState(BlockPos.containing(this.x, this.y, this.z + 1D)).is(FluidTags.WATER);
-                    boolean escapeNegZ = this.level.getFluidState(BlockPos.containing(this.x, this.y + 0.8D, this.z - 1)).is(FluidTags.WATER) && this.level.getFluidState(BlockPos.containing(this.x, this.y, this.z - 1D)).is(FluidTags.WATER);
+                    boolean escapePosX = this.level.isWaterAt(BlockPos.containing(this.x + 1D, this.y + 0.8D, this.z)) && this.level.isWaterAt(BlockPos.containing(this.x + 1D, this.y, this.z));
+                    boolean escapeNegX = this.level.isWaterAt(BlockPos.containing(this.x - 1D, this.y + 0.8D, this.z)) && this.level.isWaterAt(BlockPos.containing(this.x - 1D, this.y, this.z));
+                    boolean escapePosZ = this.level.isWaterAt(BlockPos.containing(this.x, this.y + 0.8D, this.z + 1)) && this.level.isWaterAt(BlockPos.containing(this.x, this.y, this.z + 1D));
+                    boolean escapeNegZ = this.level.isWaterAt(BlockPos.containing(this.x, this.y + 0.8D, this.z - 1)) && this.level.isWaterAt(BlockPos.containing(this.x, this.y, this.z - 1D));
 
                     if (!(!escapePosX && !escapeNegX && !escapePosZ && !escapeNegZ)) {
                         for (int i = 0; i <= 5; i++) {

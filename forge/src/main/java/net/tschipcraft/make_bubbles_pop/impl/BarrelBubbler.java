@@ -36,7 +36,7 @@ public class BarrelBubbler {
                     if (facing == Direction.NORTH) {
                         xOffset = 0.5F;
                         yOffset = 0.5F;
-                        zOffset = -.01F;
+                        zOffset = -0.01F;
                         xOffsetRand = (random.nextFloat() - random.nextFloat()) * 0.3F;
                         yOffsetRand = (random.nextFloat() - random.nextFloat()) * 0.3F;
                         zVelocityRand = -random.nextFloat();
@@ -55,7 +55,7 @@ public class BarrelBubbler {
                         zOffsetRand = (random.nextFloat() - random.nextFloat()) * 0.3F;
                         xVelocityRand = random.nextFloat();
                     } else if (facing == Direction.WEST) {
-                        xOffset = -.01F;
+                        xOffset = -0.01F;
                         yOffset = 0.5F;
                         zOffset = 0.5F;
                         yOffsetRand = (random.nextFloat() - random.nextFloat()) * 0.3F;
@@ -66,15 +66,15 @@ public class BarrelBubbler {
                         yOffset = 1.01F;
                         zOffset = 0.5F;
                         xOffsetRand = (random.nextFloat() - random.nextFloat()) * 0.3F;
-                        yOffsetRand = (random.nextFloat() * 0.25f);
+                        yOffsetRand = (random.nextFloat() * 0.25F);
                         zOffsetRand = (random.nextFloat() - random.nextFloat()) * 0.3F;
                     }
 
-                    world.addParticle(ParticleTypes.BUBBLE, pos.getX() + xOffset + xOffsetRand, pos.getY() + yOffset + yOffsetRand, pos.getZ() + zOffset + zOffsetRand, xVelocityRand, 0.05f + random.nextFloat() * 0.05F, zVelocityRand);
+                    world.addParticle(ParticleTypes.BUBBLE, pos.getX() + xOffset + xOffsetRand, pos.getY() + yOffset + yOffsetRand, pos.getZ() + zOffset + zOffsetRand, xVelocityRand, 0.05F + random.nextFloat() * 0.05F, zVelocityRand);
                 }
                 // Play sound
                 if (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.CONTAINER_SOUND_ENABLED) {
-                    world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundSource.AMBIENT, 0.3F, 1.4F, false);
+                    world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundSource.AMBIENT, 0.3F + (random.nextFloat() * 0.1F), 1.3F + (random.nextFloat() * 0.3F), false);
                 }
             }
         }

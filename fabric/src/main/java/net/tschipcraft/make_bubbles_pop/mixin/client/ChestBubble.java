@@ -27,7 +27,7 @@ import java.util.List;
 public abstract class ChestBubble {
 
     @Unique
-    private static final List<BlockPos> openedChests = new ArrayList<>();
+    private static final List<BlockPos> OPENED_CHESTS = new ArrayList<>();
 
     @Inject(method = "clientTick", at = @At("TAIL"))
     private static void makeBubblesPop$clientTick(World world, BlockPos pos, BlockState state, ChestBlockEntity blockEntity, CallbackInfo ci) {
@@ -46,9 +46,9 @@ public abstract class ChestBubble {
                 float openFactor = propertySource.apply(ChestBlock.getAnimationProgressRetriever(blockEntity)).get(1F);
 
                 if (openFactor > 0) {
-                    if(!openedChests.contains(pos)) {
+                    if(!OPENED_CHESTS.contains(pos)) {
                         // Chest just opened underwater
-                        openedChests.add(pos);
+                        OPENED_CHESTS.add(pos);
                         if (doubleChest) {
                             if (chestType == ChestType.LEFT) {
                                 // If the block is a double chest, only the left side plays particles and sound
@@ -82,22 +82,21 @@ public abstract class ChestBubble {
 
                                     world.addParticle(ParticleTypes.BUBBLE, pos.getX() + xOffset + xOffsetRand, pos.getY() + 0.7F - (world.random.nextFloat() / 2F), pos.getZ() + zOffset + zOffsetRand, 0F, 0.05F + world.random.nextFloat() * 0.05F, 0F);
                                 }
-                                world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundCategory.AMBIENT, 0.5F, 1.4F, false);
                             }
                         } else {
                             // Single chest
                             for (int i = 0; i < 7 + world.random.nextInt(10); i++) {
                                 world.addParticle(ParticleTypes.BUBBLE, pos.getX() + 0.5F + (world.random.nextFloat() - world.random.nextFloat()) * 0.3F, pos.getY() + 0.7F - (world.random.nextFloat() / 2F), pos.getZ() + 0.5F + (world.random.nextFloat() - world.random.nextFloat()) * 0.3F, 0F, 0.05F + world.random.nextFloat() * 0.05F, 0F);
                             }
-                            // Play sound
-                            if (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.CONTAINER_SOUND_ENABLED) {
-                                world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundCategory.AMBIENT, 0.3F, 1.4F, false);
-                            }
+                        }
+                        // Play sound
+                        if (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.CONTAINER_SOUND_ENABLED) {
+                            world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundCategory.AMBIENT, 0.3F + (world.random.nextFloat() * 0.1F), 1.3F + (world.random.nextFloat() * 0.3F), false);
                         }
                     }
                 } else {
                     // Chest closed
-                    openedChests.remove(pos);
+                    OPENED_CHESTS.remove(pos);
                 }
             }
         }
