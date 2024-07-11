@@ -17,7 +17,7 @@ This client-side mod makes bubble particles pop and completely overhauls their b
 It also adds bubble particles to opening chests, opening barrels and explosions underwater.
 '''
 authors="Tschipcraft"
-displayURL="https://github.com/Tschipcraft/make_bubbles_pop"
+displayURL="https://github.com/Tschipcraft/make_bubbles_pop/tree/forge-1.21"
 issueTrackerURL="https://github.com/Tschipcraft/make_bubbles_pop/issues"
 updateJSONURL="https://api.modrinth.com/updates/gPCdW0Wr/forge_updates.json"
 displayTest="IGNORE_ALL_VERSION"
