@@ -5,6 +5,7 @@ license="Custom"
 logoFile= "icon.png"
 logoBlur=false
 showAsResourcePack=false
+clientSideOnly=true
 
 [[mods]]
 modId="make_bubbles_pop"
@@ -21,10 +22,17 @@ issueTrackerURL="https://github.com/Tschipcraft/make_bubbles_pop/issues"
 updateJSONURL="https://api.modrinth.com/updates/gPCdW0Wr/forge_updates.json"
 displayTest="IGNORE_ALL_VERSION"
 
+[[dependencies.make_bubbles_pop]] #optional
+    modId="forge"
+    mandatory=true
+    versionRange="[50,)" #mandatory
+    ordering="NONE"
+    side="BOTH"
+
 [[dependencies.make_bubbles_pop]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.19.4,)"
+    versionRange="[1.20.6,)"
     ordering="NONE"
     side="CLIENT"
 

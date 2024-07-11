@@ -9,6 +9,13 @@
   <a href="https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod/releases/latest"><img alt="GitHub Downloads" src="https://img.shields.io/github/downloads/Tschipcraft/fabric_make_bubbles_pop_mod/total?logo=github&colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
 </p>
 
+<picture><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/light-theme/info.svg"><img alt="Info" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/info.svg"></picture><br>
+This branch hosts the updated forge version for 1.20.6 and 1.21 until I finally have enough and switch to using Architectury to keep my sanity
+- Fabric version works in Minecraft 1.19.4-1.21
+- Forge version works in Minecraft 1.20.6-1.21
+
+[Got to the master branch for the latest version](https://github.com/Tschipcraft/make_bubbles_pop/tree/master)
+
 ## Features
 
 This client-side mod makes bubble particles pop
@@ -29,7 +36,7 @@ This mod is also available on Modrinth and CurseForge!
 <picture>
   <source height="72px" media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Tschipcraft/badges/main/assets/modrinth-badge-dark.svg">
   <source height="72px" media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Tschipcraft/badges/main/assets/modrinth-badge-light.svg">
-  <img height="72px" alt="Download on Modrinth" src="https://raw.githubusercontent.com/modrinth/art/main/Branding/Badge/badge-dark.svg">
+  <img height="72px" alt="Download on Modrinth" src="https://raw.githubusercontent.com/Tschipcraft/badges/main/assets/modrinth-badge-dark.svg">
 </picture>
 </a>
 <a href="https://www.curseforge.com/minecraft/mc-mods/make-bubbles-pop">
