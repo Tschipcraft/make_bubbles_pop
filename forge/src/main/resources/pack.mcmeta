@@ -1,8 +1,8 @@
 {
   "pack": {
+    "pack_format": 10,
     "description": {
-      "text": "Make Bubbles Pop resources"
-    },
-    "pack_format": 12
+      "text": "Resources for Make Bubbles Pop by Tschipcraft"
+    }
   }
 }

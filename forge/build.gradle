@@ -7,7 +7,7 @@ buildscript {
     }
     dependencies {
         classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '6.+', changing: true
         classpath 'org.parchmentmc:librarian:1.+'
     }
 }
@@ -16,6 +16,7 @@ plugins {
     id 'eclipse'
     id 'maven-publish'
 }
+apply plugin: 'java'
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
@@ -150,6 +151,10 @@ repositories {
     // flatDir {
     //     dir 'libs'
     // }
+    maven {
+        name "modrinth"
+        url "https://api.modrinth.com/maven"
+    }
 }
 
 dependencies {
@@ -165,6 +170,9 @@ dependencies {
     // implementation fg.deobf("blank:coolmod-${mc_version}:${coolmod_version}")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
+
+    // MidnightLib for config
+    compileOnly ("maven.modrinth:midnightlib:${midnightlib_version}-forge")
 
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html

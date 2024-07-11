@@ -7,12 +7,14 @@
   "mixins": [
   ],
   "client": [
-    "BubblePop",
-    "BubbleColumnPop",
-    "CurrentDownPop",
-    "ExplosionEmitterBubble",
-    "ChestBubble",
-    "BarrelOnUse"
+    "client.BubblePop",
+    "client.BubbleColumnPop",
+    "client.CurrentDownPop",
+    "client.PopBubblePop",
+    "client.ChestBubble",
+    "client.BarrelBlockEntityMixin",
+    "client.BarrelBubble",
+    "client.ExplosionEmitterBubble"
   ],
   "injectors": {
     "defaultRequire": 1
