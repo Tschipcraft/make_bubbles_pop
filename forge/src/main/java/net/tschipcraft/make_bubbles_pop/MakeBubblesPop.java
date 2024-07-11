@@ -16,9 +16,11 @@ public class MakeBubblesPop
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
+    // MidnightLib sadly doesn't exist for this version
+    public static final boolean MIDNIGHTLIB_INSTALLED = false;
 
-    public MakeBubblesPop()
-    {
+
+    public MakeBubblesPop() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         // Register the setup method for modloading

@@ -1,34 +1,40 @@
-package net.tschipcraft.make_bubbles_pop.mixin;
+package net.tschipcraft.make_bubbles_pop.mixin.client;
 
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.client.particle.BubbleColumnUpParticle;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
+import net.tschipcraft.make_bubbles_pop.impl.BubbleUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = BubbleColumnUpParticle.class)
+@Mixin(BubbleColumnUpParticle.class)
 public abstract class BubbleColumnPop extends TextureSheetParticle {
 
     protected BubbleColumnPop(ClientLevel clientWorld, double d, double e, double f) {
         super(clientWorld, d, e, f);
     }
 
-    @Inject(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/particle/BubbleColumnUpParticle;remove()V", shift = At.Shift.AFTER))
-    protected void injectPopParticle(CallbackInfo info) {
-        this.level.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.xd, this.yd, this.zd);
-        this.level.playLocalSound(this.x, this.y, this.z, SoundEvents.BUBBLE_COLUMN_BUBBLE_POP, SoundSource.AMBIENT, 0.1f, 1f, false);
+    // Tint bubble based on water color
+    @Inject(method = "<init>", at = @At(value = "TAIL"))
+    void makeBubblesPop$init(ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, CallbackInfo ci) {
+        BubbleUtil.tintBubble(this.level, this.x, this.y, this.z, this);
     }
 
+    // Inject pop particle
+    @Inject(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/particle/BubbleColumnUpParticle;remove()V", shift = At.Shift.AFTER))
+    protected void makeBubblesPop$injectPopParticle(CallbackInfo info) {
+        BubbleUtil.popBubble(level, this.x, this.y, this.z, this.xd, this.yd, this.zd);
+    }
+
+    // Catch age removal
+    // This is needed since the tick() method of the super class handles removing the particle when it reaches its lifetime
     @Inject(method = "tick()V", at = @At(value = "HEAD"))
-    protected void injectPopParticleToSuper(CallbackInfo info) {
+    protected void makeBubblesPop$injectPopParticleToSuper(CallbackInfo info) {
         if ((this.age + 1) >= this.lifetime) {
             this.remove();
-            this.level.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.xd, this.yd, this.zd);
+            BubbleUtil.popBubble(level, this.x, this.y, this.z, this.xd, this.yd, this.zd);
         }
     }
 

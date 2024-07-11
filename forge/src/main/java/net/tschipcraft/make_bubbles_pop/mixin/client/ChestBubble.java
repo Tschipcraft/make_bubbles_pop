@@ -1,11 +1,10 @@
-package net.tschipcraft.make_bubbles_pop.mixin;
+package net.tschipcraft.make_bubbles_pop.mixin.client;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractChestBlock;
 import net.minecraft.world.level.block.Block;
@@ -14,6 +13,8 @@ import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.ChestType;
+import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
+import net.tschipcraft.make_bubbles_pop.MakeBubblesPopConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,16 +31,14 @@ import java.util.List;
 public abstract class ChestBubble {
 
     @Unique
-    private static final List<BlockPos> openedChests = new ArrayList<>();
+    private static final List<BlockPos> OPENED_CHESTS = new ArrayList<>();
 
     @Inject(method = "lidAnimateTick", at = @At("TAIL"))
-    private static void clientTick(Level world, BlockPos pos, BlockState state, ChestBlockEntity blockEntity, CallbackInfo ci) {
-        boolean bl = world != null;
-        if (bl && world.isClientSide && world.getFluidState(pos).is(FluidTags.WATER)) {
-            BlockState blockState = blockEntity.getBlockState();
-            ChestType chestType = blockState.getValues().containsKey(BlockStateProperties.CHEST_TYPE) ? blockState.getValue(BlockStateProperties.CHEST_TYPE) : ChestType.SINGLE;
-            Direction facing = blockState.getValues().containsKey(ChestBlock.FACING) ? blockState.getValue(ChestBlock.FACING) : Direction.NORTH;
-            Block block = blockState.getBlock();
+    private static void makeBubblesPop$clientTick(Level world, BlockPos pos, BlockState state, ChestBlockEntity blockEntity, CallbackInfo ci) {
+        if (world != null && world.isClientSide && (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.CHEST_BUBBLES_ENABLED) && world.isWaterAt(pos)) {
+            ChestType chestType = state.getOptionalValue(BlockStateProperties.CHEST_TYPE).orElse(ChestType.SINGLE);
+            Direction facing = state.getOptionalValue(ChestBlock.FACING).orElse(Direction.NORTH);
+            Block block = state.getBlock();
 
             boolean doubleChest = chestType != ChestType.SINGLE;
 
@@ -48,9 +47,9 @@ public abstract class ChestBubble {
                 float openFactor = blockEntity.getOpenNess(1);
 
                 if (openFactor > 0) {
-                    if(!openedChests.contains(pos)) {
+                    if(!OPENED_CHESTS.contains(pos)) {
                         // Chest just opened underwater
-                        openedChests.add(pos);
+                        OPENED_CHESTS.add(pos);
                         if (doubleChest) {
                             if (chestType == ChestType.LEFT) {
                                 // If the block is a double chest, only the left side plays particles and sound
@@ -84,21 +83,24 @@ public abstract class ChestBubble {
 
                                     world.addParticle(ParticleTypes.BUBBLE, pos.getX() + xOffset + xOffsetRand, pos.getY() + .7F - (world.random.nextFloat() / 2.0), pos.getZ() + zOffset + zOffsetRand, 0F, .05f + world.random.nextFloat() * .05f, 0F);
                                 }
-                                world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundSource.AMBIENT, 0.5f, 1.4f, false);
                             }
                         } else {
                             // Single chest
                             for (int i = 0; i < 7 + world.random.nextInt(10); i++) {
                                 world.addParticle(ParticleTypes.BUBBLE, pos.getX() + .5f + (world.random.nextFloat() - world.random.nextFloat()) * .3f, pos.getY() + .7F - (world.random.nextFloat() / 2.0), pos.getZ() + .5f + (world.random.nextFloat() - world.random.nextFloat()) * .3f, 0F, .05f + world.random.nextFloat() * .05f, 0F);
                             }
-                            world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundSource.AMBIENT, 0.3f, 1.4f, false);
+                        }
+                        // Play sound
+                        if (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.CONTAINER_SOUND_ENABLED) {
+                            world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundSource.AMBIENT, 0.3F + (world.random.nextFloat() * 0.1F), 1.3F + (world.random.nextFloat() * 0.3F), false);
                         }
                     }
                 } else {
                     // Chest closed
-                    openedChests.remove(pos);
+                    OPENED_CHESTS.remove(pos);
                 }
             }
         }
     }
+
 }

@@ -1,11 +1,9 @@
-package net.tschipcraft.make_bubbles_pop.mixin;
+package net.tschipcraft.make_bubbles_pop.mixin.client;
 
 import net.minecraft.client.particle.BubbleColumnUpParticle;
 import net.minecraft.client.particle.SpriteBillboardParticle;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
+import net.tschipcraft.make_bubbles_pop.impl.BubbleUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -18,17 +16,25 @@ public abstract class BubbleColumnPop extends SpriteBillboardParticle {
         super(clientWorld, d, e, f);
     }
 
-    @Inject(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/particle/BubbleColumnUpParticle;markDead()V", shift = At.Shift.AFTER))
-    protected void injectPopParticle(CallbackInfo info) {
-        this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
-        this.world.playSound(this.x, this.y, this.z, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.AMBIENT, 0.1f, 1f, true);
+    // Tint bubble based on water color
+    @Inject(method = "<init>", at = @At(value = "TAIL"))
+    void makeBubblesPop$init(ClientWorld clientWorld, double d, double e, double f, double g, double h, double i, CallbackInfo ci) {
+        BubbleUtil.tintBubble(world, this.x, this.y, this.z, this);
     }
 
+    // Inject pop particle
+    @Inject(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/particle/BubbleColumnUpParticle;markDead()V", shift = At.Shift.AFTER))
+    protected void makeBubblesPop$injectPopParticle(CallbackInfo info) {
+        BubbleUtil.popBubble(world, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
+    }
+
+    // Catch age removal
+    // This is needed since the tick() method of the super class handles removing the particle when it reaches its lifetime
     @Inject(method = "tick()V", at = @At(value = "HEAD"))
-    protected void injectPopParticleToSuper(CallbackInfo info) {
+    protected void makeBubblesPop$injectPopParticleToSuper(CallbackInfo info) {
         if ((this.age + 1) >= this.maxAge) {
             this.markDead();
-            this.world.addParticle(ParticleTypes.BUBBLE_POP, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
+            BubbleUtil.popBubble(world, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
         }
     }
 

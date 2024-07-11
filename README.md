@@ -1,18 +1,18 @@
 <h1 align="center">
-  <a><img src="demo/icon_scaled.png" width="95" height="95" style="image-rendering: pixelated;"></a><br/>
+  <a><img alt="Icon" src="demo/icon_scaled.png" width="95" height="95" style="image-rendering: pixelated;"></a><br/>
   Make Bubbles Pop Mod
 </h1>
 <p align="center">
-  <a href="https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod/stargazers"><img src="https://img.shields.io/github/stars/Tschipcraft/fabric_make_bubbles_pop_mod?colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
-  <a href="https://www.curseforge.com/minecraft/mc-mods/make-bubbles-pop"><img src="https://cf.way2muchnoise.eu/full_605235_downloads.svg?badge_style=for_the_badge"></a>
-  <a href="https://modrinth.com/mod/make_bubbles_pop"><img src="https://img.shields.io/modrinth/dt/make_bubbles_pop?label=Modrinth&colorA=2d2d2d&style=for-the-badge&logo=modrinth"></a>
-  <a href="https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod/releases/latest"><img src="https://img.shields.io/github/downloads/Tschipcraft/fabric_make_bubbles_pop_mod/total?logo=github&colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
+  <a href="https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod/stargazers"><img alt="GitHub Stars" src="https://img.shields.io/github/stars/Tschipcraft/fabric_make_bubbles_pop_mod?colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
+  <a href="https://www.curseforge.com/minecraft/mc-mods/make-bubbles-pop"><img alt="CurseForge Downloads" src="https://img.shields.io/curseforge/dt/605235?logo=curseforge&label=CurseForge&colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
+  <a href="https://modrinth.com/mod/make_bubbles_pop"><img alt="Modrinth Downloads" src="https://img.shields.io/modrinth/dt/make_bubbles_pop?label=Modrinth&colorA=363a4f&colorB=b7bdf8&style=for-the-badge&logo=modrinth"></a>
+  <a href="https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod/releases/latest"><img alt="GitHub Downloads" src="https://img.shields.io/github/downloads/Tschipcraft/fabric_make_bubbles_pop_mod/total?logo=github&colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
 </p>
 
 <picture><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/light-theme/info.svg"><img alt="Info" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/info.svg"></picture><br>
-This branch hosts the old fabric and the backported forge version.
-- Fabric version works in Minecraft 1.18–1.19.3
-- Forge version works in Minecraft 1.19–1.19.3
+This branch hosts the backported versions for Minecraft 1.18x.
+- Fabric version works in Minecraft 1.18–1.18.2
+- Forge version works in Minecraft 1.18.2
 
 [Got to the master branch for the latest version](https://github.com/Tschipcraft/make_bubbles_pop/tree/master)
 
@@ -34,13 +34,17 @@ This mod is also available on Modrinth and CurseForge!
 
 <a href="https://modrinth.com/mod/make_bubbles_pop">
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/modrinth/art/main/Branding/Badge/badge-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/modrinth/art/main/Branding/Badge/badge-light.svg">
+  <source height="72px" media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Tschipcraft/badges/main/assets/modrinth-badge-dark.svg">
+  <source height="72px" media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Tschipcraft/badges/main/assets/modrinth-badge-light.svg">
   <img alt="Download on Modrinth" src="https://raw.githubusercontent.com/modrinth/art/main/Branding/Badge/badge-dark.svg">
 </picture>
 </a>
 <a href="https://www.curseforge.com/minecraft/mc-mods/make-bubbles-pop">
-<img alt="Download on CurseForge" src="https://i.imgur.com/zcIcoGb.png">
+<picture>
+  <source height="72px" media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Tschipcraft/badges/main/assets/curseforge-badge-dark.svg">
+  <source height="72px" media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Tschipcraft/badges/main/assets/curseforge-badge-light.svg">
+  <img height="72px" alt="Download on CurseForge" src="https://raw.githubusercontent.com/Tschipcraft/badges/main/assets/curseforge-badge-dark.svg">
+</picture>
 </a>
 
 ## Demo Videos
