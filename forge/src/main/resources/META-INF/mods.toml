@@ -24,7 +24,7 @@ displayTest="IGNORE_ALL_VERSION"
 [[dependencies.make_bubbles_pop]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.19.4,)"
+    versionRange="[1.19.4,1.20.4]"
     ordering="NONE"
     side="CLIENT"
 
