@@ -4,15 +4,15 @@
   "package": "net.tschipcraft.make_bubbles_pop.mixin",
   "compatibilityLevel": "JAVA_17",
   "refmap": "make_bubbles_pop.refmap.json",
-  "mixins": [
-  ],
   "client": [
-    "BubblePop",
-    "BubbleColumnPop",
-    "CurrentDownPop",
-    "ExplosionEmitterBubble",
-    "ChestBubble",
-    "BarrelOnUse"
+    "client.BubblePop",
+    "client.BubbleColumnPop",
+    "client.CurrentDownPop",
+    "client.PopBubblePop",
+    "client.ChestBubble",
+    "client.BarrelBlockEntityMixin",
+    "client.BarrelBubble",
+    "client.ExplosionEmitterBubble"
   ],
   "injectors": {
     "defaultRequire": 1

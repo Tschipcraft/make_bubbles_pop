@@ -1,19 +1,5 @@
 {
   "schemaVersion": 1,
-  "id": "make_bubbles_pop",
-  "version": "${version}-fabric",
-  "name": "Make Bubbles Pop Mod",
-  "description": "This client-side mod makes bubble particles pop and lets them realistically rise to the water surface.\nIt also adds bubble particles to opening chests, opening barrels and explosions underwater.",
-  "authors": [
-    "Tschipcraft"
-  ],
-  "contact": {
-    "homepage": "https://tschipcraft.ddns.net/en/make_bubbles_pop.html",
-    "sources": "https://github.com/Tschipcraft/make_bubbles_pop",
-    "issues": "https://github.com/Tschipcraft/make_bubbles_pop/issues"
-  },
-  "license": "Custom",
-  "icon": "icon.png",
   "environment": "client",
   "entrypoints": {
     "main": [
@@ -29,6 +15,24 @@
     "minecraft": ">=1.19.4",
     "java": ">=17"
   },
+  "id": "make_bubbles_pop",
+  "version": "${version}-fabric",
+  "name": "Make Bubbles Pop",
+  "description": "This client-side mod makes bubble particles pop and lets them realistically rise to the water surface.\nIt also adds bubble particles to opening chests, opening barrels and explosions underwater.",
+  "license": "Custom",
+  "icon": "icon.png",
+  "authors": [
+    "Tschipcraft"
+  ],
+  "contact": {
+    "homepage": "https://tschipcraft.ddns.net/make_bubbles_pop.html",
+    "sources": "https://github.com/Tschipcraft/make_bubbles_pop",
+    "issues": "https://github.com/Tschipcraft/make_bubbles_pop/issues"
+  },
+  "recommends": {
+    "modmenu": "*",
+    "midnightlib": "*"
+  },
   "custom": {
     "modmenu": {
       "links": {
@@ -40,6 +44,9 @@
     },
     "catalogue": {
       "banner": "icon.png"
+    },
+    "ducky_updater": {
+      "modrinthId": "gPCdW0Wr"
     }
   }
 }
