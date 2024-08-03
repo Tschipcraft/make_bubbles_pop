@@ -1,0 +1,30 @@
+{
+  "modmenu.summaryTranslation.make_bubbles_pop": "버블 입자가 터지게 하고 물 표면으로 올라오게 합니다.",
+  "make_bubbles_pop.midnightconfig.title": "버블 팝 설정",
+  "make_bubbles_pop.midnightconfig.empty": "",
+  "make_bubbles_pop.midnightconfig.additional_features": "추가 기능",
+
+  "make_bubbles_pop.midnightconfig.POP_PARTICLE_ENABLED": "버블 팝 입자 활성화",
+  "make_bubbles_pop.midnightconfig.POP_PARTICLE_ENABLED.tooltip": "기본값: §a예§f \n§dℹ 주의:§f Particle Tweaks가 설치된 경우, 이 설정 또는 Particle Tweaks의 구현을 비활성화해야 합니다.",
+  "make_bubbles_pop.midnightconfig.BUBBLE_POP_VOLUME": " └ 버블 팝 소리 볼륨",
+  "make_bubbles_pop.midnightconfig.BUBBLE_POP_VOLUME.tooltip": "기본값: §b10%§f",
+  "make_bubbles_pop.midnightconfig.POPPED_BUBBLES_MAINTAIN_VELOCITY": " └ 버블 팝 입자의 속도 유지",
+  "make_bubbles_pop.midnightconfig.POPPED_BUBBLES_MAINTAIN_VELOCITY.tooltip": "기본값: §c아니오§f",
+
+  "make_bubbles_pop.midnightconfig.BUBBLE_PHYSICS_ENABLED": "버블 물리학 활성화",
+  "make_bubbles_pop.midnightconfig.BUBBLE_PHYSICS_ENABLED.tooltip": "블록이나 엔티티와 충돌할 때 개선된 버블 물리학을 활성화합니다. \n기본값: §a예§f \n§dℹ 주의:§f 이 설정은 소울 샌드나 마그마 블록에서 생성된 버블에는 현재 작동하지 않습니다.",
+  "make_bubbles_pop.midnightconfig.BUBBLE_LIFETIME_MULTIPLIER": " └ 평균 버블 입자 수명",
+  "make_bubbles_pop.midnightconfig.BUBBLE_LIFETIME_MULTIPLIER.tooltip": "버블이 물속에서 터지는데 걸리는 시간. \n기본값은 버블이 물 표면에 도달할 수 있도록 바닐라보다 길게 설정되어 있습니다. \n기본값: §b32.0§f §7(바닐라: 8.0)§f",
+  "make_bubbles_pop.midnightconfig.BIOME_COLORS_ENABLED": "생물군계에 따른 버블 색상 활성화",
+  "make_bubbles_pop.midnightconfig.BIOME_COLORS_ENABLED.tooltip": "물 색상에 따라 모든 버블 종류에 색조를 입힙니다. \n기본값: §a예§f",
+  "make_bubbles_pop.midnightconfig.BIOME_COLOR_INTENSITY": " └ 버블 생물군계 색상 강도",
+  "make_bubbles_pop.midnightconfig.BIOME_COLOR_INTENSITY.tooltip": "기본값: §b65%§f",
+  "make_bubbles_pop.midnightconfig.CHEST_BUBBLES_ENABLED": "상자 버블 활성화",
+  "make_bubbles_pop.midnightconfig.CHEST_BUBBLES_ENABLED.tooltip": "기본값: §a예§f \n§dℹ 주의:§f Effective가 설치된 경우, 이 설정 또는 Effective의 구현을 비활성화해야 합니다.",
+  "make_bubbles_pop.midnightconfig.BARREL_BUBBLES_ENABLED": "통 버블 활성화",
+  "make_bubbles_pop.midnightconfig.BARREL_BUBBLES_ENABLED.tooltip": "기본값: §a예§f",
+  "make_bubbles_pop.midnightconfig.CONTAINER_SOUND_ENABLED": " └ 물속에서 상자나 통을 열 때 소리 활성화",
+  "make_bubbles_pop.midnightconfig.CONTAINER_SOUND_ENABLED.tooltip": "기본값: §a예§f",
+  "make_bubbles_pop.midnightconfig.EXPLOSION_BUBBLES_ENABLED": "폭발 버블 활성화",
+  "make_bubbles_pop.midnightconfig.EXPLOSION_BUBBLES_ENABLED.tooltip": "기본값: §a예§f \n§dℹ 주의:§f Explosive Enhancement가 설치된 경우, 이 설정 또는 Explosive Enhancement의 구현을 비활성화해야 합니다."
+}
