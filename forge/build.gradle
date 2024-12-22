@@ -40,7 +40,7 @@ minecraft {
     //
     // Use non-default mappings at your own risk. They may not always work.
     // Simply re-run your setup task after changing the mappings to update your workspace.
-    mappings channel: 'official', version: '1.20.6'
+    mappings channel: 'official', version: '1.21.3'
 
     // Tell FG to not automtically create the reobf tasks, as we now use Official mappings at runtime, If you don't use them at dev time then you'll have to fix your reobf yourself.
     reobf = false
@@ -166,8 +166,8 @@ dependencies {
     // Mixins
     annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
 
-    // MidnightLib for config
-    compileOnly ("maven.modrinth:midnightlib:${midnightlib_version}-forge")
+    // MidnightLib for config (MidnightLib does not exist for Forge 1.20.2+)
+    //compileOnly ("maven.modrinth:midnightlib:${midnightlib_version}-forge")
 
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html

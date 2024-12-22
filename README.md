@@ -10,19 +10,17 @@
 </p>
 
 <picture><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/light-theme/info.svg"><img alt="Info" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/info.svg"></picture><br>
-This branch hosts the updated forge version for 1.20.6 and 1.21 until I finally have enough and switch to using Architectury to keep my sanity
-- Fabric version works in Minecraft 1.19.4-1.21
-- Forge version works in Minecraft 1.20.6-1.21
+This branch hosts the 1.21.2-1.21.4 version of the mod.
+- Fabric version works in Minecraft 1.21.2-1.21.4
+- Forge version works in Minecraft 1.21.2-1.21.4
 
-[Got to the master branch for the latest version](https://github.com/Tschipcraft/make_bubbles_pop/tree/master)
+[Go to the master branch](https://github.com/Tschipcraft/make_bubbles_pop/tree/master)
 
 ## Features
 
 This client-side mod makes bubble particles pop
 and completely overhauls their behavior to make them rise realistically to the water surface.
 It also adds bubble particles to opening chests, opening barrels and explosions underwater.
-
-Should be compatible with every other mod.
 
 Fixes [MC-132067](https://bugs.mojang.com/browse/MC-132067).
 
