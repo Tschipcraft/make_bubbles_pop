@@ -12,8 +12,8 @@
   "depends": {
     "fabricloader": ">=0.14.17",
     "fabric": "*",
-    "minecraft": ">=1.19.4",
-    "java": ">=17"
+    "minecraft": ">=1.21.2",
+    "java": ">=21"
   },
   "id": "make_bubbles_pop",
   "version": "${version}-fabric",
@@ -26,7 +26,7 @@
   ],
   "contact": {
     "homepage": "https://tschipcraft.ddns.net/make_bubbles_pop.html",
-    "sources": "https://github.com/Tschipcraft/make_bubbles_pop",
+    "sources": "https://github.com/Tschipcraft/make_bubbles_pop/tree/1.21.2-1.21.4",
     "issues": "https://github.com/Tschipcraft/make_bubbles_pop/issues"
   },
   "recommends": {

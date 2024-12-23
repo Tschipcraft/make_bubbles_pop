@@ -28,6 +28,8 @@ Fixes [MC-132067](https://bugs.mojang.com/browse/MC-132067).
 
 Download the latest release from [here](https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod/releases/latest) and put the .jar file into the `mods` folder in your Minecraft directory.
 
+To configure Make Bubbles Pop, install [MidnightLib](https://modrinth.com/mod/midnightlib) for Fabric or [Configured](https://www.curseforge.com/minecraft/mc-mods/configured) for Forge alongside it.
+
 This mod is also available on Modrinth and CurseForge!
 
 <a href="https://modrinth.com/mod/make_bubbles_pop">

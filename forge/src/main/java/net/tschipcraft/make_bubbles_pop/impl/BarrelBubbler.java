@@ -9,7 +9,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPopConfig;
 
 @OnlyIn(Dist.CLIENT)
@@ -20,7 +19,7 @@ public class BarrelBubbler {
     }
 
     public static void spawnBubbles(Level world, BlockPos pos, Direction facing, RandomSource random) {
-        if (world != null && world.isClientSide && (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.BARREL_BUBBLES_ENABLED)) {
+        if (world != null && world.isClientSide && (MakeBubblesPopConfig.BARREL_BUBBLES_ENABLED)) {
             if (facing != Direction.DOWN) {
                 for (int i = 0; i < 6 + random.nextInt(12); i++) {
                     float xOffset = 0F;
@@ -73,7 +72,7 @@ public class BarrelBubbler {
                     world.addParticle(ParticleTypes.BUBBLE, pos.getX() + xOffset + xOffsetRand, pos.getY() + yOffset + yOffsetRand, pos.getZ() + zOffset + zOffsetRand, xVelocityRand, 0.05F + random.nextFloat() * 0.05F, zVelocityRand);
                 }
                 // Play sound
-                if (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.CONTAINER_SOUND_ENABLED) {
+                if (MakeBubblesPopConfig.CONTAINER_SOUND_ENABLED) {
                     world.playLocalSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundSource.AMBIENT, 0.3F + (random.nextFloat() * 0.1F), 1.3F + (random.nextFloat() * 0.3F), false);
                 }
             }

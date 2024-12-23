@@ -5,7 +5,6 @@ import net.minecraft.client.particle.HugeExplosionSeedParticle;
 import net.minecraft.client.particle.NoRenderParticle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPopConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -24,7 +23,7 @@ public abstract class ExplosionEmitterBubble extends NoRenderParticle {
 
     @Inject(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/ClientLevel;addParticle(Lnet/minecraft/core/particles/ParticleOptions;DDDDDD)V", shift = At.Shift.BEFORE))
     protected void makeBubblesPop$injectBubbleParticle(CallbackInfo info) {
-        if (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.EXPLOSION_BUBBLES_ENABLED) {
+        if (MakeBubblesPopConfig.EXPLOSION_BUBBLES_ENABLED) {
             // Add bubble particles to explosions
             if (this.level.isWaterAt(BlockPos.containing(this.x, this.y, this.z))) {
                 for (int i = 0; i < 2; i++) {

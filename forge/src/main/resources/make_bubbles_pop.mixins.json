@@ -3,7 +3,6 @@
   "minVersion": "0.8",
   "package": "net.tschipcraft.make_bubbles_pop.mixin",
   "compatibilityLevel": "JAVA_21",
-  "refmap": "make_bubbles_pop.refmap.json",
   "client": [
     "client.BubblePop",
     "client.BubbleColumnPop",
@@ -15,6 +14,6 @@
     "client.ExplosionEmitterBubble"
   ],
   "injectors": {
-    "defaultRequire": 1
+    "defaultRequire": 0
   }
 }

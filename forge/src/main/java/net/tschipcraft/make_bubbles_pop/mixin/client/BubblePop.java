@@ -7,7 +7,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPopConfig;
 import net.tschipcraft.make_bubbles_pop.impl.BubbleUtil;
 import org.spongepowered.asm.mixin.Mixin;
@@ -52,7 +51,7 @@ public abstract class BubblePop extends TextureSheetParticle {
     @Inject(method = "<init>", at = @At(value = "TAIL"))
     void makeBubblesPop$init(ClientLevel clientlevel, double d, double e, double f, double g, double h, double i, CallbackInfo ci) {
         // Longer lifetime to enable bubbles to fully rise to the top (Could cause performance issues - you called it previous me)
-        this.lifetime = (int) ((MakeBubblesPop.MIDNIGHTLIB_INSTALLED ? MakeBubblesPopConfig.BUBBLE_LIFETIME_MULTIPLIER : 32.0D) / (this.random.nextDouble() * 0.7D + 0.1D));
+        this.lifetime = (int) ((MakeBubblesPopConfig.BUBBLE_LIFETIME_MULTIPLIER) / (this.random.nextDouble() * 0.7D + 0.1D));
         this.accelerationAngle = this.random.nextFloat() * 360F;
 
         // Tint bubble based on water color
@@ -106,7 +105,7 @@ public abstract class BubblePop extends TextureSheetParticle {
 
             // PHYSICS
 
-            if (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.BUBBLE_PHYSICS_ENABLED) {
+            if (MakeBubblesPopConfig.BUBBLE_PHYSICS_ENABLED) {
 
                 // Entity interaction
                 List<Entity> list = level.getEntities((Entity) null, this.getBoundingBox().inflate(0.5), new Predicate<>() {
