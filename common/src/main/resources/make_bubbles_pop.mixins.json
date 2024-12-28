@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "package": "net.tschipcraft.make_bubbles_pop.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "minVersion": "0.8",
+  "client": [
+    "client.BubblePop",
+    "client.BubbleColumnPop",
+    "client.CurrentDownPop",
+    "client.PopBubblePop",
+    "client.ChestBubble",
+    "client.BarrelBlockEntityMixin",
+    "client.BarrelBubble",
+    "client.ExplosionEmitterBubble"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}

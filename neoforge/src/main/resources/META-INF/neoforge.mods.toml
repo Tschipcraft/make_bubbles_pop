@@ -1,15 +1,13 @@
-modLoader="javafml"
-# A version range to match for said mod loader - 45 is 1.19.4 or above
-loaderVersion="[45,)"
+modLoader = "javafml"
+loaderVersion = "[4,)"
 license="Custom"
 logoFile= "icon.png"
 logoBlur=false
-showAsResourcePack=false
 
 [[mods]]
-modId="make_bubbles_pop"
-version="${version}-forge"
-displayName="Make Bubbles Pop"
+modId = "make_bubbles_pop"
+version = "${version}-neoforge"
+displayName = "Make Bubbles Pop"
 description='''
 This client-side mod makes bubble particles pop and completely overhauls their behavior to make them rise realistically to the water surface.
 
@@ -22,18 +20,18 @@ updateJSONURL="https://api.modrinth.com/updates/gPCdW0Wr/forge_updates.json"
 displayTest="IGNORE_ALL_VERSION"
 
 [[dependencies.make_bubbles_pop]]
-    modId="minecraft"
-    mandatory=true
-    versionRange="[1.21,1.21.1]"
-    ordering="NONE"
-    side="CLIENT"
+    modId = "neoforge"
+    type = "required"
+    versionRange = "[21.0.110-beta,)"
+    ordering = "NONE"
+    side = "BOTH"
 
 [[dependencies.make_bubbles_pop]]
-    modId="midnightlib"
-    mandatory=false
-    versionRange="[1.0.0,)"
-    ordering="NONE"
-    side="BOTH"
+    modId = "minecraft"
+    type = "required"
+    versionRange = "[1.21,1.21.1]"
+    ordering = "NONE"
+    side = "BOTH"
 
-[modproperties.make_bubbles_pop]
-    catalogueImageIcon="icon.png"
+[[mixins]]
+    config = "make_bubbles_pop.mixins.json"

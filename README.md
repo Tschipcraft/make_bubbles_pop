@@ -9,13 +9,16 @@
   <a href="https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod/releases/latest"><img alt="GitHub Downloads" src="https://img.shields.io/github/downloads/Tschipcraft/fabric_make_bubbles_pop_mod/total?logo=github&colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
 </p>
 
+<picture><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/light-theme/info.svg"><img alt="Info" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/info.svg"></picture><br>
+This branch hosts the 1.21-1.21.1 [arch-loom](https://github.com/architectury/architectury-loom) version of the mod with native NeoForge support. This will most likely get merged into the main branch in the future.
+
+[Go to the master branch](https://github.com/Tschipcraft/make_bubbles_pop/tree/master)
+
 ## Features
 
 This client-side mod makes bubble particles pop
 and completely overhauls their behavior to make them rise realistically to the water surface.
 It also adds bubble particles to opening chests, opening barrels and explosions underwater.
-
-Should be compatible with every other mod.
 
 Fixes [MC-132067](https://bugs.mojang.com/browse/MC-132067).
 

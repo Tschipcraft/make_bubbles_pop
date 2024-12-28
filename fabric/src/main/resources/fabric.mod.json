@@ -3,7 +3,7 @@
   "environment": "client",
   "entrypoints": {
     "main": [
-      "net.tschipcraft.make_bubbles_pop.MakeBubblesPop"
+      "net.tschipcraft.make_bubbles_pop.fabric.MakeBubblesPopFabric"
     ]
   },
   "mixins": [
@@ -12,8 +12,8 @@
   "depends": {
     "fabricloader": ">=0.14.17",
     "fabric": "*",
-    "minecraft": ">=1.19.4",
-    "java": ">=17"
+    "minecraft": ">=1.21 <=1.21.1",
+    "java": ">=21"
   },
   "id": "make_bubbles_pop",
   "version": "${version}-fabric",
