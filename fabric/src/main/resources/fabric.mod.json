@@ -4,6 +4,9 @@
   "entrypoints": {
     "main": [
       "net.tschipcraft.make_bubbles_pop.fabric.MakeBubblesPopFabric"
+    ],
+    "modmenu": [
+      "net.tschipcraft.make_bubbles_pop.fabric.compat.ModMenuIntegration"
     ]
   },
   "mixins": [

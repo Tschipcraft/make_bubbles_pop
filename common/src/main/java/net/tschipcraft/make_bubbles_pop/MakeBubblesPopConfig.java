@@ -1,9 +1,12 @@
 package net.tschipcraft.make_bubbles_pop;
 
+/**
+ * Main value holder config class for Make Bubbles Pop. Actual values are set in the respective platform-specific config classes.
+ */
 public class MakeBubblesPopConfig {
 
     private MakeBubblesPopConfig() {
-        throw new IllegalStateException("Config class cannot be instantiated");
+        throw new IllegalStateException("Main value holder config class cannot be instantiated");
     }
 
     public static boolean POP_PARTICLE_ENABLED = true;

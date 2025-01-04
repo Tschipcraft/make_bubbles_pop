@@ -88,4 +88,19 @@ public class MakeBubblesPopNeoForgeConfig {
         MakeBubblesPopConfig.EXPLOSION_BUBBLES_ENABLED = EXPLOSION_BUBBLES_ENABLED_CONF.get();
     }
 
+    public static void save() {
+        POP_PARTICLE_ENABLED_CONF.set(MakeBubblesPopConfig.POP_PARTICLE_ENABLED);
+        BUBBLE_POP_VOLUME_CONF.set((int) (MakeBubblesPopConfig.BUBBLE_POP_VOLUME * 100));
+        POPPED_BUBBLES_MAINTAIN_VELOCITY_CONF.set(MakeBubblesPopConfig.POPPED_BUBBLES_MAINTAIN_VELOCITY);
+        BUBBLE_PHYSICS_ENABLED_CONF.set(MakeBubblesPopConfig.BUBBLE_PHYSICS_ENABLED);
+        BUBBLE_LIFETIME_MULTIPLIER_CONF.set((int) MakeBubblesPopConfig.BUBBLE_LIFETIME_MULTIPLIER);
+        BIOME_COLORS_ENABLED_CONF.set(MakeBubblesPopConfig.BIOME_COLORS_ENABLED);
+        BIOME_COLOR_INTENSITY_CONF.set((int) (MakeBubblesPopConfig.BIOME_COLOR_INTENSITY * 100));
+        CHEST_BUBBLES_ENABLED_CONF.set(MakeBubblesPopConfig.CHEST_BUBBLES_ENABLED);
+        BARREL_BUBBLES_ENABLED_CONF.set(MakeBubblesPopConfig.BARREL_BUBBLES_ENABLED);
+        CONTAINER_SOUND_ENABLED_CONF.set(MakeBubblesPopConfig.CONTAINER_SOUND_ENABLED);
+        EXPLOSION_BUBBLES_ENABLED_CONF.set(MakeBubblesPopConfig.EXPLOSION_BUBBLES_ENABLED);
+        SPEC.save();
+    }
+
 }

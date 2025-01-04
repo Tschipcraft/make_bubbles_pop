@@ -30,8 +30,16 @@ subprojects {
         // See https://docs.gradle.org/current/userguide/declaring_repositories.html
         // for more information about repositories.
         maven {
-            name "modrinth"
+            name "Modrinth Maven"
             url "https://api.modrinth.com/maven"
+        }
+        maven {
+            name 'Xander Maven'
+            url 'https://maven.isxander.dev/releases'
+        }
+        maven {
+            name = "Terraformers Maven"
+            url = "https://maven.terraformersmc.com/"
         }
     }
 
@@ -41,6 +49,12 @@ subprojects {
             it.mappings("net.fabricmc:yarn:$rootProject.yarn_mappings:v2")
             it.mappings("dev.architectury:yarn-mappings-patch-neoforge:$rootProject.yarn_mappings_patch_neoforge_version")
         }
+
+        // YACL
+        modImplementation "dev.isxander:yet-another-config-lib:${project.yacl_version}"
+
+        // Mod Menu
+        modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
     }
 
     java {

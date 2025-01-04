@@ -8,7 +8,7 @@ import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPopConfig;
 
 @Mod.EventBusSubscriber(modid = MakeBubblesPop.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class MakeBubblesPopForgeConfig extends MakeBubblesPopConfig {
+public class MakeBubblesPopForgeConfig {
 
     private MakeBubblesPopForgeConfig() {
         throw new IllegalStateException("Config class cannot be instantiated");
@@ -87,4 +87,5 @@ public class MakeBubblesPopForgeConfig extends MakeBubblesPopConfig {
         MakeBubblesPopConfig.CONTAINER_SOUND_ENABLED = CONTAINER_SOUND_ENABLED_CONF.get();
         MakeBubblesPopConfig.EXPLOSION_BUBBLES_ENABLED = EXPLOSION_BUBBLES_ENABLED_CONF.get();
     }
+
 }

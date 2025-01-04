@@ -4,7 +4,7 @@ public final class MakeBubblesPop {
 
     public static final String MOD_ID = "make_bubbles_pop";
 
-    public static final boolean MIDNIGHTLIB_INSTALLED = false;
+    public static final boolean MIDNIGHTLIB_INSTALLED = true;
 
     public static void init() {
         // Write common init code here.

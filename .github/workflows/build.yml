@@ -20,7 +20,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
-          cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/dev' }}
+          cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/dev' && github.ref != 'refs/heads/archloom' }}
           add-job-summary: 'always' # maybe change to error only?
       - name: Make gradle wrapper executable
         if: ${{ runner.os != 'Windows' }}
