@@ -1,6 +1,9 @@
 package net.tschipcraft.neoforge;
 
 import net.neoforged.api.distmarker.Dist;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -18,6 +21,10 @@ public final class MakeBubblesPopNeoForge {
     public MakeBubblesPopNeoForge(IEventBus modEventBus, ModContainer modContainer) {
         // Call common setup
         MakeBubblesPop.init();
+
+        // Register config
+        modContainer.registerConfig(ModConfig.Type.CLIENT, MakeBubblesPopNeoForgeConfig.SPEC);
+        modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 
         LOGGER.info("Make Bubbles Pop by Tschipcraft initialized!");
     }
