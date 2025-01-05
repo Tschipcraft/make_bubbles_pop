@@ -10,7 +10,6 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPopConfig;
 import net.tschipcraft.make_bubbles_pop.impl.BarrelBlockEntityInterface;
 import net.tschipcraft.make_bubbles_pop.impl.BarrelBubbler;
@@ -43,7 +42,7 @@ public abstract class BarrelBubble extends BlockWithEntity {
 
     @Unique
     public void makeBubblesPop$clientTick(World world, BlockPos pos, BlockState state, BarrelBlockEntity blockEntity) {
-        if (world != null && world.isClient && (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.BARREL_BUBBLES_ENABLED)) {
+        if (world != null && world.isClient && MakeBubblesPopConfig.BARREL_BUBBLES_ENABLED) {
             // Get direction and openness of barrel block
             Direction facing = state.getOrEmpty(BarrelBlock.FACING).orElse(Direction.NORTH);
             boolean open = state.getOrEmpty(BarrelBlock.OPEN).orElse(false);

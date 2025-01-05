@@ -34,18 +34,17 @@ public class MakeBubblesPopForge {
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        if (MIDNIGHTLIB_INSTALLED) {
-            // Use MidnightLib features
-            LOGGER.info("MidnightLib detected!");
-            //MakeBubblesPopConfig.init(MODID, MakeBubblesPopConfig.class);
-            //ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, () -> {
-            //    return new ConfigScreenHandler.ConfigScreenFactory((client, parent) -> {
-            //        return MidnightConfig.getScreen(parent, MODID);
-            //    });
-            //});
-        }
-        LOGGER.info("Make Bubbles Pop by Tschipcraft initialized!");
+        // Call common setup
         MakeBubblesPop.init();
+
+        // Config screen code for later use
+        //ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, () -> {
+        //    return new ConfigScreenHandler.ConfigScreenFactory((client, parent) -> {
+        //        <config screen>
+        //    });
+        //});
+
+        LOGGER.info("Make Bubbles Pop by Tschipcraft initialized!");
     }
 
 }

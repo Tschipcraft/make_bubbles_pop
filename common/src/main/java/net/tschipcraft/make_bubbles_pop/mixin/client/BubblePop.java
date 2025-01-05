@@ -7,7 +7,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPopConfig;
 import net.tschipcraft.make_bubbles_pop.impl.BubbleUtil;
 import org.spongepowered.asm.mixin.Mixin;
@@ -51,7 +50,7 @@ public abstract class BubblePop extends SpriteBillboardParticle {
     @Inject(method = "<init>", at = @At(value = "TAIL"))
     void makeBubblesPop$init(ClientWorld clientWorld, double d, double e, double f, double g, double h, double i, CallbackInfo ci) {
         // Longer maxAge to enable bubbles to fully rise to the top (Could cause performance issues - you called it previous me)
-        this.maxAge = (int) ((MakeBubblesPop.MIDNIGHTLIB_INSTALLED ? MakeBubblesPopConfig.BUBBLE_LIFETIME_MULTIPLIER : 32D) / (this.random.nextDouble() * 0.7D + 0.1D));
+        this.maxAge = (int) (MakeBubblesPopConfig.BUBBLE_LIFETIME_MULTIPLIER / (this.random.nextDouble() * 0.7D + 0.1D));
         this.accelerationAngle = this.random.nextFloat() * 360F;
 
         // Tint bubble based on water color
@@ -105,7 +104,7 @@ public abstract class BubblePop extends SpriteBillboardParticle {
 
             // PHYSICS
 
-            if (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.BUBBLE_PHYSICS_ENABLED) {
+            if (MakeBubblesPopConfig.BUBBLE_PHYSICS_ENABLED) {
 
                 // Entity interaction
                 List<Entity> list = world.getOtherEntities(null, this.getBoundingBox().expand(0.5), EntityPredicates.VALID_LIVING_ENTITY);

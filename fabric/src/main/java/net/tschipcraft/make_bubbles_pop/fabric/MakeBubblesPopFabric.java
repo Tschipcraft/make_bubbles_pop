@@ -14,13 +14,15 @@ public class MakeBubblesPopFabric implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		// Call common setup
+		MakeBubblesPop.init();
+
 		if (YACL_INSTALLED) {
 			LOGGER.info("Yet Another Config Lib detected! Using YACL config system.");
 			MakeBubblesPopFabricConfig.HANDLER.instance().load();
 		}
 
 		LOGGER.info("Make Bubbles Pop by Tschipcraft initialized!");
-		MakeBubblesPop.init();
 	}
 
 }

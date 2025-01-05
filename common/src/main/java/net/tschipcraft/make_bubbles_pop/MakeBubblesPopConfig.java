@@ -22,4 +22,8 @@ public class MakeBubblesPopConfig {
     public static boolean CONTAINER_SOUND_ENABLED = true;
     public static boolean EXPLOSION_BUBBLES_ENABLED = true;
 
+    public static double getInitialVelocity(double original) {
+        return (MakeBubblesPopConfig.POPPED_BUBBLES_MAINTAIN_VELOCITY) ? original : 0D;
+    }
+
 }

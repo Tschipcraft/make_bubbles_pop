@@ -9,7 +9,6 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPopConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -31,7 +30,7 @@ public abstract class ChestBubble {
 
     @Inject(method = "clientTick", at = @At("TAIL"))
     private static void makeBubblesPop$clientTick(World world, BlockPos pos, BlockState state, ChestBlockEntity blockEntity, CallbackInfo ci) {
-        if (world != null && world.isClient && (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.CHEST_BUBBLES_ENABLED) && world.isWater(pos)) {
+        if (world != null && world.isClient && MakeBubblesPopConfig.CHEST_BUBBLES_ENABLED && world.isWater(pos)) {
             ChestType chestType = state.getOrEmpty(ChestBlock.CHEST_TYPE).orElse(ChestType.SINGLE);
             Direction facing = state.getOrEmpty(ChestBlock.FACING).orElse(Direction.NORTH);
             Block block = state.getBlock();
@@ -90,7 +89,7 @@ public abstract class ChestBubble {
                             }
                         }
                         // Play sound
-                        if (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.CONTAINER_SOUND_ENABLED) {
+                        if (MakeBubblesPopConfig.CONTAINER_SOUND_ENABLED) {
                             world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundCategory.AMBIENT, 0.3F + (world.random.nextFloat() * 0.1F), 1.3F + (world.random.nextFloat() * 0.3F), false);
                         }
                     }

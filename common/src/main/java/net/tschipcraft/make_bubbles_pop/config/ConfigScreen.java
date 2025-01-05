@@ -25,15 +25,15 @@ public class ConfigScreen {
 
         // Create options
         var POP_PARTICLE_ENABLED = Option.<Boolean>createBuilder()
-                .name(Text.translatable("make_bubbles_pop.midnightconfig.POP_PARTICLE_ENABLED"))
-                .description(OptionDescription.of(Text.translatable("make_bubbles_pop.midnightconfig.POP_PARTICLE_ENABLED.tooltip")))
+                .name(Text.translatable("make_bubbles_pop.config.POP_PARTICLE_ENABLED"))
+                .description(OptionDescription.of(Text.translatable("make_bubbles_pop.config.POP_PARTICLE_ENABLED.tooltip")))
                 .controller(TickBoxControllerBuilder::create)
                 .binding(true, () -> MakeBubblesPopConfig.POP_PARTICLE_ENABLED, newVal -> MakeBubblesPopConfig.POP_PARTICLE_ENABLED = newVal)
                 .build();
 
         var BUBBLE_POP_VOLUME = Option.<Float>createBuilder()
-                .name(Text.translatable("make_bubbles_pop.midnightconfig.BUBBLE_POP_VOLUME"))
-                .description(OptionDescription.of(Text.translatable("make_bubbles_pop.midnightconfig.BUBBLE_POP_VOLUME.tooltip")))
+                .name(Text.translatable("make_bubbles_pop.config.BUBBLE_POP_VOLUME"))
+                .description(OptionDescription.of(Text.translatable("make_bubbles_pop.config.BUBBLE_POP_VOLUME.tooltip")))
                 .customController(opt -> FloatSliderControllerBuilder.create(opt).range(0F, 1.0F).step(0.01F).formatValue(new ValueFormatter<Float>() {
                     @Override
                     public Text format(Float aFloat) {
@@ -45,36 +45,36 @@ public class ConfigScreen {
                 .build();
 
         var POPPED_BUBBLES_MAINTAIN_VELOCITY = Option.<Boolean>createBuilder()
-                .name(Text.translatable("make_bubbles_pop.midnightconfig.POPPED_BUBBLES_MAINTAIN_VELOCITY"))
-                .description(OptionDescription.of(Text.translatable("make_bubbles_pop.midnightconfig.POPPED_BUBBLES_MAINTAIN_VELOCITY.tooltip")))
+                .name(Text.translatable("make_bubbles_pop.config.POPPED_BUBBLES_MAINTAIN_VELOCITY"))
+                .description(OptionDescription.of(Text.translatable("make_bubbles_pop.config.POPPED_BUBBLES_MAINTAIN_VELOCITY.tooltip")))
                 .controller(TickBoxControllerBuilder::create)
                 .binding(false, () -> MakeBubblesPopConfig.POPPED_BUBBLES_MAINTAIN_VELOCITY, newVal -> MakeBubblesPopConfig.POPPED_BUBBLES_MAINTAIN_VELOCITY = newVal)
                 .build();
 
         var BUBBLE_PHYSICS_ENABLED = Option.<Boolean>createBuilder()
-                .name(Text.translatable("make_bubbles_pop.midnightconfig.BUBBLE_PHYSICS_ENABLED"))
-                .description(OptionDescription.of(Text.translatable("make_bubbles_pop.midnightconfig.BUBBLE_PHYSICS_ENABLED.tooltip")))
+                .name(Text.translatable("make_bubbles_pop.config.BUBBLE_PHYSICS_ENABLED"))
+                .description(OptionDescription.of(Text.translatable("make_bubbles_pop.config.BUBBLE_PHYSICS_ENABLED.tooltip")))
                 .controller(TickBoxControllerBuilder::create)
                 .binding(true, () -> MakeBubblesPopConfig.BUBBLE_PHYSICS_ENABLED, newVal -> MakeBubblesPopConfig.BUBBLE_PHYSICS_ENABLED = newVal)
                 .build();
 
         var BUBBLE_LIFETIME_MULTIPLIER = Option.<Double>createBuilder()
-                .name(Text.translatable("make_bubbles_pop.midnightconfig.BUBBLE_LIFETIME_MULTIPLIER"))
-                .description(OptionDescription.of(Text.translatable("make_bubbles_pop.midnightconfig.BUBBLE_LIFETIME_MULTIPLIER.tooltip")))
-                .customController(opt -> DoubleSliderControllerBuilder.create(opt).range(1D, 100D).step(0.5D).build())
+                .name(Text.translatable("make_bubbles_pop.config.BUBBLE_LIFETIME_MULTIPLIER"))
+                .description(OptionDescription.of(Text.translatable("make_bubbles_pop.config.BUBBLE_LIFETIME_MULTIPLIER.tooltip")))
+                .customController(opt -> DoubleSliderControllerBuilder.create(opt).range(1D, 100D).step(0.25D).build())
                 .binding(32D, () -> MakeBubblesPopConfig.BUBBLE_LIFETIME_MULTIPLIER, newVal -> MakeBubblesPopConfig.BUBBLE_LIFETIME_MULTIPLIER = newVal)
                 .build();
 
         var BIOME_COLORS_ENABLED = Option.<Boolean>createBuilder()
-                .name(Text.translatable("make_bubbles_pop.midnightconfig.BIOME_COLORS_ENABLED"))
-                .description(OptionDescription.of(Text.translatable("make_bubbles_pop.midnightconfig.BIOME_COLORS_ENABLED.tooltip")))
+                .name(Text.translatable("make_bubbles_pop.config.BIOME_COLORS_ENABLED"))
+                .description(OptionDescription.of(Text.translatable("make_bubbles_pop.config.BIOME_COLORS_ENABLED.tooltip")))
                 .controller(TickBoxControllerBuilder::create)
                 .binding(true, () -> MakeBubblesPopConfig.BIOME_COLORS_ENABLED, newVal -> MakeBubblesPopConfig.BIOME_COLORS_ENABLED = newVal)
                 .build();
 
         var BIOME_COLOR_INTENSITY = Option.<Float>createBuilder()
-                .name(Text.translatable("make_bubbles_pop.midnightconfig.BIOME_COLOR_INTENSITY"))
-                .description(OptionDescription.of(Text.translatable("make_bubbles_pop.midnightconfig.BIOME_COLOR_INTENSITY.tooltip")))
+                .name(Text.translatable("make_bubbles_pop.config.BIOME_COLOR_INTENSITY"))
+                .description(OptionDescription.of(Text.translatable("make_bubbles_pop.config.BIOME_COLOR_INTENSITY.tooltip")))
                 .customController(opt -> FloatSliderControllerBuilder.create(opt).range(0F, 1.0F).step(0.01F).formatValue(new ValueFormatter<Float>() {
                     @Override
                     public Text format(Float aFloat) {
@@ -86,38 +86,38 @@ public class ConfigScreen {
                 .build();
 
         var CHEST_BUBBLES_ENABLED = Option.<Boolean>createBuilder()
-                .name(Text.translatable("make_bubbles_pop.midnightconfig.CHEST_BUBBLES_ENABLED"))
-                .description(OptionDescription.of(Text.translatable("make_bubbles_pop.midnightconfig.CHEST_BUBBLES_ENABLED.tooltip")))
+                .name(Text.translatable("make_bubbles_pop.config.CHEST_BUBBLES_ENABLED"))
+                .description(OptionDescription.of(Text.translatable("make_bubbles_pop.config.CHEST_BUBBLES_ENABLED.tooltip")))
                 .controller(TickBoxControllerBuilder::create)
                 .binding(true, () -> MakeBubblesPopConfig.CHEST_BUBBLES_ENABLED, newVal -> MakeBubblesPopConfig.CHEST_BUBBLES_ENABLED = newVal)
                 .build();
 
         var BARREL_BUBBLES_ENABLED = Option.<Boolean>createBuilder()
-                .name(Text.translatable("make_bubbles_pop.midnightconfig.BARREL_BUBBLES_ENABLED"))
-                .description(OptionDescription.of(Text.translatable("make_bubbles_pop.midnightconfig.BARREL_BUBBLES_ENABLED.tooltip")))
+                .name(Text.translatable("make_bubbles_pop.config.BARREL_BUBBLES_ENABLED"))
+                .description(OptionDescription.of(Text.translatable("make_bubbles_pop.config.BARREL_BUBBLES_ENABLED.tooltip")))
                 .controller(TickBoxControllerBuilder::create)
                 .binding(true, () -> MakeBubblesPopConfig.BARREL_BUBBLES_ENABLED, newVal -> MakeBubblesPopConfig.BARREL_BUBBLES_ENABLED = newVal)
                 .build();
 
         var CONTAINER_SOUND_ENABLED = Option.<Boolean>createBuilder()
-                .name(Text.translatable("make_bubbles_pop.midnightconfig.CONTAINER_SOUND_ENABLED"))
-                .description(OptionDescription.of(Text.translatable("make_bubbles_pop.midnightconfig.CONTAINER_SOUND_ENABLED.tooltip")))
+                .name(Text.translatable("make_bubbles_pop.config.CONTAINER_SOUND_ENABLED"))
+                .description(OptionDescription.of(Text.translatable("make_bubbles_pop.config.CONTAINER_SOUND_ENABLED.tooltip")))
                 .controller(TickBoxControllerBuilder::create)
                 .binding(true, () -> MakeBubblesPopConfig.CONTAINER_SOUND_ENABLED, newVal -> MakeBubblesPopConfig.CONTAINER_SOUND_ENABLED = newVal)
                 .build();
 
         var EXPLOSION_BUBBLES_ENABLED = Option.<Boolean>createBuilder()
-                .name(Text.translatable("make_bubbles_pop.midnightconfig.EXPLOSION_BUBBLES_ENABLED"))
-                .description(OptionDescription.of(Text.translatable("make_bubbles_pop.midnightconfig.EXPLOSION_BUBBLES_ENABLED.tooltip")))
+                .name(Text.translatable("make_bubbles_pop.config.EXPLOSION_BUBBLES_ENABLED"))
+                .description(OptionDescription.of(Text.translatable("make_bubbles_pop.config.EXPLOSION_BUBBLES_ENABLED.tooltip")))
                 .controller(TickBoxControllerBuilder::create)
                 .binding(true, () -> MakeBubblesPopConfig.EXPLOSION_BUBBLES_ENABLED, newVal -> MakeBubblesPopConfig.EXPLOSION_BUBBLES_ENABLED = newVal)
                 .build();
 
         // Build screen
         return YetAnotherConfigLib.createBuilder()
-                .title(Text.translatable("make_bubbles_pop.midnightconfig.title"))
+                .title(Text.translatable("make_bubbles_pop.config.title"))
                 .category(ConfigCategory.createBuilder()
-                        .name(Text.translatable("make_bubbles_pop.midnightconfig.title"))
+                        .name(Text.translatable("make_bubbles_pop.config.title"))
                         // Add options
                         .option(POP_PARTICLE_ENABLED)
                         .option(BUBBLE_POP_VOLUME)

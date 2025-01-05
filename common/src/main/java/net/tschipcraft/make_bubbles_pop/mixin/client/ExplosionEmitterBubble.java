@@ -5,7 +5,6 @@ import net.minecraft.client.particle.NoRenderParticle;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
-import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPopConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -31,7 +30,7 @@ public abstract class ExplosionEmitterBubble extends NoRenderParticle {
             )
     )
     protected void makeBubblesPop$injectBubbleParticle(CallbackInfo info) {
-        if (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.EXPLOSION_BUBBLES_ENABLED) {
+        if (MakeBubblesPopConfig.EXPLOSION_BUBBLES_ENABLED) {
             // Add bubble particles to explosions underwater
             if (this.world.isWater(BlockPos.ofFloored(this.x, this.y, this.z))) {
                 for (int i = 0; i < 2; i++) {
