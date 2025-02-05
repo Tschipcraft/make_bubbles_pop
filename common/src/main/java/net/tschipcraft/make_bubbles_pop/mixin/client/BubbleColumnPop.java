@@ -26,7 +26,7 @@ public abstract class BubbleColumnPop extends SpriteBillboardParticle {
     // Inject pop particle
     @Inject(method = "tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/particle/BubbleColumnUpParticle;markDead()V", shift = At.Shift.AFTER))
     protected void makeBubblesPop$injectPopParticle(CallbackInfo info) {
-        BubbleUtil.popBubble(world, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
+        BubbleUtil.popBubble(world, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ, this.scale);
     }
 
     // Catch age removal
@@ -35,7 +35,7 @@ public abstract class BubbleColumnPop extends SpriteBillboardParticle {
     protected void makeBubblesPop$injectPopParticleToSuper(CallbackInfo info) {
         if ((this.age + 1) >= this.maxAge) {
             this.markDead();
-            BubbleUtil.popBubble(world, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
+            BubbleUtil.popBubble(world, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ, this.scale);
         }
     }
 

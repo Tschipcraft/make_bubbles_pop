@@ -21,7 +21,7 @@ import java.util.List;
  * <pre>
  * This mixin injects into the WaterBubbleParticle class to completely overhaul bubble behavior.
  * Notable changes for devs:
- *  - Age now counts upwards like any other particle instead of maxAge downwards (wtf mojang)
+ *  - age now counts upwards like any other particle instead of maxAge downwards (wtf mojang)
  * </pre>
  */
 @Mixin(WaterBubbleParticle.class)
@@ -67,7 +67,7 @@ public abstract class BubblePop extends SpriteBillboardParticle {
         if (this.age++ >= this.maxAge || !this.world.isWater(BlockPos.ofFloored(this.x, this.y + 0.1, this.z)) || !this.world.isWater(BlockPos.ofFloored(this.x, this.y, this.z))) {
             // Outside water/maxAge reached -> pop with sound
             this.markDead();
-            BubbleUtil.popBubble(world, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ);
+            BubbleUtil.popBubble(world, this.x, this.y, this.z, this.velocityX, this.velocityY, this.velocityZ, this.scale);
         } else {
 
             // Upward motion

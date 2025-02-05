@@ -15,7 +15,7 @@
   "depends": {
     "fabricloader": ">=0.14.17",
     "fabric": "*",
-    "minecraft": ">=1.21 <=1.21.1",
+    "minecraft": ">=1.20.6 <=1.21.1",
     "java": ">=21"
   },
   "id": "make_bubbles_pop",
@@ -34,7 +34,7 @@
   },
   "recommends": {
     "modmenu": "*",
-    "midnightlib": "*"
+    "yet_another_config_lib_v3": "*"
   },
   "custom": {
     "modmenu": {

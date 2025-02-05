@@ -5,7 +5,6 @@ import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.DoubleSliderControllerBuilder;
 import dev.isxander.yacl3.api.controller.FloatSliderControllerBuilder;
 import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
-import dev.isxander.yacl3.api.controller.ValueFormatter;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPopConfig;
@@ -34,12 +33,9 @@ public class ConfigScreen {
         var BUBBLE_POP_VOLUME = Option.<Float>createBuilder()
                 .name(Text.translatable("make_bubbles_pop.config.BUBBLE_POP_VOLUME"))
                 .description(OptionDescription.of(Text.translatable("make_bubbles_pop.config.BUBBLE_POP_VOLUME.tooltip")))
-                .customController(opt -> FloatSliderControllerBuilder.create(opt).range(0F, 1.0F).step(0.01F).formatValue(new ValueFormatter<Float>() {
-                    @Override
-                    public Text format(Float aFloat) {
-                        // Format as percentage
-                        return Text.of(String.format("%.0f%%", aFloat * 100));
-                    }
+                .customController(opt -> FloatSliderControllerBuilder.create(opt).range(0F, 1.0F).step(0.01F).formatValue(aFloat -> {
+                    // Format as percentage
+                    return Text.of(String.format("%.0f%%", aFloat * 100));
                 }).build())
                 .binding(0.1F, () -> MakeBubblesPopConfig.BUBBLE_POP_VOLUME, newVal -> MakeBubblesPopConfig.BUBBLE_POP_VOLUME = newVal)
                 .build();
@@ -75,12 +71,9 @@ public class ConfigScreen {
         var BIOME_COLOR_INTENSITY = Option.<Float>createBuilder()
                 .name(Text.translatable("make_bubbles_pop.config.BIOME_COLOR_INTENSITY"))
                 .description(OptionDescription.of(Text.translatable("make_bubbles_pop.config.BIOME_COLOR_INTENSITY.tooltip")))
-                .customController(opt -> FloatSliderControllerBuilder.create(opt).range(0F, 1.0F).step(0.01F).formatValue(new ValueFormatter<Float>() {
-                    @Override
-                    public Text format(Float aFloat) {
-                        // Format as percentage
-                        return Text.of(String.format("%.0f%%", aFloat * 100));
-                    }
+                .customController(opt -> FloatSliderControllerBuilder.create(opt).range(0F, 1.0F).step(0.01F).formatValue(aFloat -> {
+                    // Format as percentage
+                    return Text.of(String.format("%.0f%%", aFloat * 100));
                 }).build())
                 .binding(0.65F, () -> MakeBubblesPopConfig.BIOME_COLOR_INTENSITY, newVal -> MakeBubblesPopConfig.BIOME_COLOR_INTENSITY = newVal)
                 .build();
