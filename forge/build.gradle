@@ -2,15 +2,15 @@ plugins {
     id 'com.github.johnrengelman.shadow'
 }
 
+architectury {
+    platformSetupLoomIde()
+    forge()
+}
+
 loom {
     forge {
         mixinConfig "make_bubbles_pop.mixins.json"
     }
-}
-
-architectury {
-    platformSetupLoomIde()
-    forge()
 }
 
 configurations {

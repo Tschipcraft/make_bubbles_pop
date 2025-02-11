@@ -5,7 +5,7 @@ import net.neoforged.fml.ModList;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
-import net.tschipcraft.make_bubbles_pop.config.ConfigScreen;
+import net.tschipcraft.make_bubbles_pop.config.YACLScreen;
 import net.tschipcraft.make_bubbles_pop.config.PlatformConfig;
 import org.slf4j.Logger;
 
@@ -35,7 +35,7 @@ public final class MakeBubblesPopNeoForge {
             LOGGER.info("Yet Another Config Lib detected! Using YACL config screen.");
             modContainer.registerExtensionPoint(IConfigScreenFactory.class,
                     (Supplier<IConfigScreenFactory>) () -> (client, parent) ->
-                            ConfigScreen.getScreen(parent, new PlatformConfig() {
+                            YACLScreen.getScreen(parent, new PlatformConfig() {
                                 @Override
                                 public void load() {
                                     // Unnecessary, as NeoForge handles this

@@ -7,7 +7,7 @@ import net.minecraft.client.gui.screen.ConfirmScreen;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
 import net.minecraft.util.Util;
-import net.tschipcraft.make_bubbles_pop.config.ConfigScreen;
+import net.tschipcraft.make_bubbles_pop.config.YACLScreen;
 import net.tschipcraft.make_bubbles_pop.fabric.MakeBubblesPopFabric;
 import net.tschipcraft.make_bubbles_pop.fabric.MakeBubblesPopFabricConfig;
 
@@ -29,7 +29,7 @@ public class ModMenuIntegration implements ModMenuApi {
                 MinecraftClient.getInstance().setScreen(parent);
             }, Text.translatable("make_bubbles_pop.yacl.missing"), Text.translatable("make_bubbles_pop.yacl.missing.description"), ScreenTexts.YES, ScreenTexts.NO);
         } else {
-            return parent -> ConfigScreen.getScreen(parent, MakeBubblesPopFabricConfig.HANDLER.instance());
+            return parent -> YACLScreen.getScreen(parent, MakeBubblesPopFabricConfig.HANDLER.instance());
         }
     }
 

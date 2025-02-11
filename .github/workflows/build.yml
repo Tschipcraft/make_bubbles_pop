@@ -30,12 +30,12 @@ jobs:
       - name: Capture Fabric build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: "Make Bubbles Pop Fabric 1.21-1.21.1 (Unzip Me)"
+          name: "Make Bubbles Pop Fabric 1.20.6-1.21.1 (Unzip Me)"
           path: fabric/build/libs/make_bubbles_pop-*.jar
       - name: Capture Forge build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: "Make Bubbles Pop Forge 1.21-1.21.1  (Unzip Me)"
+          name: "Make Bubbles Pop Forge 1.20.6-1.21.1 (Unzip Me)"
           path: forge/build/libs/make_bubbles_pop-*.jar
       - name: Capture NeoForge build artifact
         uses: actions/upload-artifact@v4

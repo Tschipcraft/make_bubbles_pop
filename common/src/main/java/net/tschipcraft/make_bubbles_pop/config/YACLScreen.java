@@ -9,7 +9,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.Text;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPopConfig;
 
-public class ConfigScreen {
+public class YACLScreen {
 
     /**
      * Create the config screen for Make Bubbles Pop using Yet Another Config Lib.
