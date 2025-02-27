@@ -3,6 +3,7 @@ package net.tschipcraft.make_bubbles_pop.fabric;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
+import net.tschipcraft.make_bubbles_pop.config.LegacyConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +20,11 @@ public class MakeBubblesPopFabric implements ModInitializer {
 
 		if (YACL_INSTALLED) {
 			LOGGER.info("Yet Another Config Lib detected! Using YACL config system.");
+			// Load YACL config
 			MakeBubblesPopFabricConfig.HANDLER.instance().load();
+
+			// Check for legacy config file
+			LegacyConfig.loadLegacyConfig(LOGGER, MakeBubblesPopFabricConfig.HANDLER.instance().getLegacyConfigFilePath(), MakeBubblesPopFabricConfig.HANDLER.instance());
 		}
 
 		LOGGER.info("Make Bubbles Pop by Tschipcraft initialized!");

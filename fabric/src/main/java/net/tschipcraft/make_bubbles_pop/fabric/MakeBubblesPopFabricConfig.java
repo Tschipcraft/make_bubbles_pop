@@ -4,17 +4,18 @@ import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import dev.isxander.yacl3.platform.YACLPlatform;
-import net.minecraft.util.Identifier;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
-import com.google.gson.GsonBuilder;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPopConfig;
 import net.tschipcraft.make_bubbles_pop.config.PlatformConfig;
+
+import java.nio.file.Path;
+import com.google.gson.GsonBuilder;
 
 public class MakeBubblesPopFabricConfig implements PlatformConfig {
 
     // Use the ConfigClassHandler from YACL to handle the config file
     public static final ConfigClassHandler<MakeBubblesPopFabricConfig> HANDLER = ConfigClassHandler.createBuilder(MakeBubblesPopFabricConfig.class)
-            .id(Identifier.of(MakeBubblesPop.MOD_ID, "config"))
+            .id(YACLPlatform.rl(MakeBubblesPop.MOD_ID, "config"))
             .serializer(config -> GsonConfigSerializerBuilder.create(config)
                     .setPath(YACLPlatform.getConfigDir().resolve("make_bubbles_pop.json5"))
                     .appendGsonBuilder(GsonBuilder::setPrettyPrinting) // not needed, pretty print by default
@@ -74,6 +75,10 @@ public class MakeBubblesPopFabricConfig implements PlatformConfig {
         MakeBubblesPopConfig.BARREL_BUBBLES_ENABLED = BARREL_BUBBLES_ENABLED_CONF;
         MakeBubblesPopConfig.CONTAINER_SOUND_ENABLED = CONTAINER_SOUND_ENABLED_CONF;
         MakeBubblesPopConfig.EXPLOSION_BUBBLES_ENABLED = EXPLOSION_BUBBLES_ENABLED_CONF;
+    }
+
+    public Path getLegacyConfigFilePath() {
+        return YACLPlatform.getConfigDir().resolve("make_bubbles_pop.json");
     }
 
 }

@@ -9,7 +9,10 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLPaths;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
+import net.tschipcraft.make_bubbles_pop.config.LegacyConfig;
+import net.tschipcraft.make_bubbles_pop.config.PlatformConfig;
 import org.slf4j.Logger;
 
 @Mod(MakeBubblesPop.MOD_ID)
@@ -43,6 +46,18 @@ public class MakeBubblesPopForge {
         //        <config screen>
         //    });
         //});
+
+        // Check for legacy config file
+        LegacyConfig.loadLegacyConfig(LOGGER, FMLPaths.CONFIGDIR.get().resolve("make_bubbles_pop.json"), new PlatformConfig() {
+            @Override
+            public void load() {
+                // Unnecessary, as Forge handles this
+            }
+            @Override
+            public void save() {
+                MakeBubblesPopForgeConfig.save();
+            }
+        });
 
         LOGGER.info("Make Bubbles Pop by Tschipcraft initialized!");
     }

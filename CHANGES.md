@@ -1,5 +1,5 @@
 - **Native NeoForge support** 🦊
-- Switched from using MidnightLib to Yet Another Config Library for configuration
+- Switched from using MidnightLib to Yet Another Config Library for configuration. Existing config files will be migrated automatically
 - Added support for the native NeoForge&Forge config system 
 - Changed bubble pop particle sizes to be consistent with their parents (Thanks @Chailotl)
 - Switched to Architectury Loom in favor of a combined codebase and native NeoForge support
