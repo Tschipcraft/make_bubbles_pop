@@ -1,6 +1,7 @@
 package net.tschipcraft.forge;
 
 import com.mojang.logging.LogUtils;
+import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
@@ -11,6 +12,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
+import net.tschipcraft.make_bubbles_pop.config.ClothScreen;
 import net.tschipcraft.make_bubbles_pop.config.LegacyConfig;
 import net.tschipcraft.make_bubbles_pop.config.PlatformConfig;
 import org.slf4j.Logger;
@@ -20,7 +22,7 @@ public class MakeBubblesPopForge {
 
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public static final boolean MIDNIGHTLIB_INSTALLED = ModList.get().isLoaded("midnightlib");
+    public static final boolean CLOTHCONFIG_INSTALLED = ModList.get().isLoaded("cloth_config");
 
 
     public MakeBubblesPopForge() {
@@ -40,12 +42,22 @@ public class MakeBubblesPopForge {
         // Call common setup
         MakeBubblesPop.init();
 
-        // Config screen code for later use
-        //ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, () -> {
-        //    return new ConfigScreenHandler.ConfigScreenFactory((client, parent) -> {
-        //        <config screen>
-        //    });
-        //});
+        if (CLOTHCONFIG_INSTALLED) {
+            // Use Cloth Config features
+            LOGGER.info("Cloth Config detected! Using Cloth Config screen.");
+            ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, () ->
+                    new ConfigScreenHandler.ConfigScreenFactory((client, parent) -> ClothScreen.getScreen(parent, new PlatformConfig() {
+                        @Override
+                        public void load() {
+                            // Unnecessary, as Forge handles this
+                        }
+
+                        @Override
+                        public void save() {
+                            MakeBubblesPopForgeConfig.save();
+                        }
+                    })));
+        }
 
         // Check for legacy config file
         LegacyConfig.loadLegacyConfig(LOGGER, FMLPaths.CONFIGDIR.get().resolve("make_bubbles_pop.json"), new PlatformConfig() {
