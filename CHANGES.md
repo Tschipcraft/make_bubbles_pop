@@ -1,4 +1,4 @@
-- **Native NeoForge support** 🦊
+- **Added native NeoForge support** 🦊 (closes [#19](https://github.com/Tschipcraft/make_bubbles_pop/issues/19))
 - Switched from using MidnightLib to Yet Another Config Library for configuration. Existing config files will be migrated automatically
 - Added support for the native NeoForge&Forge config system 
 - Changed bubble pop particle sizes to be consistent with their parents (Thanks @Chailotl)

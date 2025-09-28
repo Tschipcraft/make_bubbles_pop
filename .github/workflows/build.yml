@@ -30,15 +30,30 @@ jobs:
       - name: Capture Fabric build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: "Make Bubbles Pop Fabric 1.20.6-1.21.1 (Unzip Me)"
+          name: "Make Bubbles Pop Fabric 1.20.5-1.21.1 (Unzip Me)"
           path: fabric/build/libs/make_bubbles_pop-*.jar
       - name: Capture Forge build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: "Make Bubbles Pop Forge 1.20.6-1.21.1 (Unzip Me)"
+          name: "Make Bubbles Pop Forge 1.20.5-1.21.1 (Unzip Me)"
           path: forge/build/libs/make_bubbles_pop-*.jar
       - name: Capture NeoForge build artifact
         uses: actions/upload-artifact@v4
         with:
           name: "Make Bubbles Pop NeoForge 1.21-1.21.1 (Unzip Me)"
           path: neoforge/build/libs/make_bubbles_pop-*.jar
+      - name: Set job summary
+        id: summary
+        shell: bash
+        run: |
+          cat << EOF >> $GITHUB_STEP_SUMMARY
+          <picture>
+            <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/light-theme/success.svg">
+            <img alt="✅ Success" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/success.svg">
+          </picture><br>
+
+          **${{ github.event.repository.name }}** built successfully! [See changes since last release](https://github.com/${{ github.repository }}/blob/${{ github.sha }}/CHANGES.md).
+
+          [Download artifacts via nightly.link](https://nightly.link/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          
+          EOF

@@ -47,4 +47,5 @@ public abstract class BubbleColumnPop extends SpriteBillboardParticle {
         this.velocityY += 0.01;
     }
      */
+
 }

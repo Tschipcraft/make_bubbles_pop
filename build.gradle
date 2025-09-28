@@ -61,7 +61,6 @@ subprojects {
         modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
             exclude(group: "net.fabricmc.fabric-api")
         }
-        //modImplementation "me.shedaniel.cloth:config2:${project.cloth_config_version}"
 
         // Mod Menu
         modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")

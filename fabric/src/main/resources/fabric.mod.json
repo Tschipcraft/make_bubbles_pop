@@ -12,12 +12,6 @@
   "mixins": [
     "make_bubbles_pop.mixins.json"
   ],
-  "depends": {
-    "fabricloader": ">=0.14.17",
-    "fabric": "*",
-    "minecraft": ">=1.20.5 <=1.21.1",
-    "java": ">=21"
-  },
   "id": "make_bubbles_pop",
   "version": "${version}-fabric",
   "name": "Make Bubbles Pop",
@@ -32,6 +26,12 @@
     "sources": "https://github.com/Tschipcraft/make_bubbles_pop/tree/archloom",
     "issues": "https://github.com/Tschipcraft/make_bubbles_pop/issues"
   },
+  "depends": {
+    "minecraft": ">=1.20.5 <=1.21.1",
+    "fabricloader": ">=0.14.17",
+    "fabric": "*",
+    "java": ">=21"
+  },
   "recommends": {
     "modmenu": "*",
     "yet_another_config_lib_v3": "*"
@@ -40,7 +40,7 @@
     "modmenu": {
       "links": {
         "modmenu.donate": "https://ko-fi.com/tschipcraft",
-        "modmenu.modrinth": "https://modrinth.com/mod/make_bubbles_pop",
+        "modmenu.modrinth": "https://modrinth.com/mod/gPCdW0Wr",
         "modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/make-bubbles-pop",
         "modmenu.youtube": "https://www.youtube.com/@tschipcraft"
       }

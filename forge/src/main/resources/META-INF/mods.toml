@@ -1,10 +1,9 @@
 modLoader="javafml"
-# 45 is 1.19.4 or above
-loaderVersion="[45,)"
+# clientSideOnly option requires at least 49.0.6
+loaderVersion="[49.0.6,)"
 license="Custom"
-logoFile= "icon.png"
-logoBlur=false
-showAsResourcePack=false
+clientSideOnly=true
+issueTrackerURL="https://github.com/Tschipcraft/make_bubbles_pop/issues"
 
 [[mods]]
 modId="make_bubbles_pop"
@@ -16,17 +15,28 @@ This client-side mod makes bubble particles pop and completely overhauls their b
 It also adds bubble particles to opening chests, opening barrels and explosions underwater.
 '''
 authors="Tschipcraft"
+logoFile= "icon.png"
+logoBlur=false
 displayURL="https://github.com/Tschipcraft/make_bubbles_pop/tree/archloom"
-issueTrackerURL="https://github.com/Tschipcraft/make_bubbles_pop/issues"
-updateJSONURL="https://api.modrinth.com/updates/gPCdW0Wr/forge_updates.json"
+modURL="https://modrinth.com/project/gPCdW0Wr/versions?l=forge"
+updateJSONURL="https://api.modrinth.com/updates/gPCdW0Wr/forge_updates.json?forge=only"
 displayTest="IGNORE_ALL_VERSION"
+features={ java_version = "[21,)" }
 
 [[dependencies.make_bubbles_pop]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.20.6,1.21.1]"
+    versionRange="[1.20.5,1.21.1]"
     ordering="NONE"
     side="CLIENT"
+
+[[dependencies.make_bubbles_pop]]
+    modId="cloth_config"
+    mandatory=false
+    versionRange="[1.0.0,)"
+    ordering="NONE"
+    side="CLIENT"
+    referralUrl="https://modrinth.com/mod/9s6osm5g/versions?l=forge"
 
 [modproperties.make_bubbles_pop]
     catalogueImageIcon="icon.png"

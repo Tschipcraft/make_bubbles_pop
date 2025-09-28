@@ -16,8 +16,7 @@ This branch hosts the 1.21-1.21.1 [arch-loom](https://github.com/architectury/ar
 
 ## Features
 
-This client-side mod makes bubble particles pop
-and completely overhauls their behavior to make them rise realistically to the water surface.
+This client-side mod makes bubble particles pop and completely overhauls their behavior to make them rise realistically to the water surface.
 It also adds bubble particles to opening chests, opening barrels and explosions underwater.
 
 Fixes [MC-132067](https://bugs.mojang.com/browse/MC-132067).
@@ -32,7 +31,7 @@ This mod is also available on Modrinth and CurseForge!
 <picture>
   <source height="72px" media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Tschipcraft/badges/main/assets/modrinth-badge-dark.svg">
   <source height="72px" media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Tschipcraft/badges/main/assets/modrinth-badge-light.svg">
-  <img height="72px" alt="Download on Modrinth" src="https://raw.githubusercontent.com/modrinth/art/main/Branding/Badge/badge-dark.svg">
+  <img height="72px" alt="Download on Modrinth" src="https://raw.githubusercontent.com/Tschipcraft/badges/main/assets/modrinth-badge-dark.svg">
 </picture>
 </a>
 <a href="https://www.curseforge.com/minecraft/mc-mods/make-bubbles-pop">
@@ -42,6 +41,10 @@ This mod is also available on Modrinth and CurseForge!
   <img height="72px" alt="Download on CurseForge" src="https://raw.githubusercontent.com/Tschipcraft/badges/main/assets/curseforge-badge-dark.svg">
 </picture>
 </a>
+
+## Development Builds
+
+Development builds are available via [GitHub Actions](https://github.com/Tschipcraft/make_bubbles_pop/actions/workflows/build.yml). These builds are not guaranteed to be stable and may contain bugs.
 
 ## Demo Videos
 

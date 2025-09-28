@@ -1,37 +1,51 @@
-modLoader = "javafml"
-loaderVersion = "[4,)"
+modLoader="javafml"
+loaderVersion="[4,)"
 license="Custom"
-logoFile= "icon.png"
-logoBlur=false
+issueTrackerURL="https://github.com/Tschipcraft/make_bubbles_pop/issues"
 
 [[mods]]
-modId = "make_bubbles_pop"
-version = "${version}-neoforge"
-displayName = "Make Bubbles Pop"
+modId="make_bubbles_pop"
+version="${version}-neoforge"
+displayName="Make Bubbles Pop"
 description='''
 This client-side mod makes bubble particles pop and completely overhauls their behavior to make them rise realistically to the water surface.
 
 It also adds bubble particles to opening chests, opening barrels and explosions underwater.
 '''
 authors="Tschipcraft"
+logoFile="icon.png"
+logoBlur=false
 displayURL="https://github.com/Tschipcraft/make_bubbles_pop/tree/archloom"
-issueTrackerURL="https://github.com/Tschipcraft/make_bubbles_pop/issues"
-updateJSONURL="https://api.modrinth.com/updates/gPCdW0Wr/forge_updates.json"
+modURL="https://modrinth.com/project/gPCdW0Wr/versions?l=neoforge"
+updateJSONURL="https://api.modrinth.com/updates/gPCdW0Wr/forge_updates.json?neoforge=only"
 displayTest="IGNORE_ALL_VERSION"
+features={ java_version = "[21,)" }
 
 [[dependencies.make_bubbles_pop]]
-    modId = "neoforge"
-    type = "required"
-    versionRange = "[21.0.110-beta,)"
-    ordering = "NONE"
-    side = "BOTH"
+    modId="minecraft"
+    type="required"
+    versionRange="[1.21,1.21.1]"
+    ordering="NONE"
+    side="CLIENT"
 
 [[dependencies.make_bubbles_pop]]
-    modId = "minecraft"
-    type = "required"
-    versionRange = "[1.21,1.21.1]"
-    ordering = "NONE"
-    side = "BOTH"
+    modId="neoforge"
+    type="required"
+    versionRange="[21.0.110-beta,)"
+    ordering="NONE"
+    side="CLIENT"
+    reason="Built-in config screen support"
+
+[[dependencies.make_bubbles_pop]]
+    modId="yet_another_config_lib_v3"
+    type="optional"
+    versionRange="[1.0.0,)"
+    ordering="NONE"
+    side="CLIENT"
+    referralUrl="https://modrinth.com/mod/1eAoo2KR/versions?l=neoforge"
 
 [[mixins]]
-    config = "make_bubbles_pop.mixins.json"
+    config="make_bubbles_pop.mixins.json"
+
+[modproperties.make_bubbles_pop]
+    catalogueImageIcon="icon.png"
