@@ -3,7 +3,7 @@ package net.tschipcraft.make_bubbles_pop.impl;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.color.world.BiomeColors;
-import net.minecraft.client.particle.SpriteBillboardParticle;
+import net.minecraft.client.particle.BillboardParticle;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -24,19 +24,19 @@ public class BubbleUtil {
      */
     public static void popBubble(World world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
         if (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.POP_PARTICLE_ENABLED) {
-            world.addParticle(ParticleTypes.BUBBLE_POP, x, y, z,
+            world.addParticleClient(ParticleTypes.BUBBLE_POP, x, y, z,
                     MakeBubblesPop.getConfigInitialVelocity(velocityX),
                     MakeBubblesPop.getConfigInitialVelocity(velocityY),
                     MakeBubblesPop.getConfigInitialVelocity(velocityZ)
             );
-            world.playSound(x, y, z, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.AMBIENT, (MakeBubblesPop.MIDNIGHTLIB_INSTALLED ? MakeBubblesPopConfig.BUBBLE_POP_VOLUME : 0.1F) - (world.random.nextFloat() * 0.1F), 0.85F + (world.random.nextFloat() * 0.3F), false);
+            world.playSoundClient(x, y, z, SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP, SoundCategory.AMBIENT, (MakeBubblesPop.MIDNIGHTLIB_INSTALLED ? MakeBubblesPopConfig.BUBBLE_POP_VOLUME : 0.1F) - (world.random.nextFloat() * 0.1F), 0.85F + (world.random.nextFloat() * 0.3F), false);
         }
     }
 
     /**
      * Tint the calling particle based on the water color.
      */
-    public static void tintBubble(World world, double x, double y, double z, SpriteBillboardParticle particle) {
+    public static void tintBubble(World world, double x, double y, double z, BillboardParticle particle) {
         if (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.BIOME_COLORS_ENABLED) {
             // Tint bubbles based on the water color
             int waterColor = BiomeColors.getWaterColor(world, BlockPos.ofFloored(x, y, z));

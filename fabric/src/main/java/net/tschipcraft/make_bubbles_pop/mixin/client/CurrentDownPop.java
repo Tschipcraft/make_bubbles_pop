@@ -1,7 +1,8 @@
 package net.tschipcraft.make_bubbles_pop.mixin.client;
 
+import net.minecraft.client.particle.BillboardParticle;
 import net.minecraft.client.particle.CurrentDownParticle;
-import net.minecraft.client.particle.SpriteBillboardParticle;
+import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.BlockPos;
 import net.tschipcraft.make_bubbles_pop.impl.BubbleUtil;
@@ -10,15 +11,15 @@ import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(CurrentDownParticle.class)
-public abstract class CurrentDownPop extends SpriteBillboardParticle {
+public abstract class CurrentDownPop extends BillboardParticle {
 
-    protected CurrentDownPop(ClientWorld clientWorld, double d, double e, double f) {
-        super(clientWorld, d, e, f);
+    protected CurrentDownPop(ClientWorld world, double x, double y, double z, Sprite sprite) {
+        super(world, x, y, z, sprite);
     }
 
     // Tint bubble based on water color
     @Inject(method = "<init>", at = @At(value = "TAIL"))
-    void makeBubblesPop$init(ClientWorld clientWorld, double d, double e, double f, CallbackInfo ci) {
+    void makeBubblesPop$init(ClientWorld clientWorld, double d, double e, double f, Sprite sprite, CallbackInfo ci) {
         BubbleUtil.tintBubble(world, this.x, this.y, this.z, this);
     }
 

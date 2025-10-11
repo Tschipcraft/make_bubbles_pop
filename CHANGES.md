@@ -1,0 +1,2 @@
+- **Added Fabric support for Minecraft 1.21.9** 🥉 **and 1.21.10** 🧩
+- Updated to Gradle 9.1 and Loom 1.11

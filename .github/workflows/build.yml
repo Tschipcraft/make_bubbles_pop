@@ -20,20 +20,29 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
-          cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/dev' }}
-          add-job-summary: 'always' # maybe change to error only?
+          cache-read-only: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/dev' && github.ref != 'refs/heads/archloom' }}
+          add-job-summary: 'always'
       - name: Make gradle wrapper executable
-        if: ${{ runner.os != 'Windows' }}
         run: chmod +x ./gradlew
       - name: Build
         run: ./gradlew build
-      - name: Capture fabric build artifact
+      - name: Capture Fabric build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: "Make Bubbles Pop Fabric for Minecraft 1.21.2-1.21.4 (Unzip Me)"
+          name: "Make Bubbles Pop Fabric for Minecraft 1.21.9-1.21.10 (Unzip Me)"
           path: fabric/build/libs/make_bubbles_pop-*.jar
-      - name: Capture forge build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: "Make Bubbles Pop Forge for Minecraft 1.21.2-1.21.4 (Unzip Me)"
-          path: forge/build/libs/make_bubbles_pop-*.jar
+      - name: Set job summary
+        id: summary
+        shell: bash
+        run: |
+          cat << EOF >> $GITHUB_STEP_SUMMARY
+          <picture>
+            <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/light-theme/success.svg">
+            <img alt="✅ Success" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/success.svg">
+          </picture><br>
+
+          **${{ github.event.repository.name }}** built successfully! [See changes since last release](https://github.com/${{ github.repository }}/blob/${{ github.sha }}/CHANGES.md).
+
+          [Download artifacts via nightly.link](https://nightly.link/${{ github.repository }}/actions/runs/${{ github.run_id }})
+
+          EOF

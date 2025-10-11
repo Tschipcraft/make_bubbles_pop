@@ -38,12 +38,12 @@ public abstract class BarrelBubble extends BlockWithEntity {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return world.isClient ? validateTicker(type, BlockEntityType.BARREL, this::makeBubblesPop$clientTick) : null;
+        return world.isClient() ? validateTicker(type, BlockEntityType.BARREL, this::makeBubblesPop$clientTick) : null;
     }
 
     @Unique
     public void makeBubblesPop$clientTick(World world, BlockPos pos, BlockState state, BarrelBlockEntity blockEntity) {
-        if (world != null && world.isClient && (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.BARREL_BUBBLES_ENABLED)) {
+        if (world != null && world.isClient() && (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.BARREL_BUBBLES_ENABLED)) {
             // Get direction and openness of barrel block
             Direction facing = state.getOrEmpty(BarrelBlock.FACING).orElse(Direction.NORTH);
             boolean open = state.getOrEmpty(BarrelBlock.OPEN).orElse(false);

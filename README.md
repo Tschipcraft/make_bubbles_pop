@@ -10,16 +10,15 @@
 </p>
 
 <picture><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/light-theme/info.svg"><img alt="Info" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/info.svg"></picture><br>
-This branch hosts the 1.21.2-1.21.4 version of the mod.
-- Fabric version works in Minecraft 1.21.2-1.21.4
-- Forge version works in Minecraft 1.21.2-1.21.4
+This branch hosts the v0.3.2 1.21.9+ Fabric version of the mod.
+- Fabric version works in Minecraft 1.21.9-1.21.10
+- Forge version not ported
 
 [Go to the master branch](https://github.com/Tschipcraft/make_bubbles_pop/tree/master)
 
 ## Features
 
-This client-side mod makes bubble particles pop
-and completely overhauls their behavior to make them rise realistically to the water surface.
+This client-side mod makes bubble particles pop and completely overhauls their behavior to make them rise realistically to the water surface.
 It also adds bubble particles to opening chests, opening barrels and explosions underwater.
 
 Fixes [MC-132067](https://bugs.mojang.com/browse/MC-132067).
@@ -28,7 +27,7 @@ Fixes [MC-132067](https://bugs.mojang.com/browse/MC-132067).
 
 Download the latest release from [here](https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod/releases/latest) and put the .jar file into the `mods` folder in your Minecraft directory.
 
-To configure Make Bubbles Pop, install [MidnightLib](https://modrinth.com/mod/midnightlib) for Fabric or [Configured](https://www.curseforge.com/minecraft/mc-mods/configured) for Forge alongside it.
+To configure Make Bubbles Pop, install [MidnightLib](https://modrinth.com/mod/midnightlib) for Fabric alongside it.
 
 This mod is also available on Modrinth and CurseForge!
 
@@ -46,6 +45,10 @@ This mod is also available on Modrinth and CurseForge!
   <img height="72px" alt="Download on CurseForge" src="https://raw.githubusercontent.com/Tschipcraft/badges/main/assets/curseforge-badge-dark.svg">
 </picture>
 </a>
+
+## Development Builds
+
+Development builds are available via [GitHub Actions](https://github.com/Tschipcraft/make_bubbles_pop/actions/workflows/build.yml). These builds are not guaranteed to be stable and may contain bugs.
 
 ## Demo Videos
 

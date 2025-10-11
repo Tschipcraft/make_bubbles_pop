@@ -1,7 +1,8 @@
 package net.tschipcraft.make_bubbles_pop.mixin.client;
 
 import net.minecraft.client.particle.BubbleColumnUpParticle;
-import net.minecraft.client.particle.SpriteBillboardParticle;
+import net.minecraft.client.particle.BillboardParticle;
+import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.world.ClientWorld;
 import net.tschipcraft.make_bubbles_pop.impl.BubbleUtil;
 import org.spongepowered.asm.mixin.Mixin;
@@ -10,16 +11,15 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(BubbleColumnUpParticle.class)
-public abstract class BubbleColumnPop extends SpriteBillboardParticle {
-    // TODO: Add support for overhauled bubble behavior (#3) - next version
+public abstract class BubbleColumnPop extends BillboardParticle {
 
-    protected BubbleColumnPop(ClientWorld clientWorld, double d, double e, double f) {
-        super(clientWorld, d, e, f);
+    protected BubbleColumnPop(ClientWorld world, double x, double y, double z, Sprite sprite) {
+        super(world, x, y, z, sprite);
     }
 
     // Tint bubble based on water color
     @Inject(method = "<init>", at = @At(value = "TAIL"))
-    void makeBubblesPop$init(ClientWorld clientWorld, double d, double e, double f, double g, double h, double i, CallbackInfo ci) {
+    void makeBubblesPop$init(ClientWorld clientWorld, double d, double e, double f, double g, double h, double i, Sprite sprite, CallbackInfo ci) {
         BubbleUtil.tintBubble(world, this.x, this.y, this.z, this);
     }
 

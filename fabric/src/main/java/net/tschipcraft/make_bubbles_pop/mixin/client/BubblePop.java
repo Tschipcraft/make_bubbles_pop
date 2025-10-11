@@ -1,7 +1,8 @@
 package net.tschipcraft.make_bubbles_pop.mixin.client;
 
-import net.minecraft.client.particle.SpriteBillboardParticle;
+import net.minecraft.client.particle.BillboardParticle;
 import net.minecraft.client.particle.WaterBubbleParticle;
+import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.predicate.entity.EntityPredicates;
@@ -26,10 +27,10 @@ import java.util.List;
  * </pre>
  */
 @Mixin(WaterBubbleParticle.class)
-public abstract class BubblePop extends SpriteBillboardParticle {
+public abstract class BubblePop extends BillboardParticle {
 
-    protected BubblePop(ClientWorld clientWorld, double d, double e, double f) {
-        super(clientWorld, d, e, f);
+    protected BubblePop(ClientWorld world, double x, double y, double z, Sprite sprite) {
+        super(world, x, y, z, sprite);
     }
 
     @Unique
@@ -49,7 +50,7 @@ public abstract class BubblePop extends SpriteBillboardParticle {
      */
 
     @Inject(method = "<init>", at = @At(value = "TAIL"))
-    void makeBubblesPop$init(ClientWorld clientWorld, double d, double e, double f, double g, double h, double i, CallbackInfo ci) {
+    void makeBubblesPop$init(ClientWorld clientWorld, double d, double e, double f, double g, double h, double i, Sprite sprite, CallbackInfo ci) {
         // Longer maxAge to enable bubbles to fully rise to the top (Could cause performance issues - you called it previous me)
         this.maxAge = (int) ((MakeBubblesPop.MIDNIGHTLIB_INSTALLED ? MakeBubblesPopConfig.BUBBLE_LIFETIME_MULTIPLIER : 32D) / (this.random.nextDouble() * 0.7D + 0.1D));
         this.accelerationAngle = this.random.nextFloat() * 360F;
@@ -61,9 +62,9 @@ public abstract class BubblePop extends SpriteBillboardParticle {
     @Inject(method = "tick", at = @At(value = "HEAD"), cancellable = true)
     public void makeBubblesPop$tick(CallbackInfo ci) {
         ci.cancel();
-        this.prevPosX = this.x;
-        this.prevPosY = this.y;
-        this.prevPosZ = this.z;
+        this.lastX = this.x;
+        this.lastY = this.y;
+        this.lastZ = this.z;
 
         if (this.age++ >= this.maxAge || !this.world.isWater(BlockPos.ofFloored(this.x, this.y + 0.1, this.z)) || !this.world.isWater(BlockPos.ofFloored(this.x, this.y, this.z))) {
             // Outside water/maxAge reached -> pop with sound
@@ -78,7 +79,7 @@ public abstract class BubblePop extends SpriteBillboardParticle {
             this.move(this.velocityX, this.velocityY, this.velocityZ);
 
             // Detect stuck bubbles
-            if (this.y == this.prevPosY) {
+            if (this.y == this.lastY) {
                 this.age *= 2;
             }
 

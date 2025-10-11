@@ -13,4 +13,4 @@ pluginManagement {
 
 rootProject.name = 'make_bubbles_pop'
 include 'fabric'
-include 'forge'
+//include 'forge' - I won't be continuing LexForge support, stay tuned for NeoForge support instead

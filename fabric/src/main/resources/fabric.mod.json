@@ -10,9 +10,9 @@
     "make_bubbles_pop.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.17",
+    "fabricloader": ">=0.17.3",
     "fabric": "*",
-    "minecraft": ">=1.21.2",
+    "minecraft": ">=1.21.9",
     "java": ">=21"
   },
   "id": "make_bubbles_pop",
@@ -25,8 +25,8 @@
     "Tschipcraft"
   ],
   "contact": {
-    "homepage": "https://tschipcraft.ddns.net/make_bubbles_pop.html",
-    "sources": "https://github.com/Tschipcraft/make_bubbles_pop/tree/1.21.2-1.21.4",
+    "homepage": "https://modrinth.com/mod/gPCdW0Wr",
+    "sources": "https://github.com/Tschipcraft/make_bubbles_pop/tree/old-1.21.9",
     "issues": "https://github.com/Tschipcraft/make_bubbles_pop/issues"
   },
   "recommends": {
@@ -37,7 +37,7 @@
     "modmenu": {
       "links": {
         "modmenu.donate": "https://ko-fi.com/tschipcraft",
-        "modmenu.modrinth": "https://modrinth.com/mod/make_bubbles_pop",
+        "modmenu.modrinth": "https://modrinth.com/mod/gPCdW0Wr",
         "modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/make-bubbles-pop",
         "modmenu.youtube": "https://www.youtube.com/@tschipcraft"
       }

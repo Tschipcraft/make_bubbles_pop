@@ -26,7 +26,7 @@ public abstract class ExplosionEmitterBubble extends NoRenderParticle {
             method = "tick()V",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/world/ClientWorld;addParticle(Lnet/minecraft/particle/ParticleEffect;DDDDDD)V",
+                    target = "Lnet/minecraft/client/world/ClientWorld;addParticleClient(Lnet/minecraft/particle/ParticleEffect;DDDDDD)V",
                     shift = At.Shift.BEFORE
             )
     )
@@ -41,7 +41,7 @@ public abstract class ExplosionEmitterBubble extends NoRenderParticle {
                     double x = this.x + dx * 3.5D;
                     double y = this.y + dy * 3.5D;
                     double z = this.z + dz * 3.5D;
-                    this.world.addParticle(ParticleTypes.BUBBLE, x, y, z, dx * 3D, dy * 3D, dz * 3D);
+                    this.world.addParticleClient(ParticleTypes.BUBBLE, x, y, z, dx * 3D, dy * 3D, dz * 3D);
                 }
             }
         }

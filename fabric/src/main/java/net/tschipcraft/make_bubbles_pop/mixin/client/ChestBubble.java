@@ -31,7 +31,7 @@ public abstract class ChestBubble {
 
     @Inject(method = "clientTick", at = @At("TAIL"))
     private static void makeBubblesPop$clientTick(World world, BlockPos pos, BlockState state, ChestBlockEntity blockEntity, CallbackInfo ci) {
-        if (world != null && world.isClient && (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.CHEST_BUBBLES_ENABLED) && world.isWater(pos)) {
+        if (world != null && world.isClient() && (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.CHEST_BUBBLES_ENABLED) && world.isWater(pos)) {
             ChestType chestType = state.getOrEmpty(ChestBlock.CHEST_TYPE).orElse(ChestType.SINGLE);
             Direction facing = state.getOrEmpty(ChestBlock.FACING).orElse(Direction.NORTH);
             Block block = state.getBlock();
@@ -80,18 +80,18 @@ public abstract class ChestBubble {
                                         zOffsetRand = (world.random.nextFloat() - world.random.nextFloat()) * 0.8F;
                                     }
 
-                                    world.addParticle(ParticleTypes.BUBBLE, pos.getX() + xOffset + xOffsetRand, pos.getY() + 0.7F - (world.random.nextFloat() / 2F), pos.getZ() + zOffset + zOffsetRand, 0F, 0.05F + world.random.nextFloat() * 0.05F, 0F);
+                                    world.addParticleClient(ParticleTypes.BUBBLE, pos.getX() + xOffset + xOffsetRand, pos.getY() + 0.7F - (world.random.nextFloat() / 2F), pos.getZ() + zOffset + zOffsetRand, 0F, 0.05F + world.random.nextFloat() * 0.05F, 0F);
                                 }
                             }
                         } else {
                             // Single chest
                             for (int i = 0; i < 7 + world.random.nextInt(10); i++) {
-                                world.addParticle(ParticleTypes.BUBBLE, pos.getX() + 0.5F + (world.random.nextFloat() - world.random.nextFloat()) * 0.3F, pos.getY() + 0.7F - (world.random.nextFloat() / 2F), pos.getZ() + 0.5F + (world.random.nextFloat() - world.random.nextFloat()) * 0.3F, 0F, 0.05F + world.random.nextFloat() * 0.05F, 0F);
+                                world.addParticleClient(ParticleTypes.BUBBLE, pos.getX() + 0.5F + (world.random.nextFloat() - world.random.nextFloat()) * 0.3F, pos.getY() + 0.7F - (world.random.nextFloat() / 2F), pos.getZ() + 0.5F + (world.random.nextFloat() - world.random.nextFloat()) * 0.3F, 0F, 0.05F + world.random.nextFloat() * 0.05F, 0F);
                             }
                         }
                         // Play sound
                         if (!MakeBubblesPop.MIDNIGHTLIB_INSTALLED || MakeBubblesPopConfig.CONTAINER_SOUND_ENABLED) {
-                            world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundCategory.AMBIENT, 0.3F + (world.random.nextFloat() * 0.1F), 1.3F + (world.random.nextFloat() * 0.3F), false);
+                            world.playSoundClient(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, SoundCategory.AMBIENT, 0.3F + (world.random.nextFloat() * 0.1F), 1.3F + (world.random.nextFloat() * 0.3F), false);
                         }
                     }
                 } else {
