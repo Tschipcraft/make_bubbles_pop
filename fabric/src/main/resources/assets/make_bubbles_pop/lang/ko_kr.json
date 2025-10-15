@@ -1,5 +1,7 @@
 {
   "modmenu.summaryTranslation.make_bubbles_pop": "버블 입자가 터지게 하고 물 표면으로 올라오게 합니다.",
+  "modmenu.descriptionTranslation.make_bubbles_pop": "이 클라이언트 사이드 모드는 거품 입자가 터지고 현실적으로 물 표면으로 떠오르게 만듭니다. \n또한, 이 모드는 상자를 열거나, 통을 열거나, 물속에서 폭발이 일어날 때 거품 입자를 추가합니다.",
+
   "make_bubbles_pop.midnightconfig.title": "버블 팝 설정",
   "make_bubbles_pop.midnightconfig.empty": "",
   "make_bubbles_pop.midnightconfig.additional_features": "추가 기능",

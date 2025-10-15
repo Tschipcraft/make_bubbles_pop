@@ -1,2 +1,2 @@
 - **Added Fabric support for Minecraft 1.21.9** 🥉 **and 1.21.10** 🧩
-- Updated to Gradle 9.1 and Loom 1.11
+- Added South Korean and Ukrainian language support (Thanks @Merhaf and @Mykytius, [#21](https://github.com/Tschipcraft/make_bubbles_pop/issues/21))

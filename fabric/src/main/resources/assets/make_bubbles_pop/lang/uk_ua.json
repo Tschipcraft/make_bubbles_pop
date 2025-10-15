@@ -1,0 +1,32 @@
+{
+  "modmenu.summaryTranslation.make_bubbles_pop": "Дозволяє частинкам бульбашок лопатися та підійматися на поверхню води.",
+  "modmenu.descriptionTranslation.make_bubbles_pop": "Цей клієнтський мод дозволяє частинкам бульбашок лопатися та реалістично підійматися на поверхню води. \nВін також додає частинки бульбашок при відкритті скринь, діжок та вибухах під водою.",
+
+  "make_bubbles_pop.midnightconfig.title": "Налаштування Make Bubbles Pop",
+  "make_bubbles_pop.midnightconfig.empty": "",
+  "make_bubbles_pop.midnightconfig.additional_features": "Додаткові функції",
+
+  "make_bubbles_pop.midnightconfig.POP_PARTICLE_ENABLED": "Увімкнути частинки лопання бульбашок",
+  "make_bubbles_pop.midnightconfig.POP_PARTICLE_ENABLED.tooltip": "Усталено: §aТак§f \n§dℹ Примітка:§f Обов'язково вимкніть цю функцію або реалізацію мода Particle Tweaks, якщо він встановлений.",
+  "make_bubbles_pop.midnightconfig.BUBBLE_POP_VOLUME": " └ Гучність звуку лопання бульбашок",
+  "make_bubbles_pop.midnightconfig.BUBBLE_POP_VOLUME.tooltip": "Усталено: §b10%§f",
+  "make_bubbles_pop.midnightconfig.POPPED_BUBBLES_MAINTAIN_VELOCITY": " └ Зберігати швидкість руху бульбашок після лопання",
+  "make_bubbles_pop.midnightconfig.POPPED_BUBBLES_MAINTAIN_VELOCITY.tooltip": "Усталено: §cНі§f",
+
+  "make_bubbles_pop.midnightconfig.BUBBLE_PHYSICS_ENABLED": "Увімкнути фізику бульбашок",
+  "make_bubbles_pop.midnightconfig.BUBBLE_PHYSICS_ENABLED.tooltip": "Вмикає розширену фізику бульбашок при зіткненні з блоками або сутностями. \nУсталено: §aТак§f \n§dℹ Примітка:§f Наразі це не працює для бульбашок від піску душ чи магматичних блоків.",
+  "make_bubbles_pop.midnightconfig.BUBBLE_LIFETIME_MULTIPLIER": " └ Середня тривалість життя бульбашок",
+  "make_bubbles_pop.midnightconfig.BUBBLE_LIFETIME_MULTIPLIER.tooltip": "Час, за який бульбашка лопається під водою. \nУсталено це значення встановлено на довше, ніж у ванільній грі, щоб бульбашки могли досягти поверхні води. \nУсталено: §b32.0§f §7(Ванільна гра: 8.0)§f",
+  "make_bubbles_pop.midnightconfig.BIOME_COLORS_ENABLED": "Увімкнути кольори бульбашок залежно від біому",
+  "make_bubbles_pop.midnightconfig.BIOME_COLORS_ENABLED.tooltip": "Надає відтінок усім типам бульбашок залежно від кольору води. \nУсталено: §aТак§f",
+  "make_bubbles_pop.midnightconfig.BIOME_COLOR_INTENSITY": " └ Інтенсивність кольору бульбашок залежно від біому",
+  "make_bubbles_pop.midnightconfig.BIOME_COLOR_INTENSITY.tooltip": "Усталено: §b65%§f",
+  "make_bubbles_pop.midnightconfig.CHEST_BUBBLES_ENABLED": "Увімкнути бульбашки від скринь",
+  "make_bubbles_pop.midnightconfig.CHEST_BUBBLES_ENABLED.tooltip": "Усталено: §aТак§f \n§dℹ Примітка:§f Обов'язково вимкніть цю функцію або реалізацію мода Effective, якщо він встановлений.",
+  "make_bubbles_pop.midnightconfig.BARREL_BUBBLES_ENABLED": "Увімкнути бульбашки від діжок",
+  "make_bubbles_pop.midnightconfig.BARREL_BUBBLES_ENABLED.tooltip": "Усталено: §aТак§f",
+  "make_bubbles_pop.midnightconfig.CONTAINER_SOUND_ENABLED": " └ Увімкнути звук відкриття скринь і діжок під водою",
+  "make_bubbles_pop.midnightconfig.CONTAINER_SOUND_ENABLED.tooltip": "Усталено: §aТак§f",
+  "make_bubbles_pop.midnightconfig.EXPLOSION_BUBBLES_ENABLED": "Увімкнути бульбашки від вибухів",
+  "make_bubbles_pop.midnightconfig.EXPLOSION_BUBBLES_ENABLED.tooltip": "Усталено: §aТак§f \n§dℹ Примітка:§f Обов'язково вимкніть цю функцію або реалізацію мода Explosive Enhancement, якщо він встановлений."
+}
