@@ -1,2 +1,1 @@
-- **Added Fabric support for Minecraft 1.21.9** 🥉 **and 1.21.10** 🧩
-- Added South Korean and Ukrainian language support (Thanks @Merhaf and @Mykytius, [#21](https://github.com/Tschipcraft/make_bubbles_pop/issues/21))
+- **Added Fabric support for Minecraft 26.1.x** 🐤
