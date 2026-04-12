@@ -30,7 +30,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: "Make Bubbles Pop Fabric for Minecraft 26.1.x (Unzip Me)"
-          path: fabric/build/libs/make_bubbles_pop-*.jar
+          path: build/libs/make_bubbles_pop-*.jar
       - name: Set job summary
         id: summary
         shell: bash
