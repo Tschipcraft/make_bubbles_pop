@@ -1,7 +1,7 @@
 {
   "modmenu.summaryTranslation.make_bubbles_pop": "버블 입자가 터지게 하고 물 표면으로 올라오게 합니다.",
-  "modmenu.descriptionTranslation.make_bubbles_pop": "이 클라이언트 사이드 모드는 거품 입자가 터지고 현실적으로 물 표면으로 떠오르게 만듭니다.\n또한, 이 모드는 상자를 열거나, 통을 열거나, 물속에서 폭발이 일어날 때 거품 입자를 추가합니다.",
-  "fml.menu.mods.info.description.make_bubbles_pop": "이 클라이언트 사이드 모드는 거품 입자가 터지고 현실적으로 물 표면으로 떠오르게 만듭니다.\n\n또한, 이 모드는 상자를 열거나, 통을 열거나, 물속에서 폭발이 일어날 때 거품 입자를 추가합니다.",
+  "modmenu.descriptionTranslation.make_bubbles_pop": "이 클라이언트 사이드 모드는 거품 입자가 터지고 현실적으로 물 표면으로 떠오르게 만듭니다. \n또한, 이 모드는 상자를 열거나, 통을 열거나, 물속에서 폭발이 일어날 때 거품 입자를 추가합니다.",
+  "fml.menu.mods.info.description.make_bubbles_pop": "이 클라이언트 사이드 모드는 거품 입자가 터지고 현실적으로 물 표면으로 떠오르게 만듭니다. \n\n또한, 이 모드는 상자를 열거나, 통을 열거나, 물속에서 폭발이 일어날 때 거품 입자를 추가합니다.",
 
   "make_bubbles_pop.yacl.missing": "Yet Another Config Lib 가 설치되지 않았습니다!",
   "make_bubbles_pop.yacl.missing.description": "패브릭&퀼트를 위한 \"Make Bubbles Pop\"을(를) 사용하려면 설정을 위해 \"Yet Another Config Lib\"를 설치해야 합니다. 지금 다운로드하시겠습니까?",
@@ -33,5 +33,4 @@
   "make_bubbles_pop.config.CONTAINER_SOUND_ENABLED.tooltip": "기본값: §a예§f",
   "make_bubbles_pop.config.EXPLOSION_BUBBLES_ENABLED": "폭발 버블 활성화",
   "make_bubbles_pop.config.EXPLOSION_BUBBLES_ENABLED.tooltip": "기본값: §a예§f \n§dℹ 주의:§f Explosive Enhancement가 설치된 경우, 이 설정 또는 Explosive Enhancement의 구현을 비활성화해야 합니다."
-
 }

@@ -6,8 +6,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
 /**
- * This mixin injects into the BarrelBlockEntity class to add a flag for tracking if a barrel was loaded.
- * Used to prevent bubbles from spawning when a chunk with an already open barrel is loaded.
+ * This mixin injects into the BarrelBlockEntity class to add a flag that tracks whether a barrel has been loaded.
+ * Used to prevent bubbles from spawning when a chunk containing an already open barrel is loaded.
  */
 @Mixin(BarrelBlockEntity.class)
 public abstract class BarrelBlockEntityMixin implements BarrelBlockEntityInterface {

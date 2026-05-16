@@ -140,7 +140,7 @@ public abstract class BubblePop extends SpriteBillboardParticle {
 
                 // Search way around blocks
                 if (!this.world.isWater(BlockPos.ofFloored(this.x, this.y + 0.8D, this.z)) && !this.world.isAir(BlockPos.ofFloored(this.x, this.y + 0.8D, this.z))) {
-                    // Direct way upwards blocked -> search up different way to water surface
+                    // Direct way upwards blocked -> search for a different way to water surface
 
                     boolean escapePosX = this.world.isWater(BlockPos.ofFloored(this.x + 1D, this.y + 0.8D, this.z)) && this.world.isWater(BlockPos.ofFloored(this.x + 1D, this.y, this.z));
                     boolean escapeNegX = this.world.isWater(BlockPos.ofFloored(this.x - 1D, this.y + 0.8D, this.z)) && this.world.isWater(BlockPos.ofFloored(this.x - 1D, this.y, this.z));

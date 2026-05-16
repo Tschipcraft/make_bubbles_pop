@@ -1,10 +1,10 @@
 {
   "modmenu.summaryTranslation.make_bubbles_pop": "Makes bubble particles pop and lets them rise to the water surface.",
-  "modmenu.descriptionTranslation.make_bubbles_pop": "This client-side mod makes bubble particles pop and lets them realistically rise to the water surface.\nIt also adds bubble particles to opening chests, opening barrels and explosions underwater.",
-  "fml.menu.mods.info.description.make_bubbles_pop": "This client-side mod makes bubble particles pop and lets them realistically rise to the water surface.\n\nIt also adds bubble particles to opening chests, opening barrels and explosions underwater.",
+  "modmenu.descriptionTranslation.make_bubbles_pop": "This client-side mod makes bubble particles pop and lets them realistically rise to the water surface. \nIt also adds bubble particles to opening chests, opening barrels and explosions underwater.",
+  "fml.menu.mods.info.description.make_bubbles_pop": "This client-side mod makes bubble particles pop and lets them realistically rise to the water surface. \n\nIt also adds bubble particles to opening chests, opening barrels and explosions underwater.",
 
   "make_bubbles_pop.yacl.missing": "Yet Another Config Lib is not installed!",
-  "make_bubbles_pop.yacl.missing.description": "Make Bubbles Pop for Fabric&Quilt requires Yet Another Config Lib to be installed for configuration. Would you like to download it now?",
+  "make_bubbles_pop.yacl.missing.description": "Make Bubbles Pop for Fabric & Quilt requires Yet Another Config Lib to be installed for configuration. Would you like to download it now?",
 
   "make_bubbles_pop.config.title": "Make Bubbles Pop Configuration",
   "make_bubbles_pop.config.empty": "",
@@ -33,5 +33,4 @@
   "make_bubbles_pop.config.CONTAINER_SOUND_ENABLED.tooltip": "Default: §aON§f",
   "make_bubbles_pop.config.EXPLOSION_BUBBLES_ENABLED": "Enable Explosion Bubbles",
   "make_bubbles_pop.config.EXPLOSION_BUBBLES_ENABLED.tooltip": "Default: §aON§f \n§dℹ Note:§f Make sure to disable this or Explosive Enhancement's implementation if Explosive Enhancement is installed."
-
 }

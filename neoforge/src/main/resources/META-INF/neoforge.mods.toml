@@ -13,6 +13,7 @@ This client-side mod makes bubble particles pop and completely overhauls their b
 It also adds bubble particles to opening chests, opening barrels and explosions underwater.
 '''
 authors="Tschipcraft"
+credits="AViewFromTheTop, Merhaf, Mykytius"
 logoFile="icon.png"
 logoBlur=false
 displayURL="https://github.com/Tschipcraft/make_bubbles_pop/tree/archloom"

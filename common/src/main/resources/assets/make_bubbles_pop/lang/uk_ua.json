@@ -3,7 +3,7 @@
   "modmenu.descriptionTranslation.make_bubbles_pop": "Цей клієнтський мод дозволяє частинкам бульбашок лопатися та реалістично підійматися на поверхню води. \nВін також додає частинки бульбашок при відкритті скринь, діжок та вибухах під водою.",
   "fml.menu.mods.info.description.make_bubbles_pop": "Цей клієнтський мод дозволяє частинкам бульбашок лопатися та реалістично підійматися на поверхню води. \n\nВін також додає частинки бульбашок при відкритті скринь, діжок та вибухах під водою.",
 
-  "make_bubbles_pop.config.title",: "Налаштування Make Bubbles Pop",
+  "make_bubbles_pop.config.title": "Налаштування Make Bubbles Pop",
   "make_bubbles_pop.config.empty": "",
   "make_bubbles_pop.config.additional_features": "Додаткові функції",
 
