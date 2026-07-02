@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.BlockEntityTypes;
 import net.minecraft.world.level.block.state.BlockState;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPop;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPopConfig;
@@ -35,7 +36,7 @@ public abstract class BarrelBubble extends BaseEntityBlock {
     // Register BarrelBlock to tick on the client
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return type == BlockEntityType.BARREL ? this::makeBubblesPop$clientTick : null;
+        return level.isClientSide() ? createTickerHelper(type, BlockEntityTypes.BARREL, this::makeBubblesPop$clientTick) : null;
     }
 
     @Unique

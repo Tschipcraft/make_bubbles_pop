@@ -1,1 +1,1 @@
-- **Added Fabric support for Minecraft 26.1.x** 🐤
+- **Added Fabric support for Minecraft 26.2.x** ♨️ ([#24](https://github.com/Tschipcraft/make_bubbles_pop/issues/24))

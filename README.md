@@ -10,9 +10,9 @@
 </p>
 
 <picture><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/light-theme/info.svg"><img alt="Info" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/info.svg"></picture><br>
-This branch hosts the v0.3.3 26.1.x Fabric version of the mod.
-- Fabric version works in Minecraft 26.1.x
-- Forge version not ported
+This branch hosts the v0.3.4 26.2.x Fabric version of the mod.
+- Fabric version works in Minecraft 26.2.x
+- (Neo)Forge version not ported
 
 [Go to the master branch](https://github.com/Tschipcraft/make_bubbles_pop/tree/master)
 

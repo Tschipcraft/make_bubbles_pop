@@ -11,7 +11,7 @@
   ],
   "depends": {
     "fabricloader": ">=0.17.3",
-    "minecraft": ">=26.1",
+    "minecraft": ">=26.2",
     "java": ">=25"
   },
   "id": "make_bubbles_pop",
@@ -25,7 +25,7 @@
   ],
   "contact": {
     "homepage": "https://modrinth.com/mod/gPCdW0Wr",
-    "sources": "https://github.com/Tschipcraft/make_bubbles_pop/tree/old-26.1",
+    "sources": "https://github.com/Tschipcraft/make_bubbles_pop/tree/old-26.2",
     "issues": "https://github.com/Tschipcraft/make_bubbles_pop/issues"
   },
   "recommends": {
