@@ -1,0 +1,223 @@
+loomx.loom_version = "1.16-SNAPSHOT"
+
+mod.id = "make_bubbles_pop"
+mod.name = "Make Bubbles Pop"
+mod.group = "net.tschipcraft"
+mod.version = "0.4.0"
+mod.channel_tag = "-beta.2"
+mod.description = "This client-side mod makes bubble particles pop and completely overhauls their behavior to make them rise realistically to the water surface. It also adds bubble particles to opening chests, opening barrels and explosions underwater."
+mod.authors = ["Tschipcraft"]
+mod.contributors = ["AViewFromTheTop", "Merhaf", "Mykytius"]
+mod.inception_year = "2022"
+mod.license.name = "Custom"
+mod.license.url = "https://github.com/Tschipcraft/make_bubbles_pop/blob/master/LICENSE"
+mod.license.dist = "repo"
+mod.sources_url = "https://github.com/Tschipcraft/make_bubbles_pop"
+mod.homepage_url = "https://modrinth.com/mod/gPCdW0Wr"
+mod.issues_url = "https://github.com/Tschipcraft/make_bubbles_pop/issues"
+mod.environment = "client"
+mod.icon = "icon.png"
+# Points Forge/NeoForge in-game update checks at the Modrinth API. Publishing credentials and
+# project ids come from the environment instead, see .env.template.
+mod.modrinth_id = "gPCdW0Wr"
+
+# Extra links surfaced in the Mod Menu mod entry.
+[mod.links]
+"modmenu.donate" = "https://ko-fi.com/tschipcraft"
+"modmenu.modrinth" = "https://modrinth.com/mod/gPCdW0Wr"
+"modmenu.curseforge" = "https://www.curseforge.com/minecraft/mc-mods/make-bubbles-pop"
+"modmenu.youtube" = "https://www.youtube.com/@tschipcraft"
+
+[[mod.pom.developers]]
+id = "tschipcraft"
+name = "Tschipcraft"
+url = "https://github.com/Tschipcraft"
+
+# ---------------------------------------------------------------------------
+# Fabric
+# ---------------------------------------------------------------------------
+[fabric]
+deps.fabric-loader = "0.19.3"
+
+[fabric."1.18.2"]
+deps.minecraft = "1.18.2"
+deps.minecraft_range_lower = "1.18"
+deps.minecraft_range_upper = "1.18.2"
+deps.fabric-api = "0.77.0+1.18.2"
+deps.modmenu = "3.2.5"
+deps.cloth-config = "6.5.133"
+publish.additionalVersions = ["1.18", "1.18.1"]
+
+[fabric."1.19.2"]
+deps.minecraft = "1.19.2"
+deps.minecraft_range_lower = "1.19"
+deps.minecraft_range_upper = "1.19.3"
+deps.fabric-api = "0.77.0+1.19.2"
+deps.modmenu = "4.2.0-beta.2"
+deps.cloth-config = "7.0.74"
+publish.additionalVersions = ["1.19", "1.19.1", "1.19.3"]
+
+[fabric."1.19.4"]
+deps.minecraft = "1.19.4"
+deps.minecraft_range_lower = "1.19.4"
+deps.minecraft_range_upper = "1.19.4"
+deps.fabric-api = "0.87.2+1.19.4"
+deps.modmenu = "6.3.1"
+deps.cloth-config = "9.1.104"
+
+[fabric."1.20.1"]
+deps.minecraft = "1.20.1"
+deps.minecraft_range_lower = "1.20"
+deps.minecraft_range_upper = "1.20.6"
+deps.fabric-api = "0.92.11+1.20.1"
+deps.modmenu = "7.2.2"
+deps.yacl = "3.6.6+1.20.1-fabric"
+publish.additionalVersions = ["1.20", "1.20.2", "1.20.3", "1.20.4", "1.20.5", "1.20.6"]
+
+[fabric."1.21.1"]
+deps.minecraft = "1.21.1"
+deps.minecraft_range_lower = "1.21"
+deps.minecraft_range_upper = "1.21.1"
+deps.fabric-api = "0.116.15+1.21.1"
+deps.modmenu = "11.0.4"
+deps.yacl = "3.8.1+1.21.1-fabric"
+publish.additionalVersions = ["1.21"]
+
+[fabric."1.21.4"]
+deps.minecraft = "1.21.4"
+deps.minecraft_range_lower = "1.21.2"
+deps.minecraft_range_upper = "1.21.8"
+deps.fabric-api = "0.119.4+1.21.4"
+deps.modmenu = "13.0.4"
+deps.yacl = "3.8.1+1.21.4-fabric"
+publish.additionalVersions = ["1.21.2", "1.21.3", "1.21.5", "1.21.6", "1.21.7", "1.21.8"]
+
+[fabric."1.21.11"]
+deps.minecraft = "1.21.11"
+deps.minecraft_range_lower = "1.21.9"
+deps.minecraft_range_upper = "1.21.11"
+deps.fabric-api = "0.141.6+1.21.11"
+deps.modmenu = "17.0.0"
+deps.yacl = "3.8.1+1.21.11-fabric"
+publish.additionalVersions = ["1.21.9", "1.21.10"]
+
+[fabric."26.1.2"]
+deps.minecraft = "26.1.2"
+deps.minecraft_range_lower = "26.1"
+deps.minecraft_range_upper = "26.1.2"
+deps.fabric-api = "0.155.2+26.1.2"
+deps.modmenu = "18.0.0-beta.1"
+deps.yacl = "3.9.6+26.1-fabric"
+publish.additionalVersions = ["26.1", "26.1.1"]
+
+[fabric."26.2"]
+deps.minecraft = "26.2"
+deps.minecraft_range_lower = "26.2"
+deps.minecraft_range_upper = "26.2"
+deps.fabric-api = "0.156.0+26.2"
+deps.modmenu = "19.0.0-alpha.1"
+deps.yacl = "3.9.6+26.2-fabric"
+
+# ---------------------------------------------------------------------------
+# NeoForge - native ModConfigSpec storage, YACL screen
+# ---------------------------------------------------------------------------
+[neoforge]
+
+# 1.21 predates NeoForge's built-in ConfigurationScreen, which the entrypoint falls back to
+# when YACL is absent and which first shipped in 21.0.110-beta (2024-07-19).
+[neoforge."1.21.1"]
+deps.minecraft = "1.21.1"
+deps.minecraft_range_lower = "1.21"
+deps.minecraft_range_upper = "1.21.1"
+deps.neoforge = "21.1.248"
+deps.neoforge_range_lower = "21.0.110-beta"
+deps.yacl = "3.8.1+1.21.1-neoforge"
+publish.additionalVersions = ["1.21"]
+
+[neoforge."1.21.4"]
+deps.minecraft = "1.21.4"
+deps.minecraft_range_lower = "1.21.2"
+deps.minecraft_range_upper = "1.21.4"
+deps.neoforge = "21.4.157"
+deps.yacl = "3.8.1+1.21.4-neoforge"
+publish.additionalVersions = ["1.21.2", "1.21.3"]
+
+[neoforge."1.21.5"]
+deps.minecraft = "1.21.5"
+deps.minecraft_range_lower = "1.21.5"
+deps.minecraft_range_upper = "1.21.5"
+deps.neoforge = "21.5.98"
+deps.yacl = "3.8.1+1.21.5-neoforge"
+
+[neoforge."1.21.8"]
+deps.minecraft = "1.21.8"
+deps.minecraft_range_lower = "1.21.6"
+deps.minecraft_range_upper = "1.21.8"
+deps.neoforge = "21.8.54"
+deps.yacl = "3.8.1+1.21.6-neoforge"
+publish.additionalVersions = ["1.21.6", "1.21.7"]
+
+[neoforge."1.21.11"]
+deps.minecraft = "1.21.11"
+deps.minecraft_range_lower = "1.21.9"
+deps.minecraft_range_upper = "1.21.11"
+deps.neoforge = "21.11.45"
+deps.yacl = "3.8.1+1.21.11-neoforge"
+publish.additionalVersions = ["1.21.9", "1.21.10"]
+
+[neoforge."26.1.2"]
+deps.minecraft = "26.1.2"
+deps.minecraft_range_lower = "26.1"
+deps.minecraft_range_upper = "26.1.2"
+deps.neoforge = "26.1.2.94"
+deps.yacl = "3.9.6+26.1-neoforge"
+publish.additionalVersions = ["26.1", "26.1.1"]
+
+[neoforge."26.2"]
+deps.minecraft = "26.2"
+deps.minecraft_range_lower = "26.2"
+deps.minecraft_range_upper = "26.2"
+deps.neoforge = "26.2.0.41-beta"
+deps.yacl = "3.9.6+26.2-neoforge"
+
+# ---------------------------------------------------------------------------
+# Forge - native ForgeConfigSpec storage, Cloth Config screen
+#
+# Capped at 1.20.1: ModDevGradle's `legacyforge` plugin supports MinecraftForge
+# 1.17-1.20.1 only, and ForgeGradle 6 (the only toolchain for newer Forge)
+# refuses Gradle 9+, which Stonecutter requires.
+# ---------------------------------------------------------------------------
+[forge]
+
+[forge."1.18.2"]
+deps.minecraft = "1.18.2"
+deps.minecraft_range_lower = "1.18"
+deps.minecraft_range_upper = "1.18.2"
+deps.forge = "40.3.12"
+deps.cloth-config = "6.5.133"
+publish.additionalVersions = ["1.18", "1.18.1"]
+
+[forge."1.19.2"]
+deps.minecraft = "1.19.2"
+deps.minecraft_range_lower = "1.19"
+deps.minecraft_range_upper = "1.19.3"
+deps.forge = "43.5.2"
+deps.cloth-config = "7.0.74"
+publish.additionalVersions = ["1.19", "1.19.1", "1.19.3"]
+
+[forge."1.19.4"]
+deps.minecraft = "1.19.4"
+deps.minecraft_range_lower = "1.19.4"
+deps.minecraft_range_upper = "1.19.4"
+deps.forge = "45.4.3"
+deps.cloth-config = "9.1.104"
+
+# Built against 1.20.1 but advertised up to 1.20.4: the mod's Forge touchpoints are unchanged
+# across that span (the pre-Stonecutter 1.19.4 Forge build was confirmed working through 1.20.4).
+[forge."1.20.1"]
+deps.minecraft = "1.20.1"
+deps.minecraft_range_lower = "1.20"
+deps.minecraft_range_upper = "1.20.4"
+deps.forge = "47.4.22"
+deps.cloth-config = "10.1.135"
+publish.additionalVersions = ["1.20", "1.20.2", "1.20.3", "1.20.4"]

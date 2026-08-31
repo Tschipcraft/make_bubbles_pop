@@ -12,35 +12,31 @@ jobs:
           show-progress: false
       - name: Validate gradle wrapper
         uses: gradle/actions/wrapper-validation@v5
-      - name: Setup JDK 21
+      - name: Setup JDKs
         uses: actions/setup-java@v5
         with:
-          java-version: 21
+          # 17 for 1.18-1.20.4, 21 for 1.20.5-1.21.x, 25 for 26+.
+          java-version: |
+            17
+            21
+            25
           distribution: temurin
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v5
         with:
-          cache-read-only: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/dev' && github.ref != 'refs/heads/archloom' }}
+          cache-read-only: ${{ github.ref != 'refs/heads/master' && github.ref != 'refs/heads/dev' }}
           add-job-summary: 'always'
       - name: Make gradle wrapper executable
         run: chmod +x ./gradlew
-      - name: Build
+      - name: Build all Stonecutter targets
         run: ./gradlew build
-      - name: Capture Fabric build artifact
+      - name: Collect jars
+        run: ./gradlew buildAndCollect
+      - name: Capture build artifacts
         uses: actions/upload-artifact@v7
         with:
-          name: "Make Bubbles Pop Fabric 1.20.5-1.21.1 (Unzip Me)"
-          path: fabric/build/libs/make_bubbles_pop-*.jar
-      - name: Capture Forge build artifact
-        uses: actions/upload-artifact@v7
-        with:
-          name: "Make Bubbles Pop Forge 1.20.5-1.21.1 (Unzip Me)"
-          path: forge/build/libs/make_bubbles_pop-*.jar
-      - name: Capture NeoForge build artifact
-        uses: actions/upload-artifact@v7
-        with:
-          name: "Make Bubbles Pop NeoForge 1.21-1.21.1 (Unzip Me)"
-          path: neoforge/build/libs/make_bubbles_pop-*.jar
+          name: "Make Bubbles Pop (Unzip Me)"
+          path: build/libs/**/*.jar
       - name: Set job summary
         id: summary
         shell: bash
@@ -51,7 +47,7 @@ jobs:
             <img alt="✅ Success" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/success.svg">
           </picture><br>
 
-          **${{ github.event.repository.name }}** built successfully! [See changes since last release](https://github.com/${{ github.repository }}/blob/${{ github.sha }}/CHANGES.md).
+          **${{ github.event.repository.name }}** built successfully for all Stonecutter targets! [See changes since last release](https://github.com/${{ github.repository }}/blob/${{ github.sha }}/CHANGES.md).
 
           [Download artifacts via nightly.link](https://nightly.link/${{ github.repository }}/actions/runs/${{ github.run_id }})
 

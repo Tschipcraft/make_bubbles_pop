@@ -1,6 +1,6 @@
 <h1 align="center">
   <a><img alt="Icon" src="demo/icon_scaled.png" width="95" height="95" style="image-rendering: pixelated"></a><br/>
-  Make Bubbles Pop Mod
+  Tschipcraft's Make Bubbles Pop
 </h1>
 <p align="center">
   <a href="https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod/stargazers"><img alt="GitHub Stars" src="https://img.shields.io/github/stars/Tschipcraft/fabric_make_bubbles_pop_mod?colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
@@ -10,9 +10,7 @@
 </p>
 
 <picture><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/light-theme/info.svg"><img alt="Info" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/info.svg"></picture><br>
-This branch hosts the 1.21-1.21.1 [arch-loom](https://github.com/architectury/architectury-loom) version of the mod with native NeoForge support. This will most likely get merged into the main branch in the future.
-
-[Go to the master branch](https://github.com/Tschipcraft/make_bubbles_pop/tree/master)
+Every supported Minecraft version and mod loader is built from this one branch. The old per-version branches are kept for history only and are no longer updated.
 
 ## Features
 
