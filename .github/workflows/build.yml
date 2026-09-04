@@ -28,9 +28,7 @@ jobs:
           add-job-summary: 'always'
       - name: Make gradle wrapper executable
         run: chmod +x ./gradlew
-      - name: Build all Stonecutter targets
-        run: ./gradlew build
-      - name: Collect jars
+      - name: Build all Stonecutter targets and collect jars
         run: ./gradlew buildAndCollect
       - name: Capture build artifacts
         uses: actions/upload-artifact@v7
