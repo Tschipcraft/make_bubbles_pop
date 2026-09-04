@@ -1,2 +1,11 @@
-# Keep LF line endings for forge .toml file
-*.toml text eol=lf
+*               text=auto eol=lf
+
+/gradlew        text eol=lf
+
+*.bat           text eol=crlf
+
+*.png           binary
+*.jpg           binary
+*.ogg           binary
+*.mp3           binary
+*.mp4           binary
