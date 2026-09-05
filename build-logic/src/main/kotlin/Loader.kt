@@ -11,8 +11,8 @@ import dev.eav.tomlkt.Toml
 import org.gradle.api.NamedDomainObjectContainer
 import java.util.*
 
-// kotlinx defaults to a four-space indent; two matches the hand-written fabric.mod.json
-// convention, so a generated manifest still diffs cleanly against one checked in before.
+// Two-space indent matches a hand-written fabric.mod.json, so generated manifests diff cleanly
+// against ones checked in before the migration.
 @OptIn(ExperimentalSerializationApi::class)
 private val JSON = Json {
 	prettyPrint = true
@@ -89,23 +89,22 @@ sealed class Loader(val id: String) {
 		/** Query parameter Modrinth's update-check endpoint expects for this loader. */
 		protected open val updateCheckLoader: String get() = id
 
-		/**
-		 * NeoForge retired `displayTest` - it is no longer part of the default
-		 * `neoforge.mods.toml` - so only legacy MinecraftForge still gets the key.
-		 */
+		/** NeoForge retired `displayTest`; only legacy MinecraftForge still gets the key. */
 		protected open val supportsDisplayTest: Boolean get() = true
 
 		/**
-		 * Name FML registers the Java version feature under, or null where nothing in the declared
-		 * range registers one. This is not cosmetic: an unrecognised name falls back to
-		 * `MissingFeatureTest`, which reports its value as `NONE` and fails on both sides, so
-		 * naming it wrong rejects the mod outright rather than being ignored.
-		 *
-		 * Every NeoForge build knows `javaVersion` - NeoForge forked MinecraftForge at 1.20.1 in
-		 * July 2023, after the rename [Forge.javaVersionFeature] describes - so no gate is needed
-		 * here.
+		 * Name FML registers the Java version feature under, or null when nothing in range does.
+		 * A wrong name is not ignored: it falls back to `MissingFeatureTest` and rejects the mod.
+		 * Every NeoForge build knows `javaVersion`, having forked MinecraftForge after the rename
+		 * [Forge.javaVersionFeature] describes.
 		 */
 		protected open fun javaVersionFeature(ctx: Context): String? = "javaVersion"
+
+		/**
+		 * Whether the range reaches NeoForge 26.2's mod screen, which added `licenseURL`,
+		 * `bannerFile`, `iconFile` and `iconBlur`. Always false on legacy Forge, which reads none.
+		 */
+		protected open fun supportsModScreenImages(ctx: Context): Boolean = false
 
 		override fun generateManifest(ctx: Context): String {
 			val forgeDeps = mutableListOf<ForgeDependency>()
@@ -128,8 +127,11 @@ sealed class Loader(val id: String) {
 			addDeps(ctx.extension.dependencies.optional, "optional")
 			addDeps(ctx.extension.dependencies.incompatible, "incompatible")
 
+			val modScreenImages = supportsModScreenImages(ctx)
+
 			val manifest = ForgeManifest(
 				license = ctx.licenseName,
+				licenseURL = ctx.licenseUrl.takeIf { modScreenImages },
 				issueTrackerURL = ctx.issuesUrl,
 				mods = listOf(
 					ForgeMod(
@@ -142,7 +144,10 @@ sealed class Loader(val id: String) {
 							"https://api.modrinth.com/updates/$it/forge_updates.json?$updateCheckLoader=only"
 						},
 						logoFile = ctx.icon,
+						bannerFile = ctx.icon.takeIf { modScreenImages },
+						iconFile = ctx.icon.takeIf { modScreenImages },
 						authors = ctx.authors.joinToString(", "),
+						iconBlur = false.takeIf { modScreenImages },
 						credits = ctx.contributors.joinToString(", "),
 						description = ctx.description,
 						displayTest = if (supportsDisplayTest) ctx.forgeDisplayTest else null
@@ -164,6 +169,13 @@ sealed class Loader(val id: String) {
 		override val modManifestPath = "META-INF/neoforge.mods.toml"
 		override val excludedResources = (super.excludedResources + "META-INF/mods.toml") + "pack.mcmeta"
 		override val supportsDisplayTest = false
+
+		/**
+		 * Gated on the upper bound - see [Context.reachesMinecraft]. The keys landed in
+		 * 26.2.0.50-beta, not 26.2.0.0; earlier betas ignore them exactly like 26.1 does, which does
+		 * not earn a second gate.
+		 */
+		override fun supportsModScreenImages(ctx: Context) = ctx.reachesMinecraft("26.2")
 	}
 
 	object Forge : ForgeLike("forge") {
@@ -172,18 +184,14 @@ sealed class Loader(val id: String) {
 		val mixinConfigAttribute = "MixinConfigs"
 
 		/**
-		 * MinecraftForge registered `java_version` from 41.0.16 (1.19) and renamed it to
-		 * `javaVersion` in 47.0.17 (1.20.1, 2023-06-22). 1.20 never got the rename: that line
-		 * ended at 46.0.14 eleven days earlier, so no Forge build for 1.20 knows the new name.
+		 * MinecraftForge registered `java_version` in 41.0.16 (1.19) and renamed it to `javaVersion`
+		 * in 47.0.17 (1.20.1). The 1.20 line ended at 46.0.14 without the rename, and a jar
+		 * advertising 1.20-1.20.4 is loaded by 46.x, where `javaVersion` is a hard rejection - hence
+		 * the gate on the range's lower bound rather than the compiled version.
 		 *
-		 * The gate reads the range's lower bound rather than the compiled version, because a jar
-		 * advertising 1.20-1.20.4 is loaded by 46.x, where `javaVersion` is a hard rejection.
-		 *
-		 * Below 1.20.1 the table is omitted rather than emitted as `java_version`: a range
-		 * straddling the rename cannot name both, and where the old name does apply (1.19-1.20) it
-		 * was registered `DependencySide.SERVER`, so the check passes trivially on clients and
-		 * buys too little to be worth the risk. The residual gap is 1.20.1 on Forge 47.0.0-47.0.16,
-		 * three weeks of June 2023 builds that were never the recommended one.
+		 * Below 1.20.1 the table is omitted rather than written as `java_version`: a range straddling
+		 * the rename cannot name both, and the old name was registered server-side only, so it bought
+		 * little anyway. Residual gap: 1.20.1 on Forge 47.0.0-47.0.16, never a recommended build.
 		 */
 		override fun javaVersionFeature(ctx: Context): String? =
 			"javaVersion".takeIf { ctx.stonecutter.eval(ctx.minecraftRangeLower, ">=1.20.1") }

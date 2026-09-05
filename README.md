@@ -44,6 +44,10 @@ This mod is also available on Modrinth and CurseForge!
 
 Development builds are available via [GitHub Actions](https://github.com/Tschipcraft/make_bubbles_pop/actions/workflows/build.yml). These builds are not guaranteed to be stable and may contain bugs.
 
+## Acknowledgements
+
+Thanks to rotgruengelb for providing [stonecutter-mod-template](https://github.com/rotgruengelb/stonecutter-mod-template).
+
 ## Demo Videos
 
 https://user-images.githubusercontent.com/78470530/161437539-a666994e-2a25-4b80-aecd-240b1a979cfd.mp4

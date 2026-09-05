@@ -55,14 +55,10 @@ class Context(
 	}
 
 	/**
-	 * `displayTest` for the Forge-like manifests. Null leaves the Forge default
-	 * (`MATCH_VERSION`) in place, which requires the mod on both sides at the same version.
-	 *
-	 * `mod.environment = "client"` implies `IGNORE_ALL_VERSION`, because a client-only mod must
-	 * not fail the version check for players joining vanilla servers. Everything else is a
-	 * genuine per-mod choice and cannot be inferred - a server-side mod that still ships client
-	 * assets is `environment = "both"` yet usually wants `IGNORE_SERVER_VERSION` - so
-	 * `mod.forge_display_test` overrides it explicitly.
+	 * `displayTest` for legacy Forge; null keeps the default `MATCH_VERSION`. Client-only mods get
+	 * `IGNORE_ALL_VERSION` so vanilla servers accept them. Anything else cannot be inferred (a
+	 * server-side mod shipping client assets is `both` yet wants `IGNORE_SERVER_VERSION`), so it
+	 * is set explicitly through `mod.forge_display_test`.
 	 */
 	val forgeDisplayTest: String? by lazy {
 		optional("mod.forge_display_test").takeIf { it.isNotBlank() }
@@ -97,9 +93,8 @@ class Context(
 	val modrinthId: String by lazy { optional("mod.modrinth_id") }
 
 	/**
-	 * Declared in `build.fabric.gradle.kts` via `entrypoint(...)`. Deliberately has no default:
-	 * guessing a conventional set would silently generate a manifest naming classes the source
-	 * set does not contain, which only fails at runtime.
+	 * Declared via `entrypoint(...)` in `build.fabric.gradle.kts`. No default: a guessed set would
+	 * name classes that do not exist and only fail at runtime.
 	 */
 	val entrypoints: Map<String, List<String>> by lazy {
 		extension.entrypoints.get().ifEmpty {
@@ -118,12 +113,25 @@ class Context(
 	/** Oldest Minecraft version the jar advertises - see [Project.minecraftRangeLower]. */
 	val minecraftRangeLower: String by lazy { project.minecraftRangeLower() }
 
+	/** Newest Minecraft version the jar advertises, blank when open-ended - see [reachesMinecraft]. */
+	val minecraftRangeUpper: String by lazy { project.minecraftRangeUpper() }
+
 	/**
-	 * Drives the jar name, the Maven version and the published version string. The range slug is
-	 * used rather than the compiled version so a jar advertises the span it actually supports.
+	 * Whether the advertised range reaches [version]; a blank upper bound is open-ended.
 	 *
-	 * Joined with `-` rather than the `+` build-metadata separator upstream uses, because an
-	 * open-ended slug already ends in `+` and two of them in one version string reads badly.
+	 * Which bound a manifest key gates on depends on how loaders treat it when unknown. FML ignores
+	 * unknown manifest keys, so emitting early is free and the *newest* loader in range decides:
+	 * gate on the upper bound, here. An unknown `[features]` entry is a hard rejection, so there
+	 * the *oldest* loader decides and [Loader.Forge.javaVersionFeature] gates on
+	 * [minecraftRangeLower] instead.
+	 */
+	fun reachesMinecraft(version: String): Boolean =
+		minecraftRangeUpper.isBlank() || stonecutter.eval(minecraftRangeUpper, ">=$version")
+
+	/**
+	 * Jar name, Maven version and published version. Uses the range slug rather than the compiled
+	 * version so the jar states what it runs on, joined with `-` rather than upstream's `+` because
+	 * an open-ended slug already ends in `+`.
 	 */
 	val fullVersion: String by lazy { "$baseVersion-${loader.id}-$minecraftRangeSlug$snapshotSuffix" }
 
@@ -131,10 +139,7 @@ class Context(
 		project.sc.properties.rawOrNull("publish", "additionalVersions")?.to<List<String>>().orEmpty()
 	}
 
-	/**
-	 * Access wideners/transformers are optional - when the file for the current version is absent
-	 * the manifest key is omitted entirely rather than pointing at nothing.
-	 */
+	/** Null when this version ships no access widener/transformer; the manifest key is omitted. */
 	val accessWidenerPath: String? by lazy {
 		"aw/$currentMcVersion.accesswidener".takeIf {
 			project.rootProject.file("src/main/resources/$it").exists()

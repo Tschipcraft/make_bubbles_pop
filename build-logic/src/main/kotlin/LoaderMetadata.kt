@@ -15,7 +15,7 @@ data class FabricManifest(
 	val icon: String,
 	val license: String,
 	val environment: String = "*",
-	/** Null when the mod ships no access widener for this version - the key is then omitted. */
+	/** Null omits the key - see [Context.accessWidenerPath]. */
 	val accessWidener: String?,
 	val entrypoints: Map<String, List<String>>,
 	val mixins: List<String>,
@@ -28,18 +28,23 @@ data class FabricManifest(
 @Serializable
 data class ForgeManifest(
 	val modLoader: String = "javafml",
-	/** `[1,)` rather than upstream's `[2,)` so legacy MinecraftForge targets are covered too. */
+	/** `[1,)` rather than upstream's `[2,)` to cover legacy MinecraftForge. */
 	val loaderVersion: String = "[1,)",
 	val license: String,
+	/**
+	 * Links the licence name on the NeoForge 26.2 mod screen. File-level, not per-mod:
+	 * `DefaultModDisplayInfo.license()` reads it off the owning file.
+	 */
+	val licenseURL: String? = null,
 	val issueTrackerURL: String,
 	val mods: List<ForgeMod>,
 	val dependencies: Map<String, List<ForgeDependency>> = emptyMap(),
 	val mixins: List<ForgeMixin> = emptyList(),
-	/** Null when the mod ships no access transformer - the key is then omitted entirely. */
+	/** Null omits the key - see [Context.accessTransformerPath]. */
 	val accessTransformers: List<ForgeAccessTransformer>? = null,
 	/**
-	 * `[features.<modid>]` - load-time requirements FML checks before accepting the mod. Null when
-	 * the declared range has none, so the key is dropped rather than written as `features = {  }`.
+	 * `[features.<modid>]`, checked by FML before loading. Null drops the key rather than writing
+	 * `features = {  }`.
 	 */
 	val features: Map<String, Map<String, String>>? = null,
 	val modproperties: Map<String, Map<String, String>> = emptyMap()
@@ -53,15 +58,22 @@ data class ForgeMod(
 	val displayURL: String,
 	val modUrl: String,
 	val updateJSONURL: String? = null,
+	/**
+	 * Deprecated by NeoForge 26.2 for [bannerFile] and [iconFile] but still emitted: older loaders
+	 * read it, and NeoForge suppresses the deprecation warning when a replacement accompanies it.
+	 */
 	val logoFile: String,
+	/** Wide image in the 26.2 info panel; falls back to [logoFile]. */
+	val bannerFile: String? = null,
+	/** Square image in the 26.2 mod list; no fallback, so omitting it means no icon. */
+	val iconFile: String? = null,
 	val authors: String,
 	val logoBlur: Boolean = false,
+	/** [logoBlur] for [iconFile]; 26.2 reads no blur key for the banner and ignores [logoBlur]. */
+	val iconBlur: Boolean? = null,
 	val credits: String,
 	val description: String,
-	/**
-	 * `IGNORE_ALL_VERSION` for client-only mods, so they do not fail the server-side version
-	 * check for players joining vanilla servers. Null leaves the Forge default in place.
-	 */
+	/** See [Context.forgeDisplayTest]. */
 	val displayTest: String? = null
 )
 

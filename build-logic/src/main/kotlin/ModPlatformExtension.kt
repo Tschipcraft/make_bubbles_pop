@@ -17,9 +17,8 @@ abstract class ModPlatformExtension {
 	abstract val sourcesJarTask: Property<String>
 
 	/**
-	 * Fabric entrypoints written into the generated `fabric.mod.json`, declared with
-	 * [entrypoint]. Required for Fabric targets - there is no default, so the manifest can only
-	 * ever name classes that actually exist.
+	 * Fabric entrypoints for the generated `fabric.mod.json`, declared with [entrypoint].
+	 * No default - see [Context.entrypoints].
 	 */
 	abstract val entrypoints: MapProperty<String, List<String>>
 
@@ -65,13 +64,8 @@ abstract class Dependency @Inject constructor(val name: String) {
 	abstract val environment: Property<String>
 
 	/**
-	 * Whether this dependency is written into the generated mod manifest. Store listings and mod
-	 * manifests do not mean the same thing by a relationship: Modrinth and CurseForge treat
-	 * "incompatible" as an advisory tag shown to the reader, while `breaks` in `fabric.mod.json`
-	 * - or an `incompatible` entry in the Forge-like manifests - is a hard refusal to launch.
-	 *
-	 * Set false to advertise the relationship on the stores only. Mostly relevant for
-	 * [DependenciesConfig.incompatible], but it works for any of the four containers.
+	 * Whether the dependency is written into the mod manifest. Stores treat "incompatible" as an
+	 * advisory tag; in a manifest it refuses to launch. Set false to advertise on the stores only.
 	 */
 	abstract val declareInManifest: Property<Boolean>
 
@@ -80,14 +74,9 @@ abstract class Dependency @Inject constructor(val name: String) {
 		fabricLikeVersionRange.convention("*")
 		forgeLikeVersionRange.convention("(,]")
 		declareInManifest.convention(true)
-		// `environment` gets no convention on purpose. A Gradle Property with no convention
-		// reports null until something sets it, which is what lets Loader tell "the author asked
-		// for BOTH" apart from "the author said nothing at all". Unset dependencies then inherit
-		// `mod.environment` (see Context.forgeSide); giving this a convention would collapse both
-		// cases to BOTH and a client-only mod would advertise server-side dependencies.
-		//
-		// Only the Forge/NeoForge manifests read it - fabric.mod.json has no per-dependency side,
-		// so setting it in build.fabric.gradle.kts has no effect.
+		// `environment` deliberately has no convention: null means "unset", so Loader can fall back
+		// to `mod.environment` (Context.forgeSide) instead of BOTH. Only the Forge-like manifests
+		// read it; fabric.mod.json has no per-dependency side.
 	}
 
 	fun slug(slug: String) {

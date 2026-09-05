@@ -39,24 +39,19 @@ fun Project.propOrNull(name: String): String? =
 /** Like [propOrNull], but substituting [fallback] instead of returning null. */
 fun Project.propOr(name: String, fallback: String): String = propOrNull(name) ?: fallback
 
-// ---------------------------------------------------------------------------
-// Minecraft compatibility range.
-//
-// `deps.minecraft` is what the target compiles against; the optional
-// `deps.minecraft_range_lower` / `deps.minecraft_range_upper` pair widens what the
-// built jar advertises. A blank upper bound means open-ended. All three
-// representations below derive from that single pair so the Fabric manifest, the
-// Forge manifest and the jar name can never disagree.
-// ---------------------------------------------------------------------------
+// Minecraft compatibility range. `deps.minecraft` is what the target compiles against; the
+// optional `deps.minecraft_range_lower` / `_upper` pair widens what the jar advertises, a blank
+// upper bound meaning open-ended. The Fabric range, the Forge range and the jar slug all derive
+// from this one pair, so they cannot disagree.
 
-/**
- * Lowest Minecraft version the built jar advertises. Version-gating a manifest key reads from here
- * rather than from the compiled version: the oldest loader that can load the jar is the one that
- * has to understand the key.
- */
+/** Lowest advertised version. Gate on this where an unknown key is *rejected* (`[features]`). */
 fun Project.minecraftRangeLower(): String = propOr("deps.minecraft_range_lower", prop("deps.minecraft"))
 
-private fun Project.minecraftRangeUpper(): String = propOr("deps.minecraft_range_upper", "")
+/**
+ * Highest advertised version, blank when open-ended. Gate on this where an unknown key is merely
+ * *ignored* - see [Context.reachesMinecraft].
+ */
+fun Project.minecraftRangeUpper(): String = propOr("deps.minecraft_range_upper", "")
 
 /** Semver-style range consumed by Fabric's dependency resolver, e.g. `>=1.21.5 <=1.21.11`. */
 fun Project.minecraftFabricRange(): String {
@@ -66,12 +61,9 @@ fun Project.minecraftFabricRange(): String {
 }
 
 /**
- * Maven-style range consumed by Forge / NeoForge, e.g. `[1.21.5,1.21.11]`.
- *
- * Coinciding bounds collapse to the single-version form `[1.21.5]` rather than `[1.21.5,1.21.5]`.
- * The two spell the same restriction, but maven-artifact rejected identical boundaries until 3.8.8
- * and FML turns that parse failure into a hard load error. Every MinecraftForge version this build
- * targets ships 3.6.3 or 3.8.5; NeoForge ships 3.9.x and accepts either form.
+ * Maven-style range for Forge / NeoForge, e.g. `[1.21.5,1.21.11]`. Coinciding bounds collapse to
+ * `[1.21.5]`: maven-artifact before 3.8.8 rejects `[x,x]` and FML makes that a hard load error.
+ * Every targeted MinecraftForge ships 3.6.3 or 3.8.5; NeoForge (3.9.x) accepts either form.
  */
 fun Project.minecraftForgeRange(): String {
 	val lower = minecraftRangeLower()
@@ -83,14 +75,7 @@ fun Project.minecraftForgeRange(): String {
 	}
 }
 
-/**
- * Compact filename segment encoding the supported range, so a jar says what it runs on
- * without having to be opened:
- *
- *  - lower=1.21.5, upper=1.21.11 → `mc1.21.5-1.21.11`
- *  - lower=1.21.5, upper=(blank) → `mc1.21.5+`
- *  - lower=upper=26.1.2          → `mc26.1.2`
- */
+/** Filename segment for the range: `mc1.21.5-1.21.11`, `mc1.21.5+` (open-ended) or `mc26.1.2`. */
 fun Project.minecraftRangeSlug(): String {
 	val lower = minecraftRangeLower()
 	val upper = minecraftRangeUpper()
@@ -111,15 +96,11 @@ fun Project.env(variable: String): String? {
 fun Project.envTrue(variable: String): Boolean = env(variable)?.toDefaultLowerCase() == "true"
 
 /**
- * Point a mixin config at the refmap the build produces alongside it, by inserting the key
- * straight after the opening brace.
- *
- * Legacy Forge runs on SRG member names, so Mixin needs the refmap to translate the Mojang names
- * the annotations carry. Without it every `@Accessor` throws on apply and, under a permissive
- * `defaultRequire`, every injector quietly misses its target. ModDevGradle builds and reobfuscates
- * the refmap but never writes the key, and the config is shared with the loaders that must not
- * carry it - NeoForge already runs on Mojang names, and Loom rewrites the annotations in place
- * instead of shipping a refmap - so it goes in here, on the one path that needs it.
+ * Inserts `"refmap"` after the opening brace of a mixin config. Legacy Forge runs on SRG names, so
+ * Mixin needs the refmap to resolve the Mojang names in the annotations; without it every
+ * `@Accessor` throws and, under a permissive `defaultRequire`, every injector silently misses.
+ * ModDevGradle builds the refmap but never writes the key, and the config is shared with NeoForge
+ * and Loom, which must not carry it - so it is added here, on the Forge path only.
  */
 private fun FileCopyDetails.declareRefmap(refmapName: String) {
 	var declared = false
@@ -249,9 +230,7 @@ abstract class ModPlatformPlugin @Inject constructor() : Plugin<Project> {
 			}
 			exclude(ctx.loader.excludedResources)
 
-			// A config that slipped past the anchor would produce a Forge jar whose accessors
-			// throw and whose injectors silently miss, so refuse to build one rather than leave
-			// it to be discovered in-game.
+			// A config that slipped past the anchor builds green and fails in-game, so refuse it here.
 			if (ctx.loader is Loader.Forge) {
 				val processed = destinationDir
 				doLast {
@@ -268,8 +247,8 @@ abstract class ModPlatformPlugin @Inject constructor() : Plugin<Project> {
 
 	private fun Project.configureJarTask(ctx: Context) {
 		val generateTask = tasks.named("generateModManifest")
-		// Ship the licence alongside the code it covers, in every artifact including the sources
-		// and javadoc jars. Optional, like the access widener - a project without one still builds.
+		// Bundle the root LICENSE in every jar, sources and javadoc included. Optional, like the
+		// access widener.
 		val license = rootProject.file("LICENSE").takeIf { it.exists() }
 		tasks.withType<Jar>().configureEach {
 			archiveBaseName.set(ctx.modId)
