@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.tschipcraft.make_bubbles_pop.MakeBubblesPopConfig;
 import net.tschipcraft.make_bubbles_pop.mixin.client.SingleQuadParticleAccessor;
@@ -28,6 +29,27 @@ public final class BubbleUtil {
 	private BubbleUtil() {
 		throw new IllegalStateException("Utility class");
 	}
+
+	/**
+	 * Vanilla's default attenuation distance, squared. {@code SoundEngine} hands OpenAL a linear
+	 * rolloff over {@code max(volume, 1) * Sound.getAttenuationDistance()}, so a pop further out
+	 * than this is mixed at zero gain.
+	 */
+	private static final double POP_SOUND_RADIUS_SQR = 16D * 16D;
+
+	/**
+	 * How many pop sounds may start per tick.
+	 *
+	 * <p>Every sound holds its channel for at least 20 ticks, so a saturated budget occupies about
+	 * {@code MAX_POP_SOUNDS_PER_TICK * 20} channels.
+	 */
+	private static final int MAX_POP_SOUNDS_PER_TICK = 3;
+
+	/** Game time {@link #popSoundBudget} was last refilled for. */
+	private static long popSoundTick = Long.MIN_VALUE;
+
+	/** Eligible pop sounds left this tick. Client thread only. */
+	private static int popSoundBudget;
 
 	/**
 	 * Builds a {@link BlockPos} from world coordinates.
@@ -59,8 +81,32 @@ public final class BubbleUtil {
 			if (bubble != null) {
 				((SingleQuadParticleAccessor) bubble).makeBubblesPop$setQuadSize(scale * 2F);
 			}
-			level.playLocalSound(x, y, z, SoundEvents.BUBBLE_COLUMN_BUBBLE_POP, SoundSource.AMBIENT, MakeBubblesPopConfig.BUBBLE_POP_VOLUME - (level.getRandom().nextFloat() * 0.1F), 0.85F + (level.getRandom().nextFloat() * 0.3F), false);
+			float volume = MakeBubblesPopConfig.BUBBLE_POP_VOLUME - (level.getRandom().nextFloat() * 0.1F);
+			if (volume > 0F && claimPopSound(level, x, y, z)) {
+				level.playLocalSound(x, y, z, SoundEvents.BUBBLE_COLUMN_BUBBLE_POP, SoundSource.AMBIENT, volume, 0.85F + (level.getRandom().nextFloat() * 0.3F), false);
+			}
 		}
+	}
+
+	/**
+	 * Whether a bubble popping at these coordinates may start a sound this tick.
+	 */
+	private static boolean claimPopSound(Level level, double x, double y, double z) {
+		long tick = level.getGameTime();
+		if (tick != popSoundTick) {
+			popSoundTick = tick;
+			popSoundBudget = MAX_POP_SOUNDS_PER_TICK;
+		} else if (popSoundBudget <= 0) {
+			return false;
+		}
+
+		Entity listener = Minecraft.getInstance().getCameraEntity();
+		if (listener == null || listener.distanceToSqr(x, y, z) > POP_SOUND_RADIUS_SQR) {
+			return false;
+		}
+
+		popSoundBudget--;
+		return true;
 	}
 
 	/**
