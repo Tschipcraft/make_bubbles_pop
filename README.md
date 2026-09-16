@@ -3,10 +3,10 @@
   Tschipcraft's Make Bubbles Pop
 </h1>
 <p align="center">
-  <a href="https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod/stargazers"><img alt="GitHub Stars" src="https://img.shields.io/github/stars/Tschipcraft/fabric_make_bubbles_pop_mod?colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
+  <a href="https://github.com/Tschipcraft/make_bubbles_pop/stargazers"><img alt="GitHub Stars" src="https://img.shields.io/github/stars/Tschipcraft/make_bubbles_pop?colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
   <a href="https://www.curseforge.com/minecraft/mc-mods/make-bubbles-pop"><img alt="CurseForge Downloads" src="https://img.shields.io/curseforge/dt/605235?logo=curseforge&label=CurseForge&colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
   <a href="https://modrinth.com/mod/make_bubbles_pop"><img alt="Modrinth Downloads" src="https://img.shields.io/modrinth/dt/make_bubbles_pop?label=Modrinth&colorA=363a4f&colorB=b7bdf8&style=for-the-badge&logo=modrinth"></a>
-  <a href="https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod/releases/latest"><img alt="GitHub Downloads" src="https://img.shields.io/github/downloads/Tschipcraft/fabric_make_bubbles_pop_mod/total?logo=github&colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
+  <a href="https://github.com/Tschipcraft/make_bubbles_pop/releases/latest"><img alt="GitHub Downloads" src="https://img.shields.io/github/downloads/Tschipcraft/make_bubbles_pop/total?logo=github&colorA=363a4f&colorB=b7bdf8&style=for-the-badge"></a>
 </p>
 
 <picture><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/light-theme/info.svg"><img alt="Info" src="https://raw.githubusercontent.com/Mqxx/GitHub-Markdown/main/blockquotes/badge/dark-theme/info.svg"></picture><br>
@@ -21,7 +21,7 @@ Fixes [MC-132067](https://bugs.mojang.com/browse/MC-132067).
 
 ## Installation
 
-Download the latest release from [here](https://github.com/Tschipcraft/fabric_make_bubbles_pop_mod/releases/latest) and put the .jar file into the `mods` folder in your Minecraft directory.
+Download the latest release from [here](https://github.com/Tschipcraft/make_bubbles_pop/releases/latest) and put the .jar file into the `mods` folder in your Minecraft directory.
 
 This mod is also available on Modrinth and CurseForge!
 

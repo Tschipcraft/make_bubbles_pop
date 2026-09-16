@@ -4,7 +4,7 @@ mod.id = "make_bubbles_pop"
 mod.name = "Make Bubbles Pop"
 mod.group = "net.tschipcraft"
 mod.version = "0.4.0"
-mod.channel_tag = "-beta.2"
+mod.channel_tag = "-beta.3"
 mod.description = "This client-side mod makes bubble particles pop and completely overhauls their behavior to make them rise realistically to the water surface. It also adds bubble particles to opening chests, opening barrels and explosions underwater."
 mod.authors = ["Tschipcraft"]
 mod.contributors = ["AViewFromTheTop", "Merhaf", "Mykytius"]
@@ -113,10 +113,10 @@ publish.additionalVersions = ["26.1", "26.1.1"]
 [fabric."26.2"]
 deps.minecraft = "26.2"
 deps.minecraft_range_lower = "26.2"
-deps.minecraft_range_upper = "26.2"
 deps.fabric-api = "0.156.0+26.2"
-deps.modmenu = "19.0.0-alpha.1"
+deps.modmenu = "20.0.1"
 deps.yacl = "3.9.6+26.2-fabric"
+publish.additionalVersions = ["26.3"]
 
 # ---------------------------------------------------------------------------
 # NeoForge - native ModConfigSpec storage, YACL screen
@@ -176,9 +176,9 @@ publish.additionalVersions = ["26.1", "26.1.1"]
 [neoforge."26.2"]
 deps.minecraft = "26.2"
 deps.minecraft_range_lower = "26.2"
-deps.minecraft_range_upper = "26.2"
 deps.neoforge = "26.2.0.41-beta"
 deps.yacl = "3.9.6+26.2-neoforge"
+publish.additionalVersions = ["26.3"]
 
 # ---------------------------------------------------------------------------
 # Forge - native ForgeConfigSpec storage, Cloth Config screen
