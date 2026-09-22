@@ -8,11 +8,13 @@
     "client.BarrelBubble",
     "client.BubbleColumnPop",
     "client.BubblePop",
+    "client.BubblePopParticleAccessor",
     "client.ChestBubble",
     "client.CurrentDownPop",
     "client.ExplosionEmitterBubble",
     "client.PopBubblePop",
-    "client.SingleQuadParticleAccessor"
+    "client.SingleQuadParticleAccessor",
+    "client.SulfurBubblePop"
   ],
   "injectors": {
     "defaultRequire": 0
