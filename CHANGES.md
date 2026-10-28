@@ -6,7 +6,8 @@
   - Added white bubble pop particles for sulfur bubbles spawned by geysers. 
     These are the first custom textures in this mod. Resource packs may retexture them in `assets/make_bubbles_pop/textures/particle/`.
 - Changed bubble pop particles to inherit their size from the bubble that spawned them (Thanks @Chailotl)
-- Fixed bubble pop sounds saturating the sound engine cap, preventing other sounds to play (closes [#18](https://github.com/Tschipcraft/make_bubbles_pop/issues/18))
+- Fixed bubble pop sounds saturating the sound engine cap, preventing other sounds from playing (closes [#18](https://github.com/Tschipcraft/make_bubbles_pop/issues/18))
+- Reduced lag from Guardian attacks by thinning their beam bubble particle amount (Thanks @Fyoncle)
 - Lowered mixin `defaultRequire` to 0 to avoid crashes even when mixins fail to apply
 - Added South Korean and Ukrainian language support (Thanks @Merhaf and @Mykytius, closes [#21](https://github.com/Tschipcraft/make_bubbles_pop/issues/21), [#17](https://github.com/Tschipcraft/make_bubbles_pop/pull/17))
 

@@ -12,6 +12,7 @@
     "client.ChestBubble",
     "client.CurrentDownPop",
     "client.ExplosionEmitterBubble",
+    "client.GuardianBeamBubble",
     "client.PopBubblePop",
     "client.SingleQuadParticleAccessor",
     "client.SulfurBubblePop"
