@@ -53,18 +53,11 @@ public final class BubbleUtil {
 	private static final double POP_SOUND_RADIUS_SQR = 16D * 16D;
 
 	/**
-	 * How many pop sounds may start per tick.
-	 *
-	 * <p>Every sound holds its channel for at least 20 ticks, so a saturated budget occupies about
-	 * {@code MAX_POP_SOUNDS_PER_TICK * 20} channels.
+	 * Game time the last pop sound started on, so at most one starts per tick. A pop clip ends
+	 * within 10 ticks even at the lowest pitch, so pops hold at most 10 channels. Client thread
+	 * only.
 	 */
-	private static final int MAX_POP_SOUNDS_PER_TICK = 3;
-
-	/** Game time {@link #popSoundBudget} was last refilled for. */
-	private static long popSoundTick = Long.MIN_VALUE;
-
-	/** Eligible pop sounds left this tick. Client thread only. */
-	private static int popSoundBudget;
+	private static long lastPopSoundTick = Long.MIN_VALUE;
 
 	/**
 	 * Builds a {@link BlockPos} from world coordinates.
@@ -114,10 +107,7 @@ public final class BubbleUtil {
 	 */
 	private static boolean claimPopSound(Level level, double x, double y, double z) {
 		long tick = level.getGameTime();
-		if (tick != popSoundTick) {
-			popSoundTick = tick;
-			popSoundBudget = MAX_POP_SOUNDS_PER_TICK;
-		} else if (popSoundBudget <= 0) {
+		if (tick == lastPopSoundTick) {
 			return false;
 		}
 
@@ -126,7 +116,7 @@ public final class BubbleUtil {
 			return false;
 		}
 
-		popSoundBudget--;
+		lastPopSoundTick = tick;
 		return true;
 	}
 
